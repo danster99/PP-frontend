@@ -1,1 +1,23 @@
+:root {
+  --color-text-primary: #000;
 
+  --color-white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}

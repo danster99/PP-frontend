@@ -1,0 +1,14 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 3rem 0 3rem;
+}
+
+.logo {
+  &__name {
+    color: #fff;
+    font-size: 3.8rem;
+  }
+}
