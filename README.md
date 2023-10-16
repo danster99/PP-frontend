@@ -1,2 +1,2 @@
 # PP-frontend
-frontend for platepal by dan and alex
+PlatePal Frontend by Alexandra Simion and Dan Niculae
