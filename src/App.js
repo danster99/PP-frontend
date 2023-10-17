@@ -5,10 +5,11 @@ import MainPage from "./pages/MainPage";
 import FoodMenuPage from "./pages/FoodMenuPage";
 import DrinksMenuPage from "./pages/DrinksMenuPage";
 import OrderPage from "./pages/OrderPage";
-
-//import classes from "./App.module.scss";
+import useInit from "./hooks/useInit";
 
 function App() {
+  useInit();
+
   return (
     <Layout>
       <Routes>

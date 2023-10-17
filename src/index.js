@@ -8,11 +8,14 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
+import { MenuContextProvider } from "./store/menu-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
+    <MenuContextProvider>
+      <App />
+    </MenuContextProvider>
   </BrowserRouter>
 );
 
