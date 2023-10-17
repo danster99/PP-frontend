@@ -3,6 +3,7 @@ import MenuContext from "../store/menu-context";
 import useHttp from "./useHttp";
 
 const useInit = () => {
+  // saving reference to the context, so as context updates won't trigger the hook again
   const menuContext = useRef(useContext(MenuContext));
   const { loading, error, sendRequest } = useHttp();
 

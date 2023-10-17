@@ -6,7 +6,7 @@ const Category = ({ category }) => {
   return (
     <div className={classes.category}>
       <h2 className={classes.category__name}>{category.name}</h2>
-      <Gallery categoryNumber={7} />
+      <Gallery categoryNumber={category.id} />
     </div>
   );
 };
