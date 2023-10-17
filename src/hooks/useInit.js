@@ -7,6 +7,7 @@ const useInit = () => {
   const { loading, error, sendRequest } = useHttp();
 
   useEffect(() => {
+    // Fetch and init categories
     const reqConfigCategories = {
       url: "https://plate-pal-97cd0667892d.herokuapp.com/api/menu/3/categories/",
     };
@@ -14,6 +15,7 @@ const useInit = () => {
       menuContext.current.initCategories(data)
     );
 
+    // Fetch and init menu-items
     const reqConfigItems = {
       url: "https://plate-pal-97cd0667892d.herokuapp.com/api/item/",
     };
