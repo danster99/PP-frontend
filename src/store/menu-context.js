@@ -6,6 +6,8 @@ const MenuContext = React.createContext({
   items: [],
   initCategories: (categories) => {},
   initItems: (items) => {},
+  itemIsFood: (item) => false,
+  getItemsOfCategory: (category) => {},
 });
 
 export const MenuContextProvider = ({ children }) => {
@@ -18,6 +20,18 @@ export const MenuContextProvider = ({ children }) => {
   const initItems = (items) => {
     setItems(items);
   };
+  const itemIsFood = (item) => {
+    const itemCategory = categories.find(
+      (category) => category.id === item.category
+    );
+    return itemCategory.isFood;
+  };
+  const getItemsOfCategory = (category) => {
+    return {
+      category: { ...category },
+      items: items.filter((item) => item.category === category.id),
+    };
+  };
 
   return (
     <MenuContext.Provider
@@ -26,6 +40,8 @@ export const MenuContextProvider = ({ children }) => {
         items,
         initCategories,
         initItems,
+        itemIsFood,
+        getItemsOfCategory,
       }}
     >
       {children}

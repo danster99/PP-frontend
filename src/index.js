@@ -9,13 +9,20 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
 import { MenuContextProvider } from "./store/menu-context";
+import { RestaurantContextProvider } from "./store/restaurant-context";
+import theme from "./config/theme";
+import { ThemeProvider } from "@mui/material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <MenuContextProvider>
-      <App />
-    </MenuContextProvider>
+    <RestaurantContextProvider>
+      <MenuContextProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </MenuContextProvider>
+    </RestaurantContextProvider>
   </BrowserRouter>
 );
 

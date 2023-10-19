@@ -7,7 +7,7 @@
   min-height: 100vh;
 
   display: grid;
-  grid-template-rows: 6rem 10rem calc(100vh - 17rem);
+  grid-template-rows: 5rem 9rem calc(100vh - 15rem);
   overflow: hidden;
   padding-bottom: 1rem;
 }
@@ -15,7 +15,7 @@
 .main {
   overflow: scroll;
   display: grid;
-  row-gap: 2rem;
+  row-gap: 3rem;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -2,9 +2,8 @@ import React from "react";
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
-import FoodMenuPage from "./pages/FoodMenuPage";
-import DrinksMenuPage from "./pages/DrinksMenuPage";
 import OrderPage from "./pages/OrderPage";
+import MenuPage from "./pages/MenuPage";
 import useInit from "./hooks/useInit";
 
 function App() {
@@ -14,8 +13,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/food" element={<FoodMenuPage />} />
-        <Route path="/drinks" element={<DrinksMenuPage />} />
+        <Route path="/food" element={<MenuPage isFood={true} />} />
+        <Route path="/drinks" element={<MenuPage isFood={false} />} />
         <Route path="/order" element={<OrderPage />} />
       </Routes>
     </Layout>

@@ -3,15 +3,28 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.5rem 1.6rem 1.5rem;
 }
 
 .story {
-  background-image: url("../../../assets/backgr-food.jpg");
+  // background-image: url("../../../assets/backgr-food.jpg");
   background-size: cover;
   background-position: bottom;
-  width: 7rem;
-  height: 7rem;
+  width: 6.5rem;
+  height: 6.5rem;
   border-radius: 50%;
   border: 3px solid white;
+
+  &:nth-child(1) {
+    background-image: url("../../../assets/story1.jpg");
+  }
+  &:nth-child(2) {
+    background-image: url("../../../assets/story2.jpg");
+  }
+  &:nth-child(3) {
+    background-image: url("../../../assets/story3.jpg");
+  }
+  &:nth-child(4) {
+    background-image: url("../../../assets/story4.jpg");
+  }
 }

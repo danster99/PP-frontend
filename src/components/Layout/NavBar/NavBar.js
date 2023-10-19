@@ -1,21 +1,26 @@
 import React from "react";
 import classes from "./NavBar.module.scss";
 import { NavLink } from "react-router-dom";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import LocalBarOutlinedIcon from "@mui/icons-material/LocalBarOutlined";
-import RestaurantOutlinedIcon from "@mui/icons-material/RestaurantOutlined";
+import ShoppingCartFilledIcon from "@mui/icons-material/ShoppingCart";
+import LocalBarFilledIcon from "@mui/icons-material/LocalBar";
+import RestaurantFilledIcon from "@mui/icons-material/Restaurant";
+import HomeFilledIcon from "@mui/icons-material/Home";
+import { grey } from "@mui/material/colors";
 
 const NavBar = () => {
   return (
     <nav className={classes.nav}>
+      <NavLink to="/">
+        <HomeFilledIcon sx={{ color: grey[300] }} />
+      </NavLink>
       <NavLink to="/food">
-        <RestaurantOutlinedIcon style={{ color: "#fff" }} />
+        <RestaurantFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
       <NavLink to="/drinks">
-        <LocalBarOutlinedIcon style={{ color: "#fff" }} />
+        <LocalBarFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
       <NavLink to="/order">
-        <ShoppingCartOutlinedIcon style={{ color: "#fff" }} />
+        <ShoppingCartFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
     </nav>
   );
