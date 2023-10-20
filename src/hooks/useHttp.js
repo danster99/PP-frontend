@@ -42,7 +42,7 @@ const useHttp = () => {
       processData(data);
     } catch (err) {
       setError(err);
-      console.log(err.message);
+      //console.log(err.message);
     } finally {
       setIsLoading(false);
     }
