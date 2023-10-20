@@ -1,23 +1,26 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
-import { Route, Routes } from "react-router-dom";
-import MainPage from "./pages/MainPage";
-import OrderPage from "./pages/OrderPage";
-import MenuPage from "./pages/MenuPage";
+import AppRouter from "./AppRouter";
 import useInit from "./hooks/useInit";
+import Preloader from "./components/UserFeedback/Preloader/Preloader";
+import UserAlert from "./components/UserFeedback/UserAlert/UserAlert";
 
 function App() {
-  useInit();
+  const { isLoading, error, setError } = useInit();
 
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/food" element={<MenuPage isFood={true} />} />
-        <Route path="/drinks" element={<MenuPage isFood={false} />} />
-        <Route path="/order" element={<OrderPage />} />
-      </Routes>
-    </Layout>
+    <>
+      <Layout>
+        <AppRouter />
+      </Layout>
+      <Preloader isShown={isLoading} />
+      <UserAlert
+        isOpen={!!error}
+        message={error?.message}
+        onClose={() => setError(null)}
+        severity="error"
+      />
+    </>
   );
 }
 

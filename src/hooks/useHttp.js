@@ -5,8 +5,8 @@ import { useCallback, useState } from "react";
  * returns an object with a sendRequest helper function and state variables (+state updating functions) for loading & error states
  */
 const useHttp = () => {
-  const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   /**
    * helper function for requests
@@ -33,18 +33,16 @@ const useHttp = () => {
 
       const response = await fetch(requestConfig.url, options);
 
-      const data = await response.json();
-
-      //   console.log(data);
-
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error("Something went wrong! Try again!");
       }
+
+      const data = await response.json();
 
       processData(data);
     } catch (err) {
       setError(err);
-      console.log(err);
+      console.log(err.message);
     } finally {
       setIsLoading(false);
     }

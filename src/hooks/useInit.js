@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import MenuContext from "../store/menu-context";
 import useHttp from "./useHttp";
 import { API_URL } from "../config/config";
@@ -8,9 +8,11 @@ const useInit = () => {
   // saving reference to the context, so as context updates won't trigger the hook again
   const menuContext = useRef(useContext(MenuContext));
   const restaurantContext = useRef(useContext(RestaurantContext));
-  const { loading, error, sendRequest } = useHttp();
+  const [isLoading, setIsLoading] = useState(true);
+  const { error, sendRequest, setError } = useHttp();
 
   useEffect(() => {
+    setIsLoading(true);
     // Fetch and init restaurant
     const reqConfigRestaurant = {
       url: `${API_URL}/restaurant/3/`,
@@ -32,9 +34,13 @@ const useInit = () => {
       url: `${API_URL}/item/`,
     };
     sendRequest(reqConfigItems, (data) => menuContext.current.initItems(data));
-  }, [sendRequest, menuContext]);
 
-  return { error, loading };
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, [sendRequest, menuContext, setIsLoading]);
+
+  return { error, isLoading, setError };
 };
 
 export default useInit;

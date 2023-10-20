@@ -1,0 +1,12 @@
+// Material UI modified classes
+
+// Material UI class wrapped in local class so just necessary styles are overwritten
+.error-alert {
+  .css-168e92h-MuiPaper-root-MuiAlert-root {
+    align-items: center;
+  }
+  .MuiAlert-message.css-1pxa9xg-MuiAlert-message {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+}
