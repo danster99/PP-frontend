@@ -12,14 +12,14 @@ function App() {
     <>
       <Layout>
         <AppRouter />
+        <Preloader isShown={isLoading} />
+        <UserAlert
+          isOpen={!!error}
+          message={error?.message}
+          onClose={() => setError(null)}
+          severity="error"
+        />
       </Layout>
-      <Preloader isShown={isLoading} />
-      <UserAlert
-        isOpen={!!error}
-        message={error?.message}
-        onClose={() => setError(null)}
-        severity="error"
-      />
     </>
   );
 }
