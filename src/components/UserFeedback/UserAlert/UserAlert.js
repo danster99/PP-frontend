@@ -7,11 +7,11 @@ const UserAlert = ({ isOpen, message = "", onClose, severity }) => {
     <Snackbar
       className="error-alert"
       open={isOpen}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
       anchorOrigin={{ horizontal: "center", vertical: "top" }}
       onClose={onClose}
     >
-      <Alert severity={severity}>{message || ""}</Alert>
+      <Alert severity={severity}>{message}</Alert>
     </Snackbar>
   );
 };

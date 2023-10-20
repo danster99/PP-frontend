@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./MenuItem.module.scss";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
+import Nutrivalues from "../Nutrivalues/Nutrivalues";
+import UserAlert from "../../UserFeedback/UserAlert/UserAlert";
 
 // ITEM STRUCTURE
 
 const MenuItem = ({ item }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [hasAlert, setHasAlert] = useState(false);
+  const nutrivalues = [
+    ["Alergens", item.alergens],
+    ...Object.entries(item.nutriValues),
+  ];
+
+  // toggle expansion handler
+  const handleExpandItem = () => setIsExpanded((prev) => !prev);
+
   const handleAddToCart = () => {
+    // Temporary just user feedback
+    setHasAlert(true);
     console.log(`${item.name} added `);
   };
+
   return (
     <li className={classes.item}>
       <div
@@ -34,7 +49,21 @@ const MenuItem = ({ item }) => {
           <span className={classes.item__price}>${item.price}</span>
         </div>
         <p className={classes.item__description}>{item.description}</p>
+        {isExpanded && <Nutrivalues nutrivalues={nutrivalues} />}
+        <Button
+          color="secondary"
+          className="btn-show-more"
+          onClick={handleExpandItem}
+        >
+          {isExpanded ? "Hide details" : "Show more"}
+        </Button>
       </div>
+      <UserAlert
+        isOpen={hasAlert}
+        message={`${item.name} successfully added!`}
+        severity="success"
+        onClose={() => setHasAlert(false)}
+      />
     </li>
   );
 };

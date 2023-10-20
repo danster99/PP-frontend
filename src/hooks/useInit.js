@@ -35,6 +35,7 @@ const useInit = () => {
     };
     sendRequest(reqConfigItems, (data) => menuContext.current.initItems(data));
 
+    // Add a short delay to show preloader and to give time to the images to render
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
