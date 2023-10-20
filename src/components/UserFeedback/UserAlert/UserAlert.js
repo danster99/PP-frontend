@@ -2,7 +2,7 @@ import React from "react";
 import { Snackbar, Alert } from "@mui/material";
 
 // severity : 'error', 'success', 'warning', 'info'
-const UserAlert = ({ isOpen, message, onClose, severity }) => {
+const UserAlert = ({ isOpen, message = "", onClose, severity }) => {
   return (
     <Snackbar
       className="error-alert"
@@ -11,7 +11,7 @@ const UserAlert = ({ isOpen, message, onClose, severity }) => {
       anchorOrigin={{ horizontal: "center", vertical: "top" }}
       onClose={onClose}
     >
-      <Alert severity={severity}>{message}</Alert>
+      <Alert severity={severity}>{message || ""}</Alert>
     </Snackbar>
   );
 };
