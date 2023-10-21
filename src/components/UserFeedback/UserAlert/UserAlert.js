@@ -5,7 +5,7 @@ import { Snackbar, Alert } from "@mui/material";
 const UserAlert = ({ isOpen, message = "", onClose, severity }) => {
   return (
     <Snackbar
-      className="error-alert"
+      className="user-alert"
       open={isOpen}
       autoHideDuration={4000}
       anchorOrigin={{ horizontal: "center", vertical: "top" }}

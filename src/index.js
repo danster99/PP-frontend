@@ -12,15 +12,18 @@ import { MenuContextProvider } from "./store/menu-context";
 import { RestaurantContextProvider } from "./store/restaurant-context";
 import theme from "./config/theme";
 import { ThemeProvider } from "@mui/material";
+import { OrderContextProvider } from "./store/order-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <RestaurantContextProvider>
       <MenuContextProvider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <OrderContextProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </OrderContextProvider>
       </MenuContextProvider>
     </RestaurantContextProvider>
   </BrowserRouter>

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./MenuItem.module.scss";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { IconButton, Button } from "@mui/material";
 import Nutrivalues from "../Nutrivalues/Nutrivalues";
 import UserAlert from "../../UserFeedback/UserAlert/UserAlert";
+import OrderContext from "../../../store/order-context";
 
 // ITEM STRUCTURE
 
 const MenuItem = ({ item }) => {
+  const orderContext = useContext(OrderContext);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAlert, setHasAlert] = useState(false);
   const nutrivalues = [
@@ -21,7 +23,8 @@ const MenuItem = ({ item }) => {
   const handleAddToCart = () => {
     // Temporary just user feedback
     setHasAlert(true);
-    console.log(`${item.name} added `);
+    orderContext.addToCart(item.id);
+    console.log(orderContext.cart);
   };
 
   return (
