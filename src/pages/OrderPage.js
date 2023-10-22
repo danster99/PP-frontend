@@ -6,6 +6,10 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 const OrderPage = () => {
   const orderContext = useContext(OrderContext);
+  const orderTotal = orderContext.cart.reduce(
+    (acc, item) => acc + +item.item.price * item.quantity,
+    0
+  );
 
   // display minimally formatted data for cart testing purpose
   return (
@@ -36,7 +40,9 @@ const OrderPage = () => {
               >
                 <span>{menuItem.item.name}</span>
                 <span>{menuItem.quantity}</span>
-                <span>{menuItem.quantity * menuItem.item.price}</span>
+                <span>
+                  ${(menuItem.quantity * menuItem.item.price).toFixed(2)}
+                </span>
                 <span>
                   <IconButton
                     aria-label="add-one-more-item"
@@ -62,6 +68,22 @@ const OrderPage = () => {
           })
         ) : (
           <p>There is nothing in your order yet!</p>
+        )}
+        {orderContext.cart.length > 0 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              marginTop: "2rem",
+            }}
+          >
+            <span>
+              <strong>Total:</strong>
+            </span>
+            <span style={{ justifySelf: "end", fontWeight: "600" }}>
+              ${orderTotal.toFixed(2)}
+            </span>
+          </div>
         )}
       </div>
     </div>

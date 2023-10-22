@@ -6,7 +6,6 @@ import AppRouter from "./AppRouter";
 
 function App() {
   const { isLoading, error, setError } = useInit();
-  console.log("rendered");
 
   return (
     <>
