@@ -1,18 +1,37 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MenuPage from "./pages/MenuPage";
 import OrderPage from "./pages/OrderPage";
+import Layout from "./components/Layout/Layout";
+
+// Create a router with v6.4 createBrowserRouter function => routes are nested inside the Layout component
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <MainPage />,
+      },
+      {
+        path: "/food",
+        element: <MenuPage isFood={true} />,
+      },
+      {
+        path: "/drinks",
+        element: <MenuPage isFood={false} />,
+      },
+      {
+        path: "/order",
+        element: <OrderPage />,
+      },
+    ],
+  },
+]);
 
 const AppRouter = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/food" element={<MenuPage isFood={true} />} />
-      <Route path="/drinks" element={<MenuPage isFood={false} />} />
-      <Route path="/order" element={<OrderPage />} />
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;

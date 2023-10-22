@@ -21,10 +21,8 @@ const MenuItem = ({ item }) => {
   const handleExpandItem = () => setIsExpanded((prev) => !prev);
 
   const handleAddToCart = () => {
-    // Temporary just user feedback
     setHasAlert(true);
-    orderContext.addToCart(item.id);
-    console.log(orderContext.cart);
+    orderContext.addToCart(item);
   };
 
   return (

@@ -7,7 +7,6 @@ import "@fontsource/roboto/700.css";
 import "./index.scss";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import { BrowserRouter } from "react-router-dom";
 import { MenuContextProvider } from "./store/menu-context";
 import { RestaurantContextProvider } from "./store/restaurant-context";
 import theme from "./config/theme";
@@ -16,17 +15,15 @@ import { OrderContextProvider } from "./store/order-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <RestaurantContextProvider>
-      <MenuContextProvider>
-        <OrderContextProvider>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </OrderContextProvider>
-      </MenuContextProvider>
-    </RestaurantContextProvider>
-  </BrowserRouter>
+  <RestaurantContextProvider>
+    <MenuContextProvider>
+      <OrderContextProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </OrderContextProvider>
+    </MenuContextProvider>
+  </RestaurantContextProvider>
 );
 
 // If you want your app to work offline and load faster, you can change
