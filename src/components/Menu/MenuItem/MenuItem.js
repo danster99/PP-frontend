@@ -10,8 +10,6 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useLocation } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 
-// ITEM STRUCTURE
-
 const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
   const menuItemRef = useRef();
