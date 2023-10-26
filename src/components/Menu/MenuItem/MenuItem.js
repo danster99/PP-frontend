@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import classes from "./MenuItem.module.scss";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { IconButton } from "@mui/material";
@@ -7,11 +7,15 @@ import UserAlert from "../../UserFeedback/UserAlert/UserAlert";
 import OrderContext from "../../../store/order-context";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { useLocation } from "react-router-dom";
+import { grey } from "@mui/material/colors";
 
 // ITEM STRUCTURE
 
 const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
+  const menuItemRef = useRef();
+  const { search } = useLocation(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAlert, setHasAlert] = useState(false);
   const nutrivalues = item.alergens
@@ -26,17 +30,30 @@ const MenuItem = ({ item }) => {
     orderContext.addToCart(item);
   };
 
+  // effect for scrolling to menu item when 'item' search param exists on path
+  useEffect(() => {
+    if (new URLSearchParams(search).get("item")) {
+      const itemQueryId = new URLSearchParams(search).get("item");
+
+      if (+itemQueryId === item.id)
+        menuItemRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [search, item]);
+
   return (
-    <li className={classes.item} data-item={item.id}>
+    <li className={classes.item} id={item.id} ref={menuItemRef}>
       <div
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url("${item.b2StorageFile}")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${item.b2StorageFile}")`,
         }}
         className={classes.item__img}
       >
         <div className={classes["item__add-btn"]}>
           <IconButton aria-label="add-to-order" onClick={handleAddToCart}>
-            <AddCircleOutlineIcon fontSize="inherit" />
+            <AddCircleOutlineIcon
+              fontSize="inherit"
+              sx={{ color: grey[300] }}
+            />
           </IconButton>
         </div>
         {!item.isAvailable && (
