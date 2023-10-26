@@ -15,7 +15,7 @@ const useInit = () => {
     setIsLoading(true);
     // Fetch and init restaurant
     const reqConfigRestaurant = {
-      url: `${API_URL}/restaurant/3/`,
+      url: `${API_URL}/restaurant/1/`,
     };
     sendRequest(reqConfigRestaurant, (data) =>
       restaurantContext.current.initRestaurant(data)
@@ -23,7 +23,7 @@ const useInit = () => {
 
     // Fetch and init categories
     const reqConfigCategories = {
-      url: `${API_URL}/menu/3/categories/`,
+      url: `${API_URL}/menu/1/categories/`,
     };
     sendRequest(reqConfigCategories, (data) =>
       menuContext.current.initCategories(data)

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // and for better autocompletion when dealing with context variables
 const initialRestaurantData = {
   id: -1,
-  name: "",
+  name: "Liod's",
   address: "",
   phone: "",
   website: "",

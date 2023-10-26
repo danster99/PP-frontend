@@ -1,0 +1,49 @@
+.order {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 2.75rem);
+  height: calc(100% - 14rem);
+  overflow: auto;
+
+  &__labels,
+  &__row {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;
+    justify-items: center;
+    height: 2.75rem;
+  }
+  &__labels {
+    font-weight: 600;
+  }
+
+  &__total {
+    grid-row: -3 / -2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  &__check-btn {
+    grid-row: -2 /-1;
+    justify-self: end;
+  }
+
+  &__footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    justify-items: center;
+    margin: 0.7rem 1rem 0 0;
+  }
+
+  &__item-btns {
+    display: flex;
+    gap: 0.8rem;
+    height: fit-content;
+
+    svg {
+      width: 1.8rem;
+      height: 2rem;
+    }
+  }
+}

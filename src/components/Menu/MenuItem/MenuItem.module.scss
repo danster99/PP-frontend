@@ -49,7 +49,7 @@
   }
 
   &__details {
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 2rem 0.4rem 2rem;
   }
 
   &__presentation {
@@ -71,5 +71,10 @@
   &__description {
     font-weight: 600;
     line-height: 1.2;
+  }
+
+  &__expand-btn {
+    display: flex;
+    justify-content: flex-end;
   }
 }

@@ -11,8 +11,31 @@
   }
 }
 
-.btn-show-more.MuiButton-text {
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 0.3rem 0;
+.btn-show-more.MuiButtonBase-root {
+  padding: 0;
+  margin-top: -0.2rem;
+
+  svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.dialog {
+  .MuiPaper-rounded {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+  .MuiDialogTitle-root {
+    padding-bottom: 0;
+  }
+}
+
+.dialog-action-btns.MuiDialogActions-root {
+  padding-right: 1.5rem;
+
+  .MuiButtonBase-root.MuiButton-root {
+    width: fit-content;
+    min-width: unset;
+  }
 }

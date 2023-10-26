@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import classes from "./MenuItem.module.scss";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { IconButton, Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import Nutrivalues from "../Nutrivalues/Nutrivalues";
 import UserAlert from "../../UserFeedback/UserAlert/UserAlert";
 import OrderContext from "../../../store/order-context";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 // ITEM STRUCTURE
 
@@ -12,10 +14,9 @@ const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAlert, setHasAlert] = useState(false);
-  const nutrivalues = [
-    ["Alergens", item.alergens],
-    ...Object.entries(item.nutriValues),
-  ];
+  const nutrivalues = item.alergens
+    ? [["Alergens", item.alergens], ...Object.entries(item.nutriValues)]
+    : Object.entries(item.nutriValues);
 
   // toggle expansion handler
   const handleExpandItem = () => setIsExpanded((prev) => !prev);
@@ -26,7 +27,7 @@ const MenuItem = ({ item }) => {
   };
 
   return (
-    <li className={classes.item}>
+    <li className={classes.item} data-item={item.id}>
       <div
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), url("${item.b2StorageFile}")`,
@@ -49,15 +50,18 @@ const MenuItem = ({ item }) => {
           <h3 className={classes.item__name}>{item.name}</h3>
           <span className={classes.item__price}>${item.price}</span>
         </div>
+
         <p className={classes.item__description}>{item.description}</p>
         {isExpanded && <Nutrivalues nutrivalues={nutrivalues} />}
-        <Button
-          color="secondary"
-          className="btn-show-more"
-          onClick={handleExpandItem}
-        >
-          {isExpanded ? "Hide details" : "Show more"}
-        </Button>
+        <div className={classes["item__expand-btn"]}>
+          <IconButton
+            color="secondary"
+            className="btn-show-more"
+            onClick={handleExpandItem}
+          >
+            {isExpanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          </IconButton>
+        </div>
       </div>
       <UserAlert
         isOpen={hasAlert}

@@ -6,6 +6,7 @@ import LocalBarFilledIcon from "@mui/icons-material/LocalBar";
 import RestaurantFilledIcon from "@mui/icons-material/Restaurant";
 import HomeFilledIcon from "@mui/icons-material/Home";
 import { grey } from "@mui/material/colors";
+import CallWaiter from "../../UserActions/CallWaiter/CallWaiter";
 
 const NavBar = () => {
   return (
@@ -22,6 +23,7 @@ const NavBar = () => {
       <NavLink to="/order">
         <ShoppingCartFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
+      <CallWaiter />
     </nav>
   );
 };
