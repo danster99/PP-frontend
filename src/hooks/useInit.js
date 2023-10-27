@@ -4,6 +4,10 @@ import useHttp from "./useHttp";
 import { API_URL } from "../config/config";
 import RestaurantContext from "../store/restaurant-context";
 
+/* 
+    TO DO!!!! Refactor for better context management and useInit call => fetch category, then add items
+*/
+
 const useInit = () => {
   // saving reference to the context, so as context updates won't trigger the hook again
   const menuContext = useRef(useContext(MenuContext));

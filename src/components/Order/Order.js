@@ -25,7 +25,7 @@ const Order = () => {
   if (orderContext.cart.length === 0)
     return (
       <p className={classes.order__message}>
-        There is nothing in your order yet!
+        Inca nu ati adaugat produse in comanda!
       </p>
     );
 
@@ -34,18 +34,18 @@ const Order = () => {
     <>
       <div className={classes.order}>
         <div className={classes.order__labels}>
-          <span>Product</span>
-          <span>Quantity</span>
-          <span>Price </span>
-          <span>Options</span>
+          <span>Produs</span>
+          <span>Cantitate</span>
+          <span>Pret</span>
+          <span>Optiuni</span>
         </div>
         {orderContext.cart.map((menuItem, i) => {
           return (
             <div key={i} className={classes.order__row}>
               <span>{menuItem.item.name}</span>
               <span>{menuItem.quantity}</span>
-              <span>
-                ${(menuItem.quantity * menuItem.item.price).toFixed(2)}
+              <span className={classes["order__item-price"]}>
+                {(menuItem.quantity * menuItem.item.price).toFixed(2)} LEI
               </span>
               <div className={classes["order__item-btns"]}>
                 <IconButton
@@ -76,8 +76,8 @@ const Order = () => {
           <span>
             <strong>Total:</strong>
           </span>
-          <span style={{ justifySelf: "end", fontWeight: "600" }}>
-            ${orderTotal.toFixed(2)}
+          <span className={classes["order__total-sum"]}>
+            {orderTotal.toFixed(2)} LEI
           </span>
         </div>
         <div className={classes["order__check-btn"]}>
@@ -86,13 +86,13 @@ const Order = () => {
             disableElevation
             onClick={handleRequestCheck}
           >
-            Request check
+            Cere Nota
           </Button>
         </div>
       </div>
       <UserAlert
         isOpen={hasCheckAlert}
-        message="We sent the request to your waiter!"
+        message="Chelnerul va sosi cu nota in cateva momente!"
         severity="success"
         onClose={() => setHasCheckAlert(false)}
       />

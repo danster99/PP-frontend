@@ -15,7 +15,7 @@ const CallWaiter = () => {
       <UserDialog
         open={dialogIsOpen}
         onClose={handleCloseDialog}
-        title={"Are you sure you want to call the waiter to your table?"}
+        title={"Doresti sa chemi chelnerul la masa?"}
       />
     </>
   );

@@ -5,7 +5,7 @@ const OrderPage = () => {
   // display minimally formatted data for cart testing purpose
   return (
     <div className="card order-card">
-      <h2>Your order</h2>
+      <h2>Comanda ta</h2>
       <Order />
     </div>
   );

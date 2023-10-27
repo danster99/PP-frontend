@@ -10,13 +10,7 @@ import {
 
 const UserDialog = ({ open, onClose, title, content = null }) => {
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      className="dialog"
-      aria-labelledby="call-the-waiter-dialog"
-      aria-describedby="do you want to call the waiter to your table"
-    >
+    <Dialog open={open} onClose={onClose} className="dialog">
       <DialogTitle>{title}</DialogTitle>
       {content && (
         <DialogContent>
@@ -25,10 +19,10 @@ const UserDialog = ({ open, onClose, title, content = null }) => {
       )}
       <DialogActions className="dialog-action-btns">
         <Button onClick={onClose} color="secondary">
-          No
+          Nu
         </Button>
         <Button onClick={onClose} autoFocus color="secondary">
-          Yes
+          Da
         </Button>
       </DialogActions>
     </Dialog>

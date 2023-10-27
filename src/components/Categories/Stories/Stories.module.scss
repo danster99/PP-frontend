@@ -3,17 +3,16 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  padding: 0.8rem 1.5rem 1.6rem 1.5rem;
+  padding: 0.8rem 1rem 1.6rem 1rem;
 }
 
 .story {
-  // background-image: url("../../../assets/backgr-food.jpg");
   background-size: cover;
   background-position: bottom;
-  width: 6.5rem;
-  height: 6.5rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid var(--color-primary-main);
 
   &:nth-child(1) {
     background-image: url("../../../assets/story1.jpg");

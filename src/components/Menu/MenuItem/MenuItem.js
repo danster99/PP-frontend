@@ -9,6 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useLocation } from "react-router-dom";
 import { grey } from "@mui/material/colors";
+import { capitalizeFirst } from "../../../helpers/helpers";
 
 const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
@@ -17,7 +18,7 @@ const MenuItem = ({ item }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAlert, setHasAlert] = useState(false);
   const nutrivalues = item.alergens
-    ? [["Alergens", item.alergens], ...Object.entries(item.nutriValues)]
+    ? [["Alergeni", item.alergens], ...Object.entries(item.nutriValues)]
     : Object.entries(item.nutriValues);
 
   // toggle expansion handler
@@ -42,7 +43,7 @@ const MenuItem = ({ item }) => {
     <li className={classes.item} id={item.id} ref={menuItemRef}>
       <div
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("${item.b2StorageFile}")`,
+          backgroundImage: `url("${item.b2StorageFile}"), linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95))`,
         }}
         className={classes.item__img}
       >
@@ -62,11 +63,13 @@ const MenuItem = ({ item }) => {
       </div>
       <div className={classes.item__details}>
         <div className={classes.item__presentation}>
-          <h3 className={classes.item__name}>{item.name}</h3>
-          <span className={classes.item__price}>${item.price}</span>
+          <h3 className={classes.item__name}>{capitalizeFirst(item.name)}</h3>
+          <span className={classes.item__price}>{item.price} LEI</span>
         </div>
 
-        <p className={classes.item__description}>{item.description}</p>
+        <p className={classes.item__description} onClick={handleExpandItem}>
+          {item.description}
+        </p>
         {isExpanded && <Nutrivalues nutrivalues={nutrivalues} />}
         <div className={classes["item__expand-btn"]}>
           <IconButton

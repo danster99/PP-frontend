@@ -11,14 +11,13 @@ const MenuList = ({ items, category, seqNo }) => {
     the first menuList on the page will be scrolled into view */
   // we don't provide any dependency array so that the effect only runs on component mount
   useEffect(() => {
-    if (seqNo === 1 && !search) menuListRef.current.scrollIntoView();
+    if (seqNo === 1 && !search && items.length > 0)
+      menuListRef.current.scrollIntoView();
   });
 
   return (
-    <div className={`card ${classes.menu}`}>
-      <div className={classes.menu__groupname} ref={menuListRef}>
-        {category.name}
-      </div>
+    <div className={`card ${classes.menu}`} ref={menuListRef}>
+      <div className={classes.menu__groupname}>{category.name}</div>
       <ul className={classes.menu__list}>
         {items.map((item) => (
           <MenuItem item={item} key={item.id} />

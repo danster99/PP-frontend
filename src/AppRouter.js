@@ -15,11 +15,11 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "/food",
+        path: "/food/:categoryId",
         element: <MenuPage isFood={true} />,
       },
       {
-        path: "/drinks",
+        path: "/drinks/:categoryId",
         element: <MenuPage isFood={false} />,
       },
       {

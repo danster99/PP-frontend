@@ -1,12 +1,19 @@
 import { createTheme } from "@mui/material";
-import { blueGrey, amber } from "@mui/material/colors";
+import { blueGrey } from "@mui/material/colors";
+
+const primary = {
+  main: "#cf562a",
+  light: "#dd896a",
+  dark: "#913c1d",
+  contrastText: "#fff",
+};
 
 const theme = createTheme({
   typography: {
     fontFamily: ["Nunito", "sans-serif"].join(","),
   },
   palette: {
-    primary: amber,
+    primary: primary,
     secondary: blueGrey,
   },
 });
