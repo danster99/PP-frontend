@@ -18,10 +18,10 @@ const UserDialog = ({ open, onClose, title, content = null }) => {
         </DialogContent>
       )}
       <DialogActions className="dialog-action-btns">
-        <Button onClick={onClose} color="secondary">
+        <Button onClick={onClose} color="primary">
           Nu
         </Button>
-        <Button onClick={onClose} autoFocus color="secondary">
+        <Button onClick={onClose} autoFocus color="primary">
           Da
         </Button>
       </DialogActions>

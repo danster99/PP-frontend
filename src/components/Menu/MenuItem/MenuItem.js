@@ -10,6 +10,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useLocation } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import { capitalizeFirst } from "../../../helpers/helpers";
+import { NUTRIVALUES_LABELS } from "../../../config/config";
 
 const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
@@ -17,9 +18,17 @@ const MenuItem = ({ item }) => {
   const { search } = useLocation(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAlert, setHasAlert] = useState(false);
+
+  // order nutrivalues as in nutritional statement
+  const nutri = NUTRIVALUES_LABELS.map((nutrivalue) =>
+    Object.entries(item.nutriValues).find(
+      (nutrival) => nutrivalue === nutrival.at(0)
+    )
+  );
+  // add alergens
   const nutrivalues = item.alergens
-    ? [["Alergeni", item.alergens], ...Object.entries(item.nutriValues)]
-    : Object.entries(item.nutriValues);
+    ? [["Alergeni", item.alergens], ...nutri]
+    : nutri;
 
   // toggle expansion handler
   const handleExpandItem = () => setIsExpanded((prev) => !prev);
@@ -66,7 +75,6 @@ const MenuItem = ({ item }) => {
           <h3 className={classes.item__name}>{capitalizeFirst(item.name)}</h3>
           <span className={classes.item__price}>{item.price} LEI</span>
         </div>
-
         <p className={classes.item__description} onClick={handleExpandItem}>
           {item.description}
         </p>

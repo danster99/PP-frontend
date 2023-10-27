@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { Button } from "@mui/material";
 import UserAlert from "../UserFeedback/UserAlert/UserAlert";
+import { capitalizeFirst } from "../../helpers/helpers";
 
 const Order = () => {
   // order context state and derived state
@@ -42,7 +43,7 @@ const Order = () => {
         {orderContext.cart.map((menuItem, i) => {
           return (
             <div key={i} className={classes.order__row}>
-              <span>{menuItem.item.name}</span>
+              <span>{capitalizeFirst(menuItem.item.name)}</span>
               <span>{menuItem.quantity}</span>
               <span className={classes["order__item-price"]}>
                 {(menuItem.quantity * menuItem.item.price).toFixed(2)} LEI
