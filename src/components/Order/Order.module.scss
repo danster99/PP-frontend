@@ -1,8 +1,9 @@
 .order {
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(2.75rem, 3.75rem));
-  height: calc(100% - 14rem);
+  height: calc(100% - 15rem);
   overflow: auto;
+  gap: 1rem;
 
   &__labels,
   &__row {

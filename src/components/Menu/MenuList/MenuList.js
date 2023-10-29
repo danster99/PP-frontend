@@ -17,7 +17,9 @@ const MenuList = ({ items, category, seqNo }) => {
 
   return (
     <div className={`card ${classes.menu}`} ref={menuListRef}>
-      <div className={classes.menu__groupname}>{category.name}</div>
+      <div className={`heading-secondary ${classes.menu__groupname}`}>
+        {category.name}
+      </div>
       <ul className={classes.menu__list}>
         {items.map((item) => (
           <MenuItem item={item} key={item.id} />

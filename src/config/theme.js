@@ -10,7 +10,7 @@ const primary = {
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Nunito", "sans-serif"].join(","),
+    fontFamily: ["Exoplanetaria", "sans-serif"].join(","),
   },
   palette: {
     primary: primary,

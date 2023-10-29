@@ -11,6 +11,9 @@ import { useLocation } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import { capitalizeFirst } from "../../../helpers/helpers";
 import { NUTRIVALUES_LABELS } from "../../../config/config";
+import redPepperImg from "../../../assets/pepper-red.png";
+import greyPepperImg from "../../../assets/pepper-grey.png";
+import isVeganSign from "../../../assets/vegan-sign.png";
 
 const MenuItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
@@ -25,7 +28,7 @@ const MenuItem = ({ item }) => {
       (nutrival) => nutrivalue === nutrival.at(0)
     )
   );
-  // add alergens
+  // add alergens to the list computed above
   const nutrivalues = item.alergens
     ? [["Alergeni", item.alergens], ...nutri]
     : nutri;
@@ -63,6 +66,29 @@ const MenuItem = ({ item }) => {
               sx={{ color: grey[300] }}
             />
           </IconButton>
+        </div>
+        <div className={classes["item__info-icons"]}>
+          {item.spiceLvl > 0 && (
+            <div className={classes["item__info-spice"]}>
+              <img
+                src={item.spiceLvl >= 1 ? redPepperImg : greyPepperImg}
+                alt="Spice level 1"
+              />
+              <img
+                src={item.spiceLvl >= 2 ? redPepperImg : greyPepperImg}
+                alt="Spice level 2"
+              />
+              <img
+                src={item.spiceLvl >= 3 ? redPepperImg : greyPepperImg}
+                alt="Spice level 3"
+              />
+            </div>
+          )}
+          {item.isVegan && (
+            <div className={classes["item__info-vegan"]}>
+              <img src={isVeganSign} alt="Food is Vegan" />
+            </div>
+          )}
         </div>
         {!item.isAvailable && (
           <div className={classes["item__img-overlay"]}>

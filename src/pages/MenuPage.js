@@ -9,31 +9,25 @@ const MenuPage = ({ isFood }) => {
   const menuContext = useContext(MenuContext);
   const { categoryId } = useParams();
 
-  /* Here we map API categories to objects with data about category and with a list of items
-  typeof(menuGroups) = {category: Category , items: Item[]}[]
-  Category = API schema for category
-  Item = API schema for menu item */
-  const menuGroups = menuContext.categories
-    .map((category) => menuContext.getItemsOfCategory(category))
-    .filter(
-      (category) =>
-        category.category.isFood === isFood && category.items.length > 0
-    );
+  // here we keep only relevant categories for the page (either food or drinks)
+  const menuCategories = menuContext.categories.filter(
+    (category) => category.isFood === isFood
+  );
 
-  // we only show the active list
-  const [renderedList] = menuGroups.filter(
-    (group) => group.category.id === +categoryId
+  // find category that will be active and displayed in page
+  const [renderedCategory] = menuCategories.filter(
+    (group) => group.id === +categoryId
   );
 
   return (
     <div className="menu-page">
-      <MenuTabs categories={menuGroups} />
+      <MenuTabs categories={menuCategories} />
       <main className="main">
-        {renderedList && (
+        {renderedCategory && (
           <MenuList
-            category={renderedList.category}
-            items={renderedList.items}
-            key={renderedList.category.id}
+            category={renderedCategory}
+            items={renderedCategory.items}
+            key={renderedCategory.id}
             seqNo={1}
           />
         )}

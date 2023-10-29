@@ -81,7 +81,7 @@ const Order = () => {
             {orderTotal.toFixed(2)} LEI
           </span>
         </div>
-        <div className={classes["order__check-btn"]}>
+        <div className={`check-btn ${classes["order__check-btn"]}`}>
           <Button
             variant="contained"
             disableElevation

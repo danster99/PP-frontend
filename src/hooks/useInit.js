@@ -25,19 +25,13 @@ const useInit = () => {
       restaurantContext.current.initRestaurant(data)
     );
 
-    // Fetch and init categories
+    // Fetch and init categories with their items
     const reqConfigCategories = {
       url: `${API_URL}/menu/1/categories/`,
     };
     sendRequest(reqConfigCategories, (data) =>
       menuContext.current.initCategories(data)
     );
-
-    // Fetch and init menu-items
-    const reqConfigItems = {
-      url: `${API_URL}/item/`,
-    };
-    sendRequest(reqConfigItems, (data) => menuContext.current.initItems(data));
 
     // Add a short delay to show preloader and to give time to the images to render
     setTimeout(() => {
