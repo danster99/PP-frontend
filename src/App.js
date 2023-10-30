@@ -3,6 +3,7 @@ import useInit from "./hooks/useInit";
 import Preloader from "./components/UserFeedback/Preloader/Preloader";
 import UserAlert from "./components/UserFeedback/UserAlert/UserAlert";
 import AppRouter from "./AppRouter";
+//import { API_URL } from "./config/config";
 
 function App() {
   const { isLoading, error, setError } = useInit();

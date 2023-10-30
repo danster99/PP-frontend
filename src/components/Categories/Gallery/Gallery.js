@@ -16,8 +16,8 @@ const Gallery = ({ categoryNumber, images }) => {
 
     // 2) conditionally navigate to food or drinks menu, depending on the category of the menu item that was clicked
     // itemId is saved as a query param in the url so the page can detect if scroll is needed
-    if (itemCategory.isFood) navigate(`/food/${categoryNumber}?item=${itemId}`);
-    else navigate(`/drinks/${categoryNumber}?item=${itemId}`);
+    if (itemCategory.isFood) navigate(`/food?item=${itemId}`);
+    else navigate(`/drinks?item=${itemId}`);
   };
 
   return (

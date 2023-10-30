@@ -29,7 +29,7 @@ const useHttp = () => {
               : undefined,
           body:
             requestConfig.method && requestConfig.method !== "GET"
-              ? JSON.parse(requestConfig.body)
+              ? JSON.stringify(requestConfig.body)
               : undefined,
         };
 

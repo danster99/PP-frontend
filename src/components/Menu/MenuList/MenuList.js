@@ -1,22 +1,50 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import classes from "./MenuList.module.scss";
 import MenuItem from "../MenuItem/MenuItem";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
-const MenuList = ({ items, category, seqNo }) => {
+const MenuList = ({ items, category, seqNo, onVisibilityChange }) => {
   const menuListRef = useRef();
   const { search } = useLocation();
+  const navigate = useNavigate();
+
+  const { ref: inViewRef } = useInView({
+    threshold: 0.1,
+    onChange: (inView) => {
+      if (inView) onVisibilityChange(category.id);
+    },
+  });
+
+  // function used to set two refs to the same object:
+  // - one used in scroll position detection, that will keep track of the active category on the screen
+  // - one used to perform programatic scroll (either to the first category or to the category indicated on the query param 'category')
+  const setRefs = useCallback(
+    (DOMNode) => {
+      // set ref for programatic scroll
+      menuListRef.current = DOMNode;
+      // set ref for inView detection
+      inViewRef(DOMNode);
+    },
+    [inViewRef]
+  );
 
   /*here we use seqNo prop to make sure that if no 'item' query param exists, 
     the first menuList on the page will be scrolled into view */
-  // we don't provide any dependency array so that the effect only runs on component mount
   useEffect(() => {
-    if (seqNo === 1 && !search && items.length > 0)
+    if (seqNo === 1 && !search && items.length > 0) {
       menuListRef.current.scrollIntoView();
-  });
+    }
+    if (new URLSearchParams(search).get("category")) {
+      const categoryQueryId = new URLSearchParams(search).get("category");
+      if (+categoryQueryId === category.id) {
+        menuListRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [category, items, search, seqNo, navigate]);
 
   return (
-    <div className={`card ${classes.menu}`} ref={menuListRef}>
+    <div className={`card ${classes.menu}`} ref={setRefs}>
       <div className={`heading-secondary ${classes.menu__groupname}`}>
         {category.name}
       </div>

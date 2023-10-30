@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
 /*
 Cart
@@ -26,6 +26,15 @@ const OrderContext = React.createContext({
       quantity: 0,
     },
   ],
+  items: [],
+  cartDetails: {
+    id: 0,
+    status: "Open",
+    table: 1,
+    closedAt: "",
+    total: 0,
+  },
+  setCart: (fetchedCart) => {},
   addToCart: (item) => {},
   incrementItem: (itemId) => {},
   decrementItem: (itemId) => {},
@@ -95,6 +104,7 @@ const cartReducer = (state, action) => {
 
 export const OrderContextProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
+  const [cartDetails, setCartDetails] = useState({});
 
   const addToCart = (item) => {
     // here we use the dispatch function to specify the action we want to perform + the payload (action.item in this situation)
@@ -113,9 +123,28 @@ export const OrderContextProvider = ({ children }) => {
     dispatch({ type: "remove", id: itemId });
   };
 
+  const setCart = async (cart) => {
+    const fetchedCartDetails = {
+      id: cart.id,
+      status: cart.status,
+      table: cart.table,
+      closedAt: cart.closed_at,
+      total: cart.total,
+    };
+    setCartDetails(fetchedCartDetails);
+  };
+
   return (
     <OrderContext.Provider
-      value={{ cart, addToCart, incrementItem, decrementItem, removeItem }}
+      value={{
+        cart,
+        cartDetails,
+        setCart,
+        addToCart,
+        incrementItem,
+        decrementItem,
+        removeItem,
+      }}
     >
       {children}
     </OrderContext.Provider>

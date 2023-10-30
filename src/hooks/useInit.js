@@ -3,6 +3,7 @@ import MenuContext from "../store/menu-context";
 import useHttp from "./useHttp";
 import { API_URL } from "../config/config";
 import RestaurantContext from "../store/restaurant-context";
+import OrderContext from "../store/order-context";
 
 /* 
     TO DO!!!! Refactor for better context management and useInit call => fetch category, then add items
@@ -12,6 +13,7 @@ const useInit = () => {
   // saving reference to the context, so as context updates won't trigger the hook again
   const menuContext = useRef(useContext(MenuContext));
   const restaurantContext = useRef(useContext(RestaurantContext));
+  const orderContext = useRef(useContext(OrderContext));
   const [isLoading, setIsLoading] = useState(true);
   const { error, sendRequest, setError } = useHttp();
 
@@ -33,13 +35,28 @@ const useInit = () => {
       menuContext.current.initCategories(data)
     );
 
+    // TO DO!!! Finish cart integration
+
+    // Add or init a cart for the table
+    const reqConfigCart = {
+      url: `${API_URL}/table/2/new_cart/`,
+      method: "POST",
+      body: {
+        restaurant: 1,
+        number: 1,
+      },
+    };
+    sendRequest(reqConfigCart, (data) => {
+      orderContext.current.setCart(data);
+    });
+
     // Add a short delay to show preloader and to give time to the images to render
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
   }, [sendRequest, menuContext, setIsLoading]);
 
-  return { error, isLoading, setError };
+  return { error, isLoading, setError, sendRequest };
 };
 
 export default useInit;

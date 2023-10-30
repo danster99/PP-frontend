@@ -14,10 +14,10 @@ const NavBar = () => {
       <NavLink to="/">
         <HomeFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
-      <NavLink to="/food/1">
+      <NavLink to="/food">
         <RestaurantFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
-      <NavLink to="/drinks/7">
+      <NavLink to="/drinks">
         <LocalBarFilledIcon sx={{ color: grey[300] }} />
       </NavLink>
       <OrderNavIcon />
