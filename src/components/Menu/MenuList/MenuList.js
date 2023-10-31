@@ -9,9 +9,15 @@ const MenuList = ({ items, category, seqNo, onVisibilityChange }) => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
+  // state (as a timestamp passed on menuTab click) is used to retrigger scroll if
+  // effect already took place, but user clicked again to re-scroll => will serve as dependency in useEffect
+  const { state: routeState } = useLocation();
+
+  // functionality for detecting if list is in view (on the screen)
   const { ref: inViewRef } = useInView({
     threshold: 0.1,
     onChange: (inView) => {
+      // when new category becomes visibile, it is triggered the setState call to change active state
       if (inView) onVisibilityChange(category.id);
     },
   });
@@ -41,7 +47,7 @@ const MenuList = ({ items, category, seqNo, onVisibilityChange }) => {
         menuListRef.current.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [category, items, search, seqNo, navigate]);
+  }, [category, items, search, seqNo, navigate, routeState]);
 
   return (
     <div className={`card ${classes.menu}`} ref={setRefs}>

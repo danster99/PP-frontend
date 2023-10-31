@@ -1,13 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, useCallback } from "react";
 import MenuContext from "../store/menu-context";
 import useHttp from "./useHttp";
 import { API_URL } from "../config/config";
 import RestaurantContext from "../store/restaurant-context";
 import OrderContext from "../store/order-context";
-
-/* 
-    TO DO!!!! Refactor for better context management and useInit call => fetch category, then add items
-*/
 
 const useInit = () => {
   // saving reference to the context, so as context updates won't trigger the hook again
@@ -17,13 +13,14 @@ const useInit = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { error, sendRequest, setError } = useHttp();
 
-  useEffect(() => {
+  // keeps all calls to the api that will be dome when app is initialised
+  const initCalls = useCallback(async () => {
     setIsLoading(true);
     // Fetch and init restaurant
     const reqConfigRestaurant = {
       url: `${API_URL}/restaurant/1/`,
     };
-    sendRequest(reqConfigRestaurant, (data) =>
+    await sendRequest(reqConfigRestaurant, (data) =>
       restaurantContext.current.initRestaurant(data)
     );
 
@@ -31,11 +28,9 @@ const useInit = () => {
     const reqConfigCategories = {
       url: `${API_URL}/menu/1/categories/`,
     };
-    sendRequest(reqConfigCategories, (data) =>
+    await sendRequest(reqConfigCategories, (data) =>
       menuContext.current.initCategories(data)
     );
-
-    // TO DO!!! Finish cart integration
 
     // Add or init a cart for the table
     const reqConfigCart = {
@@ -46,7 +41,7 @@ const useInit = () => {
         number: 1,
       },
     };
-    sendRequest(reqConfigCart, (data) => {
+    await sendRequest(reqConfigCart, (data) => {
       orderContext.current.setCart(data);
     });
 
@@ -55,6 +50,11 @@ const useInit = () => {
       setIsLoading(false);
     }, 1000);
   }, [sendRequest, menuContext, setIsLoading]);
+
+  // the actual effect that will trigger the function
+  useEffect(() => {
+    initCalls();
+  }, [initCalls]);
 
   return { error, isLoading, setError, sendRequest };
 };

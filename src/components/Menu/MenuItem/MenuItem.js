@@ -20,7 +20,8 @@ const MenuItem = ({ item }) => {
   const menuItemRef = useRef();
   const { search } = useLocation(0);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [hasAlert, setHasAlert] = useState(false);
+  const [hasSuccess, setHasSuccess] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // order nutrivalues as in nutritional statement
   const nutri = NUTRIVALUES_LABELS.map((nutrivalue) =>
@@ -36,9 +37,15 @@ const MenuItem = ({ item }) => {
   // toggle expansion handler
   const handleExpandItem = () => setIsExpanded((prev) => !prev);
 
-  const handleAddToCart = () => {
-    setHasAlert(true);
-    orderContext.addToCart(item);
+  // async operation to add item in cart and locally in cart context
+  const handleAddToCart = async () => {
+    try {
+      await orderContext.addToCart(item);
+      setHasSuccess(true);
+    } catch (err) {
+      console.error(err);
+      setHasError(true);
+    }
   };
 
   // effect for scrolling to menu item when 'item' search param exists on path
@@ -116,10 +123,16 @@ const MenuItem = ({ item }) => {
         </div>
       </div>
       <UserAlert
-        isOpen={hasAlert}
-        message={`${item.name} successfully added!`}
+        isOpen={hasSuccess}
+        message={`${item.name} adaugat cu succes!`}
         severity="success"
-        onClose={() => setHasAlert(false)}
+        onClose={() => setHasSuccess(false)}
+      />
+      <UserAlert
+        isOpen={hasError}
+        message={`Nu s-a putut adauga in comanda! Incearca din nou!`}
+        severity="error"
+        onClose={() => setHasError(false)}
       />
     </li>
   );

@@ -9,10 +9,6 @@ const MenuTabs = ({ categories, activeCategory }) => {
   // cut categoryId from pathname string to compose nav-links for each category id
   const menuPage = pathname.split("/").slice(0, 2).join("/");
 
-  /*
-    TO DO!!!!! Fix scroll not being triggered again if category is set already!
-  */
-
   return (
     <ul className={classes.tabs}>
       {categories.map((category, i) => (
@@ -20,7 +16,7 @@ const MenuTabs = ({ categories, activeCategory }) => {
           <button
             onClick={() => {
               navigate(`${menuPage}?category=${category.id}`, {
-                replace: false,
+                state: new Date().getTime(), // to retrigger effect if tab is active already
               });
             }}
             className={

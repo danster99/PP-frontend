@@ -1,14 +1,13 @@
 .order {
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax(2.75rem, 3.75rem));
-  height: calc(100% - 15rem);
+  height: calc(100% - 17rem);
   overflow: auto;
-  gap: 1rem;
 
   &__labels,
   &__row {
     display: grid;
-    grid-template-columns: 2fr 4rem 1fr 5rem;
+    grid-template-columns: 1.5fr 4rem 1fr 5rem;
     column-gap: 0.2rem;
     justify-items: center;
     align-items: center;
@@ -20,6 +19,7 @@
   }
   &__row {
     line-height: 1.2;
+    margin-bottom: 1rem;
   }
   &__item-price {
     font-size: 1.3rem;

@@ -11,15 +11,34 @@ import { capitalizeFirst } from "../../helpers/helpers";
 const Order = () => {
   // order context state and derived state
   const orderContext = useContext(OrderContext);
-  const orderTotal = orderContext.cart.reduce(
-    (acc, item) => acc + +(item.item.price * item.quantity),
-    0
-  );
 
-  // state and functions for UserAlert
+  // state and functions for UserAlert (both on success for check request and error from cart operations)
   const [hasCheckAlert, setHasCheckAlert] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const handleRequestCheck = () => {
     setHasCheckAlert(true);
+  };
+
+  const handleIncrementItem = async (itemId) => {
+    try {
+      await orderContext.incrementItem(itemId);
+    } catch (err) {
+      setHasError(true);
+    }
+  };
+  const handleDecrementItem = async (itemId) => {
+    try {
+      await orderContext.decrementItem(itemId);
+    } catch (err) {
+      setHasError(true);
+    }
+  };
+  const handleRemoveItem = async (itemId) => {
+    try {
+      await orderContext.removeItem(itemId);
+    } catch (err) {
+      setHasError(true);
+    }
   };
 
   // render message if cart is empty
@@ -52,7 +71,7 @@ const Order = () => {
                 <IconButton
                   aria-label="add-one-more-item"
                   style={{ padding: "0" }}
-                  onClick={() => orderContext.incrementItem(menuItem.item.id)}
+                  onClick={() => handleIncrementItem(menuItem.item.id)}
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
@@ -61,8 +80,8 @@ const Order = () => {
                   style={{ padding: "0" }}
                   onClick={() =>
                     menuItem.quantity > 1
-                      ? orderContext.decrementItem(menuItem.item.id)
-                      : orderContext.removeItem(menuItem.item.id)
+                      ? handleDecrementItem(menuItem.item.id)
+                      : handleRemoveItem(menuItem.item.id)
                   }
                 >
                   <RemoveCircleOutlineIcon />
@@ -78,7 +97,7 @@ const Order = () => {
             <strong>Total:</strong>
           </span>
           <span className={classes["order__total-sum"]}>
-            {orderTotal.toFixed(2)} LEI
+            {orderContext.cartDetails.total} LEI
           </span>
         </div>
         <div className={`check-btn ${classes["order__check-btn"]}`}>
@@ -96,6 +115,12 @@ const Order = () => {
         message="Chelnerul va sosi cu nota in cateva momente!"
         severity="success"
         onClose={() => setHasCheckAlert(false)}
+      />
+      <UserAlert
+        isOpen={hasError}
+        message="Nu s-a putut efectua actiunea! Incearca din nou!"
+        severity="error"
+        onClose={() => setHasError(false)}
       />
     </>
   );
