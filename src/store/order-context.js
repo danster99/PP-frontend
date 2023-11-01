@@ -59,15 +59,17 @@ export const OrderContextProvider = ({ children }) => {
 
   const { sendRequest } = useHttp();
 
-  const setCart = async (cart) => {
+  const setCart = async (fetchedCart) => {
     // 1) Set current cart details (from current table)
-    if (!cart) return;
-    setCartDetails({ ...cart, items: undefined });
+    if (!fetchedCart) return;
+    setCartDetails({ ...fetchedCart, items: undefined });
 
     try {
       // 2) Group and execute calls to get item data for each data
+
+      // TO DO: Optimization!
       const itemsArr = await Promise.all(
-        cart.items.map((item) => {
+        fetchedCart.items.map((item) => {
           return sendRequest({ url: `${API_URL}/item/${item}/` }, null, true);
         })
       );

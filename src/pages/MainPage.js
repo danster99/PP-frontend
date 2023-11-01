@@ -7,16 +7,14 @@ const MainPage = () => {
   const menuContext = useContext(MenuContext);
 
   return (
-    <div className="main-page">
+    <main className="main main-page">
       <Stories />
-      <main className="main">
-        <div className="card">
-          {menuContext.categories.map((category) => (
-            <Category category={category} key={category.id} />
-          ))}
-        </div>
-      </main>
-    </div>
+      <div className="card">
+        {menuContext.categories.map((category) => (
+          <Category category={category} key={category.id} />
+        ))}
+      </div>
+    </main>
   );
 };
 

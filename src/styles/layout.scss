@@ -34,9 +34,8 @@
 }
 ///////////////////////////////////////////////////
 /// MAIN PAGE LAYOUT
-.main-page {
-  display: grid;
-  grid-template-rows: 9rem calc(100% - 9rem);
+.main.main-page {
+  row-gap: 0;
 }
 
 //////////////////////////////////////////////////
