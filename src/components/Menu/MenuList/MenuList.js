@@ -15,9 +15,10 @@ const MenuList = ({ items, category, seqNo, onVisibilityChange }) => {
 
   // functionality for detecting if list is in view (on the screen)
   const { ref: inViewRef } = useInView({
-    threshold: 0.1,
+    threshold: 0,
     onChange: (inView) => {
       // when new category becomes visibile, it is triggered the setState call to change active state
+
       if (inView) onVisibilityChange(category.id);
     },
   });
@@ -30,6 +31,7 @@ const MenuList = ({ items, category, seqNo, onVisibilityChange }) => {
       // set ref for programatic scroll
       menuListRef.current = DOMNode;
       // set ref for inView detection
+
       inViewRef(DOMNode);
     },
     [inViewRef]

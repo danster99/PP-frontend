@@ -5,12 +5,16 @@ import Stories from "../components/Categories/Stories/Stories";
 
 const MainPage = () => {
   const menuContext = useContext(MenuContext);
+  const categories = [
+    ...menuContext.categories.filter((category) => category.isFood),
+    ...menuContext.categories.filter((category) => !category.isFood),
+  ];
 
   return (
     <main className="main main-page">
       <Stories />
       <div className="card">
-        {menuContext.categories.map((category) => (
+        {categories.map((category) => (
           <Category category={category} key={category.id} />
         ))}
       </div>

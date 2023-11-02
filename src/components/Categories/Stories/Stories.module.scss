@@ -1,6 +1,6 @@
 .stories {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   list-style: none;
   padding: 0.8rem 1rem 1.6rem 1rem;
@@ -8,22 +8,19 @@
 
 .story {
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
+  background-color: #000;
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
-  border: 3px solid var(--color-primary-main);
+  outline: 3px solid var(--color-primary-main);
 
-  &:nth-child(1) {
-    background-image: url("../../../assets/story1.jpg");
+  @media only screen and (min-width: 23em) {
+    width: 7.75rem;
+    height: 7.75rem;
   }
-  &:nth-child(2) {
-    background-image: url("../../../assets/story2.jpg");
-  }
-  &:nth-child(3) {
-    background-image: url("../../../assets/story3.jpg");
-  }
-  &:nth-child(4) {
-    background-image: url("../../../assets/story4.jpg");
+  @media only screen and (min-width: 25em) {
+    width: 8.75rem;
+    height: 8.75rem;
   }
 }

@@ -39,22 +39,36 @@ const OrderContext = React.createContext({
       quantity: 0,
     },
   ],
+  check: [
+    {
+      item: {
+        id: "-1",
+        name: "",
+        price: 2,
+        b2StorageFile: "",
+      },
+      quantity: 0,
+    },
+  ],
   cartDetails: {
     id: 0,
     status: "Open",
     table: 1,
     closedAt: "",
     total: 0,
+    items: [],
   },
   setCart: async (fetchedCart) => {},
-  addToCart: async (item) => {},
-  incrementItem: async (itemId) => {},
-  decrementItem: async (itemId) => {},
-  removeItem: async (itemId) => {},
+  sendCart: async () => {},
+  addToCart: (item) => {},
+  incrementItem: (itemId) => {},
+  decrementItem: (itemId) => {},
+  removeItem: (itemId) => {},
 });
 
 export const OrderContextProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
+  const [check, dispatchCheck] = useReducer(cartReducer, []);
   const [cartDetails, setCartDetails] = useState({});
 
   const { sendRequest } = useHttp();
@@ -66,7 +80,6 @@ export const OrderContextProvider = ({ children }) => {
 
     try {
       // 2) Group and execute calls to get item data for each data
-
       // TO DO: Optimization!
       const itemsArr = await Promise.all(
         fetchedCart.items.map((item) => {
@@ -75,26 +88,28 @@ export const OrderContextProvider = ({ children }) => {
       );
 
       // 3) Add each fetched item into the cart with "add" action
-      itemsArr.forEach((item) => item && dispatch({ type: "add", item: item }));
+      itemsArr.forEach(
+        (item) => item && dispatchCheck({ type: "add", item: item })
+      );
     } catch (err) {
       // 4) If we catch an error we throw it further to be handled with an alert in the View
       throw new Error(err.message);
     }
   };
 
-  const removeOneItemFromDb = (itemId) => {
-    const reqConfig = {
-      url: `${API_URL}/cart/${cartDetails.id}/remove_item/`,
-      method: "PUT",
-      body: {
-        item: itemId,
-      },
-    };
-    // returns configured promise that will remove an item to the cart in the database
-    return sendRequest(reqConfig, null, true);
-  };
+  // const removeOneItemFromDb = (itemId) => {
+  //   const reqConfig = {
+  //     url: `${API_URL}/cart/${cartDetails.id}/remove_item/`,
+  //     method: "PUT",
+  //     body: {
+  //       item: itemId,
+  //     },
+  //   };
+  //   // returns configured promise that will remove an item to the cart in the database
+  //   return sendRequest(reqConfig, null, true);
+  // };
 
-  const addOneItemToDb = (itemId) => {
+  const addOneItemToDb = async (itemId) => {
     const reqConfig = {
       url: `${API_URL}/cart/${cartDetails.id}/add_item/`,
       method: "PUT",
@@ -102,58 +117,62 @@ export const OrderContextProvider = ({ children }) => {
         item: itemId,
       },
     };
+
     // returns configured promise that will add an item to the cart in the database
     return sendRequest(reqConfig, null, true);
   };
 
-  const addToCart = async (item) => {
-    try {
-      // 1) Perform api call
-      await addOneItemToDb(item.id);
+  const sendCart = async () => {
+    const items = cart
+      .map((item) =>
+        new Array(item.quantity).fill(item.item.id, 0, item.quantity)
+      )
+      .flat();
 
-      // 2) Update the local state
-      // here we use the dispatch function to specify the action we want to perform + the payload (action.item in this situation)
-      dispatch({ type: "add", item: item });
-    } catch (err) {
-      // 3) If we catch an error we throw it further to be handled with an alert in the View
-      throw new Error(err.message);
-    }
+    await Promise.all(
+      items.map((item) => {
+        return addOneItemToDb(item);
+      })
+    );
+    cart.forEach((item) => {
+      console.log(item);
+
+      dispatchCheck({ type: "add-item-with-quantity", item: item });
+    });
+    dispatch({ type: "reinit" });
+
+    // cart.forEach(async (item) => {
+    //   let quantity = item.item.quantity;
+    //   while (quantity > 0) {
+    //     await addOneItemToDb(item.item.id);
+    //     quantity--;
+    //   }
+    // });
   };
 
-  const incrementItem = async (itemId) => {
-    try {
-      await addOneItemToDb(itemId);
-
-      dispatch({ type: "increment-quantity", id: itemId });
-    } catch (err) {
-      throw new Error(err.message);
-    }
+  const addToCart = (item) => {
+    dispatch({ type: "add", item: item });
   };
 
-  const decrementItem = async (itemId) => {
-    try {
-      await removeOneItemFromDb(itemId);
+  const incrementItem = (itemId) => {
+    dispatch({ type: "increment-quantity", id: itemId });
+  };
 
-      dispatch({ type: "decrement-quantity", id: itemId });
-    } catch (err) {
-      throw new Error(err.message);
-    }
+  const decrementItem = (itemId) => {
+    dispatch({ type: "decrement-quantity", id: itemId });
   };
 
   const removeItem = async (itemId) => {
-    try {
-      await removeOneItemFromDb(itemId);
-      dispatch({ type: "remove", id: itemId });
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    dispatch({ type: "remove", id: itemId });
   };
 
   return (
     <OrderContext.Provider
       value={{
         cart,
+        check,
         cartDetails,
+        sendCart,
         setCart,
         addToCart,
         incrementItem,

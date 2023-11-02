@@ -44,6 +44,7 @@ const useHttp = () => {
         if (returns) return data;
         else processData(data);
       } catch (err) {
+        console.error(err.message);
         setError(err);
       } finally {
         setIsLoading(false);

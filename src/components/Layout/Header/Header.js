@@ -1,17 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import classes from "./Header.module.scss";
-import RestaurantContext from "../../../store/restaurant-context";
+import kanpaiLogo from "../../../assets/logo kanpai.png";
 
 const Header = () => {
-  const restaurantContext = useContext(RestaurantContext);
+  //const restaurantContext = useContext(RestaurantContext);
   return (
     <header className={classes.header}>
       <figure className={classes.logo}>
-        {/* Temporary not in flow
-        <img src="" alt="<COMPANY_LOGO_PIC>" className={classes.logo__img}/> */}
-        <figcaption className={classes.logo__name}>
+        <img
+          src={kanpaiLogo}
+          alt="<COMPANY_LOGO_PIC>"
+          className={classes.logo__img}
+        />
+        {/* <figcaption className={classes.logo__name}>
           {restaurantContext.restaurant.name}
-        </figcaption>
+        </figcaption> */}
       </figure>
     </header>
   );

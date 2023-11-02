@@ -54,6 +54,33 @@ const cartReducer = (state, action) => {
     // filter out the item to be removed
     case "remove":
       return state.filter((item) => item.item.id !== action.id);
+    case "reinit":
+      return [];
+    case "add-item-with-quantity":
+      if (state.find((item) => item.item.id === action.item.item.id)) {
+        return state.map((item) =>
+          item.item.id === action.item.item.id
+            ? {
+                item: item.item,
+                quantity: item.quantity + action.item.quantity,
+              }
+            : item
+        );
+      }
+      // If new item is added we return the current state + new pushed item (from which we keep only the data that we need), with quantity set to 1
+      else
+        return [
+          ...state,
+          {
+            item: {
+              id: action.item.item.id,
+              name: action.item.item.name,
+              price: parseFloat(action.item.item.price),
+              b2StorageFile: action.item.item.b2StorageFile,
+            },
+            quantity: action.item.quantity,
+          },
+        ];
     default:
       throw new Error("Unkown Action");
   }

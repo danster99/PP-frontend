@@ -9,7 +9,7 @@ const Category = ({ category }) => {
         <h2 className={`heading-primary ${classes.category__name}`}>
           {category.name}
         </h2>
-        <Gallery images={category.items} categoryNumber={category.id} />
+        <Gallery items={category.items} categoryNumber={category.id} />
       </div>
     );
 };

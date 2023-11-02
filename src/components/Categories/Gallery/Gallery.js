@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./Gallery.module.scss";
 import MenuContext from "../../../store/menu-context";
 import { useNavigate } from "react-router-dom";
 
-const Gallery = ({ categoryNumber, images }) => {
+const Gallery = ({ categoryNumber, items }) => {
+  const [allShown, setAllShown] = useState(false);
   const navigate = useNavigate();
   const menuContext = useContext(MenuContext);
 
@@ -20,24 +21,37 @@ const Gallery = ({ categoryNumber, images }) => {
     else navigate(`/drinks?item=${itemId}`);
   };
 
+  const images = allShown ? items : items.slice(0, 8);
+
   return (
-    <div className={classes.gallery}>
-      {images.map((image) => (
-        <div
-          className={classes.gallery__item}
-          key={image.id}
-          onClick={handleNavigateToItem}
-        >
+    <>
+      <div className={classes.gallery}>
+        {images.map((image) => (
           <div
-            data-id={image.id}
-            className={classes.gallery__img}
-            style={{
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url("${image.b2StorageFile}")`,
-            }}
-          ></div>
-        </div>
-      ))}
-    </div>
+            className={classes.gallery__item}
+            key={image.id}
+            onClick={handleNavigateToItem}
+          >
+            <div
+              data-id={image.id}
+              className={classes.gallery__img}
+              style={{
+                backgroundImage: `url("${image.b2StorageFile}"), linear-gradient(#2B3034, #2B3034)`,
+              }}
+            ></div>
+          </div>
+        ))}
+        {((!allShown && items.length > 9) ||
+          (allShown && images.length > 9)) && (
+          <div
+            className={`${classes.gallery__item} ${classes.gallery__more}`}
+            onClick={() => setAllShown((allShown) => !allShown)}
+          >
+            {allShown ? "x" : "..."}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

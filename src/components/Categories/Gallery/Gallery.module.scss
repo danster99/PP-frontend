@@ -3,17 +3,28 @@
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   gap: 0.5rem;
+  padding: 0.2rem 0.5rem;
 
   &__item {
     aspect-ratio: 1;
     overflow: hidden;
     border-radius: 1rem;
+    background-image: linear-gradient(#2b3034, #2b3034);
   }
   &__img {
     height: 100%;
     width: 100%;
     background-size: cover;
     background-position: center;
-    transform: scale(1.6);
+    transform: scale(0.8);
+  }
+  &__more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    font-size: 4.6rem;
+    color: #ddd;
+    font-weight: 500;
   }
 }

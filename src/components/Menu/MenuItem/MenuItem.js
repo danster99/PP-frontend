@@ -60,48 +60,50 @@ const MenuItem = ({ item }) => {
 
   return (
     <li className={classes.item} id={item.id} ref={menuItemRef}>
-      <div
-        style={{
-          backgroundImage: `url("${item.b2StorageFile}"), linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95))`,
-        }}
-        className={classes.item__img}
-      >
-        <div className={classes["item__add-btn"]}>
-          <IconButton aria-label="add-to-order" onClick={handleAddToCart}>
-            <AddCircleOutlineIcon
-              fontSize="inherit"
-              sx={{ color: grey[300] }}
-            />
-          </IconButton>
-        </div>
-        <div className={classes["item__info-icons"]}>
-          {item.spiceLvl > 0 && (
-            <div className={classes["item__info-spice"]}>
-              <img
-                src={item.spiceLvl >= 1 ? redPepperImg : greyPepperImg}
-                alt="Spice level 1"
+      <div className={classes["item__img-container"]}>
+        <div
+          style={{
+            backgroundImage: `url("${item.b2StorageFile}"), linear-gradient(#2b3034, #2b3034)`,
+          }}
+          className={classes.item__img}
+        >
+          <div className={classes["item__add-btn"]}>
+            <IconButton aria-label="add-to-order" onClick={handleAddToCart}>
+              <AddCircleOutlineIcon
+                fontSize="inherit"
+                sx={{ color: grey[300] }}
               />
-              <img
-                src={item.spiceLvl >= 2 ? redPepperImg : greyPepperImg}
-                alt="Spice level 2"
-              />
-              <img
-                src={item.spiceLvl >= 3 ? redPepperImg : greyPepperImg}
-                alt="Spice level 3"
-              />
-            </div>
-          )}
-          {item.isVegan && (
-            <div className={classes["item__info-vegan"]}>
-              <img src={isVeganSign} alt="Food is Vegan" />
-            </div>
-          )}
-        </div>
-        {!item.isAvailable && (
-          <div className={classes["item__img-overlay"]}>
-            <div className={classes["item__img-warning"]}>Not Available!</div>
+            </IconButton>
           </div>
-        )}
+          <div className={classes["item__info-icons"]}>
+            {item.spiceLvl > 0 && (
+              <div className={classes["item__info-spice"]}>
+                <img
+                  src={item.spiceLvl >= 1 ? redPepperImg : greyPepperImg}
+                  alt="Spice level 1"
+                />
+                <img
+                  src={item.spiceLvl >= 2 ? redPepperImg : greyPepperImg}
+                  alt="Spice level 2"
+                />
+                <img
+                  src={item.spiceLvl >= 3 ? redPepperImg : greyPepperImg}
+                  alt="Spice level 3"
+                />
+              </div>
+            )}
+            {item.isVegan && (
+              <div className={classes["item__info-vegan"]}>
+                <img src={isVeganSign} alt="Food is Vegan" />
+              </div>
+            )}
+          </div>
+          {!item.isAvailable && (
+            <div className={classes["item__img-overlay"]}>
+              <div className={classes["item__img-warning"]}>Not Available!</div>
+            </div>
+          )}
+        </div>
       </div>
       <div className={classes.item__details}>
         <div className={classes.item__presentation}>
