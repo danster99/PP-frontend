@@ -36,7 +36,7 @@ const Gallery = ({ categoryNumber, items }) => {
               data-id={image.id}
               className={classes.gallery__img}
               style={{
-                backgroundImage: `url("${image.b2StorageFile}"), linear-gradient(#2b3034, #2b3034)`,
+                backgroundImage: `url("${image.b2StorageFile}"), linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))`,
               }}
             ></div>
           </div>
