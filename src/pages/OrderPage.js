@@ -21,6 +21,17 @@ const OrderPage = () => {
 
   return (
     <div className="card order-card">
+      {/* <div className={classes.order__circles}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div> */}
       <div className={classes.order__cart}>
         <h2>Cos de cumparaturi</h2>
         <Order type="cart" items={orderContext.cart} />

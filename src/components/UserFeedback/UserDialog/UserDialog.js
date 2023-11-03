@@ -31,8 +31,9 @@ const UserDialog = ({
         </DialogContent>
       )}
       <DialogActions className="dialog-action-btns">
-        {dialogButtons.map((button) => (
+        {dialogButtons.map((button, i) => (
           <Button
+            key={i}
             onClick={button.onClick}
             color="primary"
             disabled={button.disabled || false}

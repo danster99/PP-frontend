@@ -54,7 +54,7 @@
 }
 
 .order-card {
-  padding: 3rem 2.5rem 8rem 2.5rem;
+  padding: 1.5rem 2.5rem 8rem 2.5rem;
   margin-top: 1rem;
   height: calc(100vh - 7rem);
   display: grid;
@@ -65,6 +65,9 @@
   & > *:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-300);
   }
+  // & > *:first-child {
+  //   border-bottom: none;
+  // }
 
   h2 {
     font-size: 1.8rem;
