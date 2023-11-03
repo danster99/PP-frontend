@@ -8,7 +8,7 @@ import RequestCheckDialog from "../components/UserActions/RequestCheckDialog.js/
 
 const OrderPage = () => {
   const orderContext = useContext(OrderContext);
-  const [hasCheckAlert, setHasCheckAlert] = useState(false);
+  const [hasSuccessAlert, setHasSuccessAlert] = useState(false);
 
   const productsSum = (+orderContext.cartDetails.total).toFixed(2);
   const tva = (0.19 * productsSum).toFixed(2);
@@ -16,6 +16,7 @@ const OrderPage = () => {
 
   const handleSendToKitchen = async () => {
     await orderContext.sendCart();
+    setHasSuccessAlert(true);
   };
 
   return (
@@ -58,6 +59,12 @@ const OrderPage = () => {
           <RequestCheckDialog />
         </div>
       </div>
+      <UserAlert
+        isOpen={hasSuccessAlert}
+        message="Comanda a fost trimisa cu succes!"
+        severity="success"
+        onClose={() => setHasSuccessAlert(false)}
+      />
     </div>
   );
 };

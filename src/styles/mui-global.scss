@@ -45,10 +45,11 @@
 }
 
 .dialog-action-btns.MuiDialogActions-root {
-  padding-right: 1.5rem;
+  padding: 0 1.5rem;
 
   .MuiButtonBase-root.MuiButton-root {
     width: fit-content;
     min-width: unset;
+    line-height: 1.3;
   }
 }

@@ -8,7 +8,20 @@ import {
   Button,
 } from "@mui/material";
 
-const UserDialog = ({ open, onClose, title, content = null }) => {
+const UserDialog = ({
+  open,
+  onClose,
+  title,
+  content = null,
+  dialogButtons = null,
+}) => {
+  if (!dialogButtons) {
+    dialogButtons = [
+      { text: "Da", onClick: onClose },
+      { text: "Nu", onClick: onClose },
+    ];
+  }
+
   return (
     <Dialog open={open} onClose={onClose} className="dialog">
       <DialogTitle>{title}</DialogTitle>
@@ -18,12 +31,15 @@ const UserDialog = ({ open, onClose, title, content = null }) => {
         </DialogContent>
       )}
       <DialogActions className="dialog-action-btns">
-        <Button onClick={onClose} color="primary">
-          Nu
-        </Button>
-        <Button onClick={onClose} autoFocus color="primary">
-          Da
-        </Button>
+        {dialogButtons.map((button) => (
+          <Button
+            onClick={button.onClick}
+            color="primary"
+            disabled={button.disabled || false}
+          >
+            {button.text}
+          </Button>
+        ))}
       </DialogActions>
     </Dialog>
   );
