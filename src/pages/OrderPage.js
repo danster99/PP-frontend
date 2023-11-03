@@ -4,6 +4,7 @@ import classes from "../components/Order/Order.module.scss";
 import { Button } from "@mui/material";
 import UserAlert from "../components/UserFeedback/UserAlert/UserAlert";
 import OrderContext from "../store/order-context";
+import RequestCheckDialog from "../components/UserActions/RequestCheckDialog.js/RequestCheckDialog";
 
 const OrderPage = () => {
   const orderContext = useContext(OrderContext);
@@ -12,10 +13,6 @@ const OrderPage = () => {
   const productsSum = (+orderContext.cartDetails.total).toFixed(2);
   const tva = (0.19 * productsSum).toFixed(2);
   const totalSum = (+productsSum + +tva).toFixed(2);
-
-  const handleRequestCheck = () => {
-    setHasCheckAlert(true);
-  };
 
   const handleSendToKitchen = async () => {
     await orderContext.sendCart();
@@ -58,20 +55,8 @@ const OrderPage = () => {
         </div>
 
         <div className={`check-btn ${classes["order__check-btn"]}`}>
-          <Button
-            variant="contained"
-            disableElevation
-            onClick={handleRequestCheck}
-          >
-            Cere Nota
-          </Button>
+          <RequestCheckDialog />
         </div>
-        <UserAlert
-          isOpen={hasCheckAlert}
-          message="Chelnerul va sosi cu nota in cateva momente!"
-          severity="success"
-          onClose={() => setHasCheckAlert(false)}
-        />
       </div>
     </div>
   );

@@ -9,14 +9,14 @@
     aspect-ratio: 1;
     overflow: hidden;
     border-radius: 1rem;
-    background-image: linear-gradient(#2b3034, #2b3034);
+    // background-image: linear-gradient(#2b3034, #2b3034);
   }
   &__img {
     height: 100%;
     width: 100%;
     background-size: cover;
     background-position: center;
-    transform: scale(0.8);
+    transform: scale(1.5);
   }
   &__more {
     display: flex;
