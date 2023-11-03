@@ -50,7 +50,6 @@ const Stories = () => {
       ) : (
         <li className={classes.story}></li>
       )}
-
       {activeStory && (
         <Story
           width={"100vw"}
