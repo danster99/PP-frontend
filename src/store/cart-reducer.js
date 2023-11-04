@@ -68,7 +68,7 @@ export const cartReducer = (state, action) => {
       return newState;
     }
     case "reinit": {
-      localStorage.setItem("cart", JSON.stringyfy([]));
+      localStorage.setItem("cart", JSON.stringify([]));
       return [];
     }
 
@@ -107,7 +107,7 @@ export const cartReducer = (state, action) => {
   }
 };
 
-// keeps logic for 'add' action from cartReducer in order to manage the items fetched on init from the db cart (order)
+// keeps logic for 'add' and 'add-item-with-quantity' actions from cartReducer in order to manage the items fetched on init from the db cart (order)
 // same action as in orderReducer, but it doesn't persist the state in localStorage, hence it is used for managing the remote cart
 export const orderReducer = (state, action) => {
   switch (action.type) {
@@ -138,6 +138,34 @@ export const orderReducer = (state, action) => {
             quantity: 1,
           },
         ];
+    case "add-item-with-quantity":
+      if (state.find((item) => item.item.id === action.item.item.id)) {
+        const newState = state.map((item) =>
+          item.item.id === action.item.item.id
+            ? {
+                item: item.item,
+                quantity: item.quantity + action.item.quantity,
+              }
+            : item
+        );
+        return newState;
+      }
+      // If new item is added we return the current state + new pushed item (from which we keep only the data that we need), with quantity set to 1
+      else {
+        const newState = [
+          ...state,
+          {
+            item: {
+              id: action.item.item.id,
+              name: action.item.item.name,
+              price: parseFloat(action.item.item.price),
+              b2StorageFile: action.item.item.b2StorageFile,
+            },
+            quantity: action.item.quantity,
+          },
+        ];
+        return newState;
+      }
     default:
       throw new Error("Unkown Action");
   }

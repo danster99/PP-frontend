@@ -128,23 +128,29 @@ export const OrderContextProvider = ({ children }) => {
   };
 
   const sendCart = async () => {
+    // Prepare an array with item ids that will be added to the remote cart
     const items = cart
       .map((item) =>
         new Array(item.quantity).fill(item.item.id, 0, item.quantity)
       )
       .flat();
 
-    await Promise.all(
-      items.map((item) => {
-        return addOneItemToDb(item);
-      })
-    );
-    cart.forEach((item) => {
-      console.log(item);
-
-      dispatchCheck({ type: "add-item-with-quantity", item: item });
-    });
-    dispatch({ type: "reinit" });
+    // await 'put' operations to finish
+    try {
+      await Promise.all(
+        items.map((item) => {
+          return addOneItemToDb(item);
+        })
+      );
+      // local cart items are pushed into the orderCart
+      cart.forEach((item) => {
+        dispatchCheck({ type: "add-item-with-quantity", item: item });
+      });
+      // local cart is reinitialized
+      dispatch({ type: "reinit" });
+    } catch (err) {
+      throw new Error(err.message);
+    }
   };
 
   const addToCart = (item) => {
