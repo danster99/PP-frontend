@@ -65,12 +65,17 @@
   & > *:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-300);
   }
-  // & > *:first-child {
-  //   border-bottom: none;
-  // }
 
   h2 {
     font-size: 1.8rem;
     margin-bottom: 0.6rem;
   }
+}
+
+.error-card {
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

@@ -1,35 +1,27 @@
 import React from "react";
 import classes from "./MenuTabs.module.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import MenuTab from "../MenuTab/MenuTab";
 
 const MenuTabs = ({ categories, activeCategory }) => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   // cut categoryId from pathname string to compose nav-links for each category id
   const menuPage = pathname.split("/").slice(0, 2).join("/");
 
   return (
-    <ul className={classes.tabs}>
-      {categories.map((category, i) => (
-        <li className={classes.tab} key={category.id}>
-          <button
-            onClick={() => {
-              navigate(`${menuPage}?category=${category.id}`, {
-                state: new Date().getTime(), // to retrigger effect if tab is active already
-              });
-            }}
-            className={
-              activeCategory === category.id
-                ? `${classes.tab__active}`
-                : `${classes.tab__inactive}`
-            }
-          >
-            {category.name}
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div className={classes.tabs__container}>
+      <ul className={classes.tabs}>
+        {categories.map((category) => (
+          <MenuTab
+            key={category.id}
+            category={category}
+            menuPage={menuPage}
+            activeCategory={activeCategory}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };
 

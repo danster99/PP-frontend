@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import classes from "./Gallery.module.scss";
 import MenuContext from "../../../store/menu-context";
 import { useNavigate } from "react-router-dom";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Gallery = ({ categoryNumber, items }) => {
   const [allShown, setAllShown] = useState(false);
@@ -47,7 +49,11 @@ const Gallery = ({ categoryNumber, items }) => {
             className={`${classes.gallery__item} ${classes.gallery__more}`}
             onClick={() => setAllShown((allShown) => !allShown)}
           >
-            {allShown ? "x" : "..."}
+            {allShown ? (
+              <CloseIcon sx={{ fontSize: "4.6rem" }} />
+            ) : (
+              <MoreHorizIcon sx={{ fontSize: "4.6rem" }} />
+            )}
           </div>
         )}
       </div>

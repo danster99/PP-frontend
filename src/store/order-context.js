@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import useHttp from "../hooks/useHttp";
 import { API_URL } from "../config/config";
-import cartReducer from "./cart-reducer";
+import { cartReducer, orderReducer } from "./cart-reducer";
 
 /*
 Cart
@@ -67,8 +67,13 @@ const OrderContext = React.createContext({
 });
 
 export const OrderContextProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, []);
-  const [check, dispatchCheck] = useReducer(cartReducer, []);
+  // if we have data in local storage, we use it as an initial cart
+  const initialCart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+
+  const [cart, dispatch] = useReducer(cartReducer, initialCart);
+  const [check, dispatchCheck] = useReducer(orderReducer, []);
   const [cartDetails, setCartDetails] = useState({});
 
   const { sendRequest } = useHttp();
@@ -80,7 +85,6 @@ export const OrderContextProvider = ({ children }) => {
 
     try {
       // 2) Group and execute calls to get item data for each data
-      // TO DO: Optimization!
       const itemsArr = await Promise.all(
         fetchedCart.items.map((item) => {
           return sendRequest({ url: `${API_URL}/item/${item}/` }, null, true);
@@ -97,6 +101,7 @@ export const OrderContextProvider = ({ children }) => {
     }
   };
 
+  // Kept for future use, if needed (function configures a promise for removing an item from database cart)
   // const removeOneItemFromDb = (itemId) => {
   //   const reqConfig = {
   //     url: `${API_URL}/cart/${cartDetails.id}/remove_item/`,
@@ -140,14 +145,6 @@ export const OrderContextProvider = ({ children }) => {
       dispatchCheck({ type: "add-item-with-quantity", item: item });
     });
     dispatch({ type: "reinit" });
-
-    // cart.forEach(async (item) => {
-    //   let quantity = item.item.quantity;
-    //   while (quantity > 0) {
-    //     await addOneItemToDb(item.item.id);
-    //     quantity--;
-    //   }
-    // });
   };
 
   const addToCart = (item) => {

@@ -12,17 +12,25 @@ const initialRestaurantData = {
 
 const RestaurantContext = React.createContext({
   restaurant: initialRestaurantData,
+  stories: [],
   initRestaurant: (restaurantData) => {},
+  initStories: (storiesData) => {},
 });
 
 export const RestaurantContextProvider = ({ children }) => {
   const [restaurant, setRestaurant] = useState(initialRestaurantData);
+  const [stories, setStories] = useState([]);
 
   const initRestaurant = (restaurantData) => {
     setRestaurant(restaurantData);
   };
+  const initStories = (storiesData) => {
+    setStories(storiesData);
+  };
   return (
-    <RestaurantContext.Provider value={{ restaurant, initRestaurant }}>
+    <RestaurantContext.Provider
+      value={{ restaurant, initRestaurant, stories, initStories }}
+    >
       {children}
     </RestaurantContext.Provider>
   );

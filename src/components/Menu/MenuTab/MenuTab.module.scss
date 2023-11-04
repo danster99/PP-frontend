@@ -1,0 +1,27 @@
+.tab button {
+  border: none;
+  outline: none;
+  font-family: "Okami";
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  padding: 0.2rem 1.8rem;
+  border-radius: 1rem;
+  letter-spacing: 1.5px;
+  display: block;
+  width: max-content;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab__inactive {
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.tab__active {
+  background-color: var(--color-primary-main);
+  color: var(--color-white);
+  letter-spacing: 1.5px;
+}

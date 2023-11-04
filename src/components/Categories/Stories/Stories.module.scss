@@ -3,26 +3,57 @@
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  padding: 0.8rem 1rem 1.6rem 1rem;
+  padding: 0.7rem 0.1rem 1.5rem 0.1rem;
   gap: 0.9rem;
-  //overflow-x: scroll;
+  margin: 0 1rem;
+  height: 10rem;
+  overflow-x: scroll;
+
+  @media only screen and (min-width: 23em) {
+    height: 11rem;
+  }
 }
 
 .story {
+  flex-shrink: 0;
   background-size: cover;
   background-position: center;
   background-color: #000;
-  width: 7rem;
-  height: 7rem;
+  width: 7.2rem;
+  height: 7.2rem;
   border-radius: 50%;
-  outline: 3px solid var(--color-primary-main);
+  border: 3px solid var(--color-primary-main);
 
   @media only screen and (min-width: 23em) {
-    width: 7.75rem;
-    height: 7.75rem;
+    width: 7.85rem;
+    height: 7.85rem;
   }
   @media only screen and (min-width: 25em) {
-    width: 8.75rem;
-    height: 8.75rem;
+    width: 8.85rem;
+    height: 8.85rem;
+  }
+
+  &__close {
+    position: fixed;
+    top: 2rem;
+    right: 1rem;
+    z-index: 1001;
+  }
+
+  &__next {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    z-index: 1000;
+  }
+  &__previous {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    z-index: 1000;
   }
 }
