@@ -1,17 +1,16 @@
 <template>
-    <div class="h-24 flex justify-around items-center w-full p-6 bg-transparent">
+    <div class="h-24 flex w-full justify-between items-center py-6 px-2 bg-transparent">
         <img v-for="(story, index) in this.stories" :key="index" :src="(story.b2StorageFile)"
-            class="rounded-full h-20 w-20 drop-shadow-2xl" @click="openStory(story.b2StorageFile, story)">
+            class="rounded-full w-[24%] aspect-square drop-shadow-2xl border-4 border-yellow-500"
+            @click="openStory(story.b2StorageFile, story)">
         <div class="absolute w-screen h-screen top-0 left-0 z-[999] flex items-center justify-center bg-white"
             v-if="this.showBig">
             <h3 class="absolute top-5 left-5 text-2xl font-black z-[999999]" @click="this.closeBig">X</h3>
             <img :src="this.currentStoryImg" class="">
             <div class="absolute w-screen h-screen flex justify-between">
                 <div class="absolute w-[33vw] h-screen left-0 z-[9999]" @click='alertLeft(currentStory)'>
-
                 </div>
                 <div class="absolute w-[67vw] h-screen right-0 z-[9999]" @click='alertRight(currentStory)'>
-
                 </div>
             </div>
         </div>
