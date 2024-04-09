@@ -4,7 +4,7 @@
         <div class="overflow-x-scroll">
             <div class="flex">
                 <div v-for="(card, index) in this.sizes" :key="index">
-                    <DisplayCard :size="card" image="@/assets/apple-pie.jpg" />
+                    <DisplayCard :size="card.size" :image="card.image" />
                 </div>
             </div>
         </div>

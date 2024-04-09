@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="width-full border-b-[1px] border-gray-400 flex justify-between p-1" @click="showDetails = true"
+        <div class="width-full border-b-[1px] border-gray-400 flex justify-between p-1" @click="showDetailsfunc()"
             v-if="!showDetails">
             <div class="flex flex-col pl-2 z-30">
                 <h2 class="font-semibold text-lg mb-1">{{ title }}</h2>
@@ -15,7 +15,7 @@
             v-if="showDetails">
             <div class="sticky">
                 <h2 class="text-3xl text-white font-bold text-m text-shadow absolute right-2 top-2"
-                    @click="showDetails = false">X</h2>
+                    @click="hideDetailsfunc()">X</h2>
                 <img class="w-full h-full object-fill  rounded-2xl" :src="this.image" alt="">
             </div>
             <div class="flex flex-col pl-2 bg-slate-50">
@@ -41,9 +41,23 @@ export default {
             showDetails: false
         }
     },
+    mounted() {
+        localStorage.setItem('showDetails', 'false');
+    },
     methods: {
         limitLength(str) {
             return str.length > 100 ? str.substring(0, 100) + '...' : str;
+        },
+        showDetailsfunc() {
+            console.log('clicked', localStorage.getItem('showDetails'));
+            if (localStorage.getItem('showDetails') != 'true') {
+                this.showDetails = true;
+                localStorage.setItem('showDetails', 'true');
+            }
+        },
+        hideDetailsfunc() {
+            this.showDetails = false;
+            localStorage.setItem('showDetails', 'false');
         }
     }
 }
