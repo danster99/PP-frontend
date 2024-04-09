@@ -22,20 +22,19 @@
                 <h2 class="font-semibold text-lg mb-1">{{ title }}</h2>
                 <h3 class="text-xl font-light mb-1">{{ price }}</h3>
                 <p>{{ full_description }}</p>
-                <AppButton text="Add to Wishlist" />
+                <div class="h-16 flex justify-center items-center rounded-lg mt-3 border-[1px] border-black bg-yellow-500 text-semibold text-2xl w-5/6 left-0 right-0 ml-10 mr-10"
+                    @click="addToWishlistParent()">
+                    Add to Wishlist
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import AppButton from '@/components/AppButton.vue'
 export default {
     name: 'MenuCard',
     props: ['title', 'price', 'description', 'image', 'full_description'],
-    components: {
-        AppButton
-    },
     data: function () {
         return {
             showDetails: false
@@ -58,6 +57,11 @@ export default {
         hideDetailsfunc() {
             this.showDetails = false;
             localStorage.setItem('showDetails', 'false');
+        },
+        addToWishlistParent() {
+            console.log('clicked');
+            this.$parent.addToWishlist(this.title, this.price, this.description, this.image);
+            window.alert('Added to Wishlist');
         }
     }
 }

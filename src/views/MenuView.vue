@@ -5,7 +5,8 @@
         <div v-for="(categ, key, index) in items" :key="index">
             <h1 class="p-4 font-bold text-2xl capitalize" v-if="categ.length > 0">{{ key }}</h1>
             <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
-                :description="item.description" :full_description="item.description" :image="item.photo" />
+                :description="item.description" :full_description="item.description" :image="item.photo"
+                :price="item.price" />
         </div>
         <NavBar />
         <div class="h-8"></div>
@@ -30,10 +31,12 @@ export default {
     data() {
         return {
             items: {},
+            wishlist: []
         }
     },
     created() {
         this.getItems();
+        this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     },
     methods: {
         async getItems() {
@@ -48,6 +51,16 @@ export default {
         },
         capitalize(str) {
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        },
+        addToWishlist(title, price, description, image) {
+            this.wishlist.push({
+                title: title,
+                price: price,
+                description: description,
+                image: image
+            });
+            localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
+            console.log(localStorage.getItem('wishlist'));
         }
     }
 }

@@ -13,13 +13,24 @@ export default {
             quantity: 1
         }
     },
+    props: ['item'],
     methods: {
         increment() {
             this.quantity++
         },
         decrement() {
             if (this.quantity === 1) {
-                alert('Negative quantity not allowed')
+                if (confirm('Are you sure you want to remove this item from your wishlist?')) {
+                    let local = JSON.parse(localStorage.getItem('wishlist'));
+                    local.forEach(element => {
+                        console.log(element, this.item)
+                        if (element.title == this.item.title) {
+                            local.splice(local.indexOf(element), 1);
+                            localStorage.setItem('wishlist', JSON.stringify(local));
+                            window.location.reload();
+                        }
+                    });
+                }
             } else {
                 this.quantity--
             }
@@ -51,9 +62,12 @@ $border: 2px solid #ddd;
         border: 0;
         border-top: $border;
         border-bottom: $border;
-        width: 2.5rem;
+        border-radius: 0;
+        width: 2.4rem;
         text-align: center;
-        padding: 0 .5rem;
+        padding: 0.5rem;
+        z-index: 3;
+        max-height: 30px;
     }
 
     button {
@@ -61,8 +75,26 @@ $border: 2px solid #ddd;
         padding: .5rem;
         background: #f5f5f5;
         color: #888;
-        font-size: 1rem;
+        background-color: #fff;
+        font-size: 0.6rem;
+        border-radius: 16px;
         cursor: pointer;
+        z-index: 2;
+        max-height: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    button:first-of-type {
+        border-right: none;
+        padding-right: 20px;
+        transform: translateX(12px);
+    }
+
+    button:last-of-type {
+        border-left: none;
+        padding-left: 20px;
+        transform: translateX(-12px);
     }
 }
 </style>
