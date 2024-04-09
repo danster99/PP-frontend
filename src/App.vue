@@ -5,6 +5,17 @@
 </template>
 
 <style>
+#app {
+  background-image: url("@/assets/background.png");
+  background-position: top right;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.router-view {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 nav {
   padding: 30px;
 }
