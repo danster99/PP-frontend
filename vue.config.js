@@ -10,10 +10,7 @@ module.exports = defineConfig({
       },
       client: {
         overlay: false,
-      },
-      watchOptions: {
-        ignored: /node_modules/,
-      },
+      }
     },
     allowedHosts: 'all',
   },
