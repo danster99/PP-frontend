@@ -2,7 +2,12 @@
     <div class="home">
         <appTitle />
         <StoriesBar />
-        <div v-for="(categ, key, index) in items" :key="index">
+        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3">
+            <div v-for="(categ, key, index) in items" :key="index" class="">
+                <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
+            </div>
+        </div>
+        <div v-for="(categ, key, index) in items" :key="index" :id="key">
             <h1 class="p-2 font-bold text-3xl capitalize" v-if="categ.length > 0">{{ key }}</h1>
             <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
                 :description="item.description" :full_description="item.description" :image="item.photo"
@@ -61,7 +66,16 @@ export default {
             });
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
             console.log(localStorage.getItem('wishlist'));
+        },
+        scrollTo(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
     }
 }
 </script>
+<style scoped lang="scss">
+.highlited {
+    font-weight: 900;
+    text-decoration: underline;
+}
+</style>
