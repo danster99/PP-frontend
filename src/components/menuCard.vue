@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div class="width-full border-b-[1px] border-gray-400 flex justify-between p-1" @click="showDetailsfunc()"
+        <div class="width-full border-b-[3px] border-gray-200 flex justify-between p-1" @click="showDetailsfunc()"
             v-if="!showDetails">
             <div class="flex flex-col pl-2 z-30">
-                <h2 class="font-semibold text-lg mb-1">{{ title }}</h2>
-                <h3 class="text-xl font-light mb-5">{{ price }}</h3>
-                <p class="text-sm">{{ this.limitLength(description) }}</p>
+                <h2 class="font-bold text-2xl tracking-tight">{{ title }}</h2>
+                <h3 class="text-base font-light mb tracking-tight">{{ price }} RON</h3>
+                <p class="text-base tracking-tighter">{{ this.limitLength(description) }}</p>
             </div>
-            <div class="aspect-small h-40 w-40 ml-2 rounded-2xl relative z-30 flex items-center justify-end mr-4">
-                <img class="w-4/6 h-4/6 object-fill  rounded-2xl" :src="this.image" alt="">
+            <div class="aspect-small h-36 w-28 rounded-2xl relative z-30 flex items-center justify-end mr-3 ml-6">
+                <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
         <div class="top-0 left-0 w-full h-full bg-slate-50 pt-6 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] overflow-hidden"
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         limitLength(str) {
-            return str.length > 100 ? str.substring(0, 100) + '...' : str;
+            return str.length > 100 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
             console.log('clicked', localStorage.getItem('showDetails'));

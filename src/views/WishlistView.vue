@@ -8,7 +8,7 @@
         <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
             :description="item.description" :image="item.image" />
         <div class=" h-96"></div>
-        <NavBar />
+        <NavBar class="left-0"/>
     </div>
 </template>
 

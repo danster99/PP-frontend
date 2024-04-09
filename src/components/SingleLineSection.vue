@@ -1,6 +1,6 @@
 <template>
     <div class="w-100">
-        <h2 class="mb-2 ml-5 text-xl font-bold mt-3">{{ this.title }}</h2>
+        <h2 class="mb-2 ml-5 text-2xl font-extrabold mt-3">{{ this.title }}</h2>
         <div class="overflow-x-scroll">
             <div class="flex">
                 <div v-for="(card, index) in this.sizes" :key="index">

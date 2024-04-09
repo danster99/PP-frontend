@@ -7,7 +7,7 @@
     <SingleLineSection title="Plate perfections" :sizes="[{ size: 'l', image: box4 }, { size: 's', image: box5 }]" />
     <SingleLineSection title="Deals & events"
       :sizes="[{ size: 'm', image: box6 }, { size: 's', image: box7 }, { size: 'l', image: box8 }]" />
-    <SingleLineSection :sizes="[{ size: 's', image: box4 }, { size: 'm', image: box2 }, { size: 's', image: box6 }]" />
+    <SingleLineSection :sizes="[{ size: 'l', image: box4 }, { size: 'm', image: box2 }, { size: 's', image: box6 }]" />
     <NavBar />
     <div class=" h-10"></div>
   </div>

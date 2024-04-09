@@ -1,8 +1,8 @@
 <template>
     <div class="quantity-toggle">
-        <button @click="decrement()">&mdash;</button>
+        <button @click="decrement()">−</button>
         <input type="text" :value="quantity" readonly>
-        <button @click="increment()">&#xff0b;</button>
+        <button @click="increment()">+</button>
     </div>
 </template>
 <script>
@@ -63,20 +63,20 @@ $border: 2px solid #ddd;
         border-top: $border;
         border-bottom: $border;
         border-radius: 0;
-        width: 2.4rem;
+        width: 2.2rem;
         text-align: center;
-        padding: 0.5rem;
+        padding: 0.2rem;
         z-index: 3;
         max-height: 30px;
     }
 
     button {
         border: $border;
-        padding: .5rem;
+        padding: .4rem;
         background: #f5f5f5;
         color: #888;
         background-color: #fff;
-        font-size: 0.6rem;
+        font-size: 1.5rem;
         border-radius: 16px;
         cursor: pointer;
         z-index: 2;
@@ -87,13 +87,13 @@ $border: 2px solid #ddd;
 
     button:first-of-type {
         border-right: none;
-        padding-right: 20px;
+        padding-right: 10px;
         transform: translateX(12px);
     }
 
     button:last-of-type {
         border-left: none;
-        padding-left: 20px;
+        padding-left: 10px;
         transform: translateX(-12px);
     }
 }

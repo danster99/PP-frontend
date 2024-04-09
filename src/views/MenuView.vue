@@ -3,7 +3,7 @@
         <appTitle />
         <StoriesBar />
         <div v-for="(categ, key, index) in items" :key="index">
-            <h1 class="p-4 font-bold text-2xl capitalize" v-if="categ.length > 0">{{ key }}</h1>
+            <h1 class="p-2 font-bold text-3xl capitalize" v-if="categ.length > 0">{{ key }}</h1>
             <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
                 :description="item.description" :full_description="item.description" :image="item.photo"
                 :price="item.price" />

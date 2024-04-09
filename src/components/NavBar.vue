@@ -11,7 +11,7 @@
                 <img src="../assets/heart.png" class="max-h-8">
             </router-link>
         </div>
-        <div class="h-36 border-t-2 absolute bottom-0 left-0 right-0 bg-slate-50 -z-50 total-bar"
+        <div class="h-36 border-t-2 absolute bottom-0 bg-slate-50 -z-50 total-bar"
             v-if="this.showTotalsBar">
             <div class="pt-2 pb-2 pr-6 pl-4 flex justify-between">
                 <h2 class="text-xl font-semibold">Subtotal:</h2>
@@ -41,15 +41,15 @@ export default {
 </script>
 <style scoped lang="scss">
 .navbar {
-    width: 60%;
+    width: 50%;
     position: sticky;
-    bottom: 40px;
-    left: 20%;
+    bottom: 30px;
+    left: 25%;
 }
 
 .total-bar {
     width: 100vw;
-    transform: translate(-20%, 40px);
+    transform: translate(-25%, 40px);
     bottom: 0;
 }
 </style>
