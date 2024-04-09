@@ -5,17 +5,10 @@
             <img class="h-7 mr-2" src="@/assets/heart_red.png">
             <h1 class="text-2xl">Wishlist</h1>
         </div>
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
-        <WishlistCard />
+        <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
+            :description="item.description" :image="item.image" />
+        <div class=" h-96"></div>
         <NavBar />
-        <div class=" h-20"></div>
-
     </div>
 </template>
 
@@ -30,6 +23,18 @@ export default {
         appTitle,
         NavBar,
         WishlistCard
+    },
+    data() {
+        return {
+            wishlist: []
+        }
+    },
+    mounted() {
+        let wishlist = localStorage.getItem('wishlist');
+        if (wishlist) {
+            this.wishlist = JSON.parse(wishlist);
+        }
+        console.log(this.wishlist.length);
     }
 }
 </script>
