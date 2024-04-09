@@ -5,7 +5,7 @@
         </div>
         <div class="p-1 w-2/4">
             <h2 class="font-bold text-md">{{ title }}</h2>
-            <h3 class="font-semibold text-sm">${{ price }}</h3>
+            <h3 class="font-semibold text-sm">{{ price }} RON</h3>
             <p>{{ limitLength(description) }}</p>
         </div>
         <div class="flex items-center w-1/4">
@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         limitLength(str) {
-            return str.length > 100 ? str.substring(0, 50) + '...' : str;
+            return str.length > 50 ? str.substring(0, 50) + '...' : str;
         },
     }
 }

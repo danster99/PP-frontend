@@ -7,8 +7,8 @@
         </div>
         <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
             :description="item.description" :image="item.image" />
-        <div class=" h-96"></div>
-        <NavBar class="left-0"/>
+        <div class=" h-screen"></div>
+        <NavBar/>
     </div>
 </template>
 
@@ -30,11 +30,18 @@ export default {
         }
     },
     mounted() {
+        window.scrollTo(0, 0);
         let wishlist = localStorage.getItem('wishlist');
+        let total = 0;
         if (wishlist) {
             this.wishlist = JSON.parse(wishlist);
+            this.wishlist.forEach(item => {
+                total += parseFloat(item.price);
+            });
         }
+        localStorage.setItem('total', total);
         console.log(this.wishlist.length);
+        console.log("total", total);
     }
 }
 </script>

@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         limitLength(str) {
-            return str.length > 100 ? str.substring(0, 80) + ' ...' : str;
+            return str.length > 80 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
             console.log('clicked', localStorage.getItem('showDetails'));
