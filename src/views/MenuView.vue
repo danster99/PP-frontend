@@ -62,12 +62,22 @@ export default {
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         },
         addToWishlist(title, price, description, image) {
-            this.wishlist.push({
-                title: title,
-                price: price,
-                description: description,
-                image: image
+            let exists = false;
+            this.wishlist.forEach(element => {
+                if (element.title == title) {
+                    element.quantity += 1;
+                    exists = true;
+                }
             });
+            if (!exists) {
+                this.wishlist.push({
+                    title: title,
+                    price: price,
+                    description: description,
+                    image: image,
+                    quantity: 1
+                });
+            }
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
             console.log(localStorage.getItem('wishlist'));
         },

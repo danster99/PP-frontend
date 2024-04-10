@@ -9,7 +9,7 @@
             <p>{{ limitLength(description) }}</p>
         </div>
         <div class="flex items-center w-1/4">
-            <QuantitySelector :item="{ title, price, description, image }" />
+            <QuantitySelector :item="{ title, price, description, image, quantity }" />
         </div>
     </div>
 </template>
@@ -19,7 +19,7 @@ import QuantitySelector from "@/components/QuantitySelector.vue"
 
 export default {
     name: 'WishlistCard',
-    props: ['title', 'price', 'description', 'image'],
+    props: ['title', 'price', 'description', 'image', 'quantity'],
     components: {
         QuantitySelector
     },

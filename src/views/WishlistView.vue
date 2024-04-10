@@ -10,7 +10,7 @@
         </h1>
 
         <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
-            :description="item.description" :image="item.image" />
+            :description="item.description" :image="item.image" :quantity="item.quantity" />
         <div class=" h-screen"></div>
         <NavBar />
     </div>
