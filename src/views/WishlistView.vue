@@ -34,6 +34,8 @@ export default {
         }
     },
     mounted() {
+        window.removeEventListener('scroll', this.updateScroll)
+
         window.scrollTo(0, 0);
         let wishlist = localStorage.getItem('wishlist');
         let total = 0;
