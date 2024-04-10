@@ -2,7 +2,7 @@
     <div class="home">
         <appTitle />
         <StoriesBar />
-        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3">
+        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3" id="menu">
             <div v-for="(categ, key, index) in items" :key="index" class="">
                 <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
             </div>
@@ -36,12 +36,16 @@ export default {
     data() {
         return {
             items: {},
-            wishlist: []
+            wishlist: [],
+            scrollPosition: null
         }
     },
     created() {
         this.getItems();
         this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    },
+    mounted() {
+        window.addEventListener('scroll', this.updateScrollPosition);
     },
     methods: {
         async getItems() {
@@ -69,6 +73,16 @@ export default {
         },
         scrollTo(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        },
+        updateScrollPosition() {
+            this.scrollPosition = window.scrollY;
+            console.log('Scroll position', this.scrollPosition)
+            if (this.scrollPosition > 160) {
+                document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 1)';
+            } else {
+                document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            }
+
         }
     }
 }
