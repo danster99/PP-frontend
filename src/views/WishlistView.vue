@@ -5,10 +5,14 @@
             <img class="h-7 mr-2" src="@/assets/heart_red.png">
             <h1 class="text-2xl">Wishlist</h1>
         </div>
+        <h1 v-if="this.wishlist.length == 0" class="w-full text-center text-xl mt-24 font-semibold">Your wishlist is
+            currently empty!
+        </h1>
+
         <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
-            :description="item.description" :image="item.image" />
+            :description="item.description" :image="item.image" :quantity="item.quantity" />
         <div class=" h-screen"></div>
-        <NavBar/>
+        <NavBar />
     </div>
 </template>
 
@@ -30,6 +34,8 @@ export default {
         }
     },
     mounted() {
+        window.removeEventListener('scroll', this.updateScroll)
+
         window.scrollTo(0, 0);
         let wishlist = localStorage.getItem('wishlist');
         let total = 0;

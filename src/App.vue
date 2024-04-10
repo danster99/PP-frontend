@@ -1,16 +1,12 @@
 <template>
   <div id="app">
+    <img src="@/assets/background.png" class="fixed top-0 z-[-1]">
     <router-view />
   </div>
 </template>
 
 <style>
-#app {
-  background-image: url("@/assets/background.png");
-  background-position: top right;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+#app {}
 
 .router-view {
   background-color: rgba(255, 255, 255, 0.5);

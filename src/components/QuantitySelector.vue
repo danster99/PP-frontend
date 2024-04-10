@@ -8,12 +8,12 @@
 <script>
 export default {
     name: 'QuantitySelector',
+    props: ['item'],
     data() {
         return {
-            quantity: 1
+            quantity: this.item.quantity
         }
     },
-    props: ['item'],
     methods: {
         increment() {
             this.quantity++
