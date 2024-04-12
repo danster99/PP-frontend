@@ -4,7 +4,9 @@
             v-if="!showDetails">
             <div class="flex flex-col pl-2 z-30">
                 <h2 class="font-bold text-2xl tracking-tight">{{ title }}</h2>
-                <h3 class="text-base font-light mb tracking-tight">{{ price }} RON</h3>
+                <h3 class="text-base font-light mb tracking-tight flex">{{ price }} RON <img
+                        src="@/assets/heart-yellow.png" class="h-6 ml-4" @click.stop="addToWishlistParent()" alt="">
+                </h3>
                 <p class="text-base tracking-tighter">{{ this.limitLength(description) }}</p>
             </div>
             <div class="aspect-small h-36 w-28 rounded-2xl relative z-30 flex items-center justify-end mr-3 ml-6">
