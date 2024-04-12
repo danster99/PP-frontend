@@ -11,10 +11,10 @@
                 <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
-        <div class="top-0 left-0 w-full h-full bg-slate-50 pt-6 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] overflow-hidden"
+        <div class=" absolute overscroll-none top-0 left-0 w-full h-full bg-slate-50 pt-20 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] overflow-hidden"
             v-if="showDetails">
             <div class="sticky">
-                <h2 class="text-3xl text-white font-bold text-m text-shadow absolute right-2 top-2"
+                <h2 class="text-3xl text-white font-bold text-m text-shadow absolute right-2 top-2 -translate-y-8"
                     @click="hideDetailsfunc()">X</h2>
                 <img class="w-full h-full object-fill  rounded-2xl" :src="this.image" alt="">
             </div>
@@ -37,10 +37,12 @@ export default {
     props: ['title', 'price', 'description', 'image', 'full_description'],
     data: function () {
         return {
-            showDetails: false
+            showDetails: false,
+            isLocked: true
         }
     },
     mounted() {
+
         localStorage.setItem('showDetails', 'false');
     },
     methods: {
@@ -48,20 +50,30 @@ export default {
             return str.length > 80 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
+            this.disableScroll()
             console.log('clicked', localStorage.getItem('showDetails'));
             if (localStorage.getItem('showDetails') != 'true') {
                 this.showDetails = true;
+                window.scrollTo(0, 0);
+
                 localStorage.setItem('showDetails', 'true');
             }
         },
         hideDetailsfunc() {
             this.showDetails = false;
+            this.enableScroll()
             localStorage.setItem('showDetails', 'false');
         },
         addToWishlistParent() {
             console.log('clicked');
             this.$parent.addToWishlist(this.title, this.price, this.description, this.image);
             window.alert('Added to Wishlist');
+        },
+        disableScroll() {
+            document.body.style.overflow = 'hidden';
+        },
+        enableScroll() {
+            document.body.style.overflow = 'auto';
         }
     }
 }
