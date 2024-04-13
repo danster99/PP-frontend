@@ -13,8 +13,8 @@
                 <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
-        <div class=" absolute overscroll-none top-0 left-0 w-full h-full bg-slate-50 pt-20 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] overflow-hidden"
-            v-if="showDetails">
+        <div class="top-0 left-0 w-full h-screen bg-slate-50 pt-20 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] flex flex-col justify-center overflow-hidden"
+            v-if="showDetails" id="detailed-view">
             <div class="sticky">
                 <h2 class="text-3xl text-white font-bold text-m text-shadow absolute right-2 top-2 -translate-y-8"
                     @click="hideDetailsfunc()">X</h2>
@@ -52,12 +52,13 @@ export default {
             return str.length > 80 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
-            this.disableScroll()
             console.log('clicked', localStorage.getItem('showDetails'));
             if (localStorage.getItem('showDetails') != 'true') {
                 this.showDetails = true;
-                window.scrollTo(0, 0);
-
+                this.$nextTick(() => {
+                    document.getElementById('detailed-view').scrollIntoView();
+                    this.disableScroll();
+                });
                 localStorage.setItem('showDetails', 'true');
             }
         },
