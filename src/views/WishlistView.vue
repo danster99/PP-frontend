@@ -42,6 +42,7 @@ export default {
     methods: {
         updateTotal() {
             let wishlist = localStorage.getItem('wishlist');
+            this.total = 0;
             if (wishlist) {
                 this.wishlist = JSON.parse(wishlist);
                 this.wishlist.forEach(item => {
