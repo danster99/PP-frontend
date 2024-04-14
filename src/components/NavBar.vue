@@ -7,6 +7,9 @@
             <router-link to="/menu" class="p-2">
                 <img src="../assets/burger.png" class="max-h-8">
             </router-link>
+            <router-link to="/drinks" class="p-2">
+                <img src="../assets/cocktail.png" class="max-h-8">
+            </router-link>
             <router-link to="/wishlist" class="p-2">
                 <img src="../assets/heart.png" class="max-h-8">
             </router-link>
