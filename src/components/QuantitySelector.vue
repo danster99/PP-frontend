@@ -16,24 +16,39 @@ export default {
     },
     methods: {
         increment() {
-            this.quantity++
+            this.quantity++;
+            this.updateWishlist();
+            this.$parent.$parent.updateTotal();
         },
         decrement() {
             if (this.quantity === 1) {
                 if (confirm('Are you sure you want to remove this item from your wishlist?')) {
-                    let local = JSON.parse(localStorage.getItem('wishlist'));
-                    local.forEach(element => {
-                        console.log(element, this.item)
-                        if (element.title == this.item.title) {
-                            local.splice(local.indexOf(element), 1);
-                            localStorage.setItem('wishlist', JSON.stringify(local));
-                            window.location.reload();
-                        }
-                    });
+                    this.removeItemFromWishlist();
                 }
             } else {
-                this.quantity--
+                this.quantity--;
+                this.updateWishlist();
+                this.$parent.$parent.updateTotal();
             }
+        },
+        updateWishlist() {
+            let local = JSON.parse(localStorage.getItem('wishlist'));
+            local.forEach(element => {
+                if (element.title == this.item.title) {
+                    element.quantity = this.quantity;
+                }
+            });
+            localStorage.setItem('wishlist', JSON.stringify(local));
+        },
+        removeItemFromWishlist() {
+            let local = JSON.parse(localStorage.getItem('wishlist'));
+            local.forEach(element => {
+                if (element.title == this.item.title) {
+                    local.splice(local.indexOf(element), 1);
+                }
+            });
+            localStorage.setItem('wishlist', JSON.stringify(local));
+            window.location.reload();
         }
     }
 }

@@ -7,15 +7,17 @@
             <router-link to="/menu" class="p-2">
                 <img src="../assets/burger.png" class="max-h-8">
             </router-link>
+            <router-link to="/drinks" class="p-2">
+                <img src="../assets/cocktail.png" class="max-h-8">
+            </router-link>
             <router-link to="/wishlist" class="p-2">
                 <img src="../assets/heart.png" class="max-h-8">
             </router-link>
         </div>
-        <div class="h-36 border-t-2 absolute bottom-0 bg-white -z-50 total-bar"
-            v-if="this.showTotalsBar">
+        <div class="h-36 border-t-2 absolute bottom-0 bg-white -z-50 total-bar" v-if="this.showTotalsBar">
             <div class="pt-2 pb-2 pr-6 pl-4 flex justify-between">
                 <h2 class="text-xl font-semibold">Subtotal:</h2>
-                <h2 class="text-xl font-semibold">{{total}} RON</h2>
+                <h2 class="text-xl font-semibold">{{ total }} RON</h2>
             </div>
         </div>
     </div>
@@ -26,15 +28,16 @@ export default {
     name: 'NavBar',
     data() {
         return {
-            showTotalsBar: false
-        }
-    },
-    computed: {
-        total() {
-            return localStorage.getItem('total');
+            showTotalsBar: false,
+            total: 0
         }
     },
     mounted() {
+        this.total = localStorage.getItem('total');
+        window.addEventListener('storage', (event) => {
+            this.total = event.detail.storage;
+            this.$forceUpdate();
+        });
         if (this.$router.history.current.name == 'wishlist') {
             this.showTotalsBar = true;
         } else {

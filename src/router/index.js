@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import MenuView from '../views/MenuView.vue'
 import CallWaiter from '../views/CallWaiter.vue'
 import Wishlist from '../views/WishlistView.vue'
+import DrinksView from '@/views/DrinksView.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/menu',
     name: 'menu',
     component: MenuView
+  },
+  {
+    path: '/drinks',
+    name: 'drinks',
+    component: DrinksView
   },
   {
     path: '/waiter',

@@ -30,24 +30,32 @@ export default {
     },
     data() {
         return {
-            wishlist: []
+            wishlist: [],
+            total: 0
         }
     },
     mounted() {
         window.removeEventListener('scroll', this.updateScroll)
-
         window.scrollTo(0, 0);
-        let wishlist = localStorage.getItem('wishlist');
-        let total = 0;
-        if (wishlist) {
-            this.wishlist = JSON.parse(wishlist);
-            this.wishlist.forEach(item => {
-                total += parseFloat(item.price);
-            });
+        this.updateTotal();
+    },
+    methods: {
+        updateTotal() {
+            let wishlist = localStorage.getItem('wishlist');
+            this.total = 0;
+            if (wishlist) {
+                this.wishlist = JSON.parse(wishlist);
+                this.wishlist.forEach(item => {
+                    this.total += parseFloat(item.price) * item.quantity;
+                });
+            }
+            localStorage.setItem('total', this.total);
+            window.dispatchEvent(new CustomEvent('storage', {
+                detail: {
+                    storage: localStorage.getItem('total')
+                }
+            }));
         }
-        localStorage.setItem('total', total);
-        console.log(this.wishlist.length);
-        console.log("total", total);
     }
 }
 </script>

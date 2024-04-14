@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.7.2",
+    "@vueuse/core": "^10.9.0",
     "autoprefixer": "^10",
     "core-js": "^3.8.3",
     "postcss": "^8",
