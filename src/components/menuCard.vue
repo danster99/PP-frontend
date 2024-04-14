@@ -5,7 +5,7 @@
             <div class="flex flex-col pl-2 z-30">
                 <h2 class="font-bold text-2xl tracking-tight">{{ title }}</h2>
                 <h3 class="text-base font-light mb tracking-tight flex">{{ price }} RON <img
-                        src="@/assets/heart-yellow.png" class="h-6 ml-4" @click.stop="addToWishlistParent()" alt="">
+                        src="@/assets/heart-yellow.png" class="h-6 ml-2" @click.stop="addToWishlistParent()" alt="">
                 </h3>
                 <p class="text-base tracking-tighter">{{ this.limitLength(description) }}</p>
             </div>
@@ -13,18 +13,18 @@
                 <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
-        <div class="top-0 left-0 w-full h-screen bg-slate-50 pt-20 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg z-[9999999] flex flex-col justify-center overflow-hidden"
+        <div class="top-0 left-0 w-full h-screen bg-slate-50 pt-5 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg flex flex-col justify-center overflow-hidden custom-z"
             v-if="showDetails" id="detailed-view">
-            <div class="sticky">
-                <h2 class="text-3xl text-white font-bold text-m text-shadow absolute right-2 top-2 -translate-y-8"
+            <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
+                <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-8"
                     @click="hideDetailsfunc()">X</h2>
-                <img class="w-full h-full object-fill  rounded-2xl" :src="this.image" alt="">
+                <img class=" w-9/12 height-9/12 object-fill rounded-2xl" :src="this.image" alt="">
             </div>
-            <div class="flex flex-col pl-2 bg-slate-50">
+            <div class="flex flex-col bg-slate-50">
                 <h2 class="font-semibold text-lg mb-1">{{ title }}</h2>
-                <h3 class="text-xl font-light mb-1">{{ price }}</h3>
+                <h3 class="text-xl font-light mb-1">{{ price }} RON</h3>
                 <p>{{ full_description }}</p>
-                <div class="h-16 flex justify-center items-center rounded-lg mt-3 border-[1px] border-black bg-yellow-500 text-semibold text-2xl w-5/6 left-0 right-0 ml-10 mr-10"
+                <div class="h-16 flex justify-center items-center rounded-lg mt-3 border-[1px] text-white bg-yellow-500 text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
                     @click="addToWishlistParent()">
                     Add to Wishlist
                 </div>
@@ -81,3 +81,8 @@ export default {
     }
 }
 </script>
+<style scoped lang="scss">
+.custom-z {
+    z-index: 99999 !important;
+}
+</style>

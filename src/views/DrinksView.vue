@@ -2,7 +2,7 @@
     <div class="home">
         <appTitle />
         <StoriesBar />
-        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
+        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="drinks">
             <div v-for="(categ, key, index) in items" :key="index" class="">
                 <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
             </div>
@@ -86,11 +86,11 @@ export default {
         },
         updateScrollPosition() {
             this.scrollPosition = window.scrollY;
-            if (document.getElementById('menu') != null) {
-                if (this.scrollPosition > 160 && this.$route.name == 'menu') {
-                    document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 1)';
+            if (document.getElementById('drinks') != null) {
+                if (this.scrollPosition > 160 && this.$route.name == 'drinks') {
+                    document.getElementById('drinks').style.backgroundColor = 'rgba(255, 255, 255, 1)';
                 } else {
-                    document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+                    document.getElementById('drinks').style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
                 }
             }
 
