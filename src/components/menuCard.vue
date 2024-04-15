@@ -28,7 +28,7 @@
             <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
                 <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-4"
                     @click="hideDetailsfunc()">X</h2>
-                <img class=" w-9/12 h-9/12 object-fill rounded-2xl" :src="this.image" alt="">
+                <img class=" w-2/5 mt-1 aspect-square object-fill rounded-2xl" :src="this.image" alt="">
             </div>
             <div class="flex flex-col bg-slate-50">
                 <div class="flex">
