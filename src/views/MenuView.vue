@@ -82,7 +82,9 @@ export default {
             console.log(localStorage.getItem('wishlist'));
         },
         scrollTo(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            if (localStorage.getItem('showDetails') == 'false') {
+                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            }
         },
         updateScrollPosition() {
             this.scrollPosition = window.scrollY;
