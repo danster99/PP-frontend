@@ -14,7 +14,7 @@
                 :price="item.price" :spice="item.spiceLvl" :vegan="item.isVegan" :milk="item.isDairyFree"
                 :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
         </div>
-        <NavBar />
+        <NavBar v-if="showNavbarMenu" />
         <div class="h-8"></div>
     </div>
 </template>
@@ -38,7 +38,8 @@ export default {
         return {
             items: {},
             wishlist: [],
-            scrollPosition: null
+            scrollPosition: null,
+            showNavbarMenu: true
         }
     },
     created() {
@@ -49,6 +50,14 @@ export default {
         window.addEventListener('scroll', this.updateScrollPosition);
     },
     methods: {
+        hideNavbar() {
+            console.log('hide')
+            this.showNavbarMenu = false;
+        },
+        showNavbar() {
+            console.log('show')
+            this.showNavbarMenu = true;
+        },
         async getItems() {
             try {
                 await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {

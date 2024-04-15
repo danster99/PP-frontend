@@ -26,9 +26,9 @@
         <div class="top-0 left-0 w-full h-screen bg-slate-50 pt-5 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg flex flex-col justify-center overflow-hidden custom-z"
             v-if="showDetails" id="detailed-view">
             <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
-                <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-8"
+                <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-4"
                     @click="hideDetailsfunc()">X</h2>
-                <img class=" w-9/12 height-9/12 object-fill rounded-2xl" :src="this.image" alt="">
+                <img class=" w-9/12 h-9/12 object-fill rounded-2xl" :src="this.image" alt="">
             </div>
             <div class="flex flex-col bg-slate-50">
                 <div class="flex">
@@ -77,6 +77,7 @@ export default {
             return str.length > 80 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
+            this.$parent.hideNavbar();
             console.log('clicked', localStorage.getItem('showDetails'));
             if (localStorage.getItem('showDetails') != 'true') {
                 this.showDetails = true;
@@ -88,6 +89,7 @@ export default {
             }
         },
         hideDetailsfunc() {
+            this.$parent.showNavbar();
             this.showDetails = false;
             this.enableScroll()
             localStorage.setItem('showDetails', 'false');

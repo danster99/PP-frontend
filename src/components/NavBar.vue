@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar z-50">
+    <div class="navbar z-50" v-if="showNavbar">
         <div class="h-12 bg-slate-200 flex justify-around rounded-full mt-3 border-black z-50">
             <router-link to="/" class="p-2">
                 <img src="../assets/home.png" class="max-h-8">
@@ -29,6 +29,7 @@ export default {
     data() {
         return {
             showTotalsBar: false,
+            showNavbar: localStorage.getItem('showDetails') != 'true',
             total: 0
         }
     },
