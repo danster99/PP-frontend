@@ -32,17 +32,16 @@
             </div>
             <div class="flex flex-col bg-slate-50">
                 <div class="flex">
-                    <h2 class="font-semibold text-lg mb-1 ">{{ title }}</h2>
-                    <img src="@/assets/chilli.png" class="h-4 ml-2 mt-1" v-if="spice > 0">
-                    <img src="@/assets/chilli.png" class="h-4 ml-1 mt-1" v-if="spice > 1">
-                    <img src="@/assets/chilli.png" class="h-4 ml-1 mt-1" v-if="spice > 2">
+                    <h2 class="font-semibold text-2xl mb-1 ">{{ title }}</h2>
+                    <img src="@/assets/chilli.png" class="h-5 ml-2 mt-1" v-if="spice > 0">
+                    <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 1">
+                    <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 2">
                 </div>
-                <h3 class="text-xl font-light mb-1">{{ price }} RON</h3>
+                <h3 class="text-lg font-light mb-1">{{ price }} RON</h3>
                 <p>{{ full_description }}</p>
                 <p>Valori nutritionale:</p>
-                <div v-for="(value, key) in nutriValues" :key="key" class="flex flex-wrap text-xs">
-                    <p class="ml-2">{{ key }}: </p>
-                    <p>{{ value }}</p>
+                <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
+                    <p class="ml-2">{{ key }}:  {{ value }}</p>
                 </div>
                 <div class="flex mt-2">
                     <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
@@ -102,6 +101,18 @@ export default {
         },
         enableScroll() {
             document.body.style.overflow = 'auto';
+        },
+        sortNutriValues(nutriValues) {
+            console.log(nutriValues);
+            let sorted = {};
+            sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
+            sorted["Grasimi"] = nutriValues["Grasimi"];
+            sorted["Acizi grasi saturati"] = nutriValues["Acizi grasi saturati"];
+            sorted["Glucide"] = nutriValues["Glucide"];
+            sorted["Zaharuri"] = nutriValues["Zaharuri"];
+            sorted["Proteine"] = this.nutriValues["Proteine"];
+            sorted["Sare"] = nutriValues["Sare"];
+            return sorted;
         }
     }
 }
