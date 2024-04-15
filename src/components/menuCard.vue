@@ -3,11 +3,21 @@
         <div class="width-full border-b-[3px] border-gray-200 flex justify-between p-1" @click="showDetailsfunc()"
             v-if="!showDetails">
             <div class="flex flex-col pl-2 z-30">
-                <h2 class="font-bold text-2xl tracking-tight">{{ title }}</h2>
+                <div class="flex items-center">
+                    <h2 class="font-bold text-2xl tracking-tight">{{ title }}</h2>
+                    <img src="@/assets/chilli.png" class="h-4 ml-2" v-if="spice > 0">
+                    <img src="@/assets/chilli.png" class="h-4 ml-1" v-if="spice > 1">
+                    <img src="@/assets/chilli.png" class="h-4 ml-1" v-if="spice > 2">
+                </div>
                 <h3 class="text-base font-light mb tracking-tight flex">{{ price }} RON <img
                         src="@/assets/heart-yellow.png" class="h-6 ml-2" @click.stop="addToWishlistParent()" alt="">
                 </h3>
                 <p class="text-base tracking-tighter">{{ this.limitLength(description) }}</p>
+                <div class="flex mt-2">
+                    <img src="@/assets/vegan.png" class="h-10 ml-2" v-if="vegan">
+                    <img src="@/assets/free.png" class="h-10 ml-2" v-if="free">
+                    <img src="@/assets/milk.png" class="h-10 ml-2" v-if="milk">
+                </div>
             </div>
             <div class="aspect-small h-36 w-28 rounded-2xl relative z-30 flex items-center justify-end mr-3 ml-6">
                 <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
@@ -21,9 +31,23 @@
                 <img class=" w-9/12 height-9/12 object-fill rounded-2xl" :src="this.image" alt="">
             </div>
             <div class="flex flex-col bg-slate-50">
-                <h2 class="font-semibold text-lg mb-1">{{ title }}</h2>
+                <div class="flex">
+                    <h2 class="font-semibold text-lg mb-1 ">{{ title }}</h2>
+                    <img src="@/assets/chilli.png" class="h-4 ml-2 mt-1" v-if="spice > 0">
+                    <img src="@/assets/chilli.png" class="h-4 ml-1 mt-1" v-if="spice > 1">
+                    <img src="@/assets/chilli.png" class="h-4 ml-1 mt-1" v-if="spice > 2">
+                </div>
                 <h3 class="text-xl font-light mb-1">{{ price }} RON</h3>
                 <p>{{ full_description }}</p>
+                <div v-for="(value, key) in nutriValues" :key="key" class="flex flex-wrap text-xs">
+                    <p class="ml-2">{{ key }}: </p>
+                    <p>{{ value }}</p>
+                </div>
+                <div class="flex mt-2">
+                    <img src="@/assets/vegan.png" class="h-10 ml-2" v-if="vegan">
+                    <img src="@/assets/free.png" class="h-10 ml-2" v-if="free">
+                    <img src="@/assets/milk.png" class="h-10 ml-2" v-if="milk">
+                </div>
                 <div class="h-16 flex justify-center items-center rounded-lg mt-3 border-[1px] text-white bg-yellow-500 text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
                     @click="addToWishlistParent()">
                     Add to Wishlist
@@ -36,7 +60,7 @@
 <script>
 export default {
     name: 'MenuCard',
-    props: ['title', 'price', 'description', 'image', 'full_description'],
+    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues'],
     data: function () {
         return {
             showDetails: false,
