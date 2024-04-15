@@ -12,7 +12,7 @@
             <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
                 :description="item.description" :full_description="item.description" :image="item.photo"
                 :price="item.price" :spice="item.spiceLvl" :vegan="item.isVegan" :milk="item.isDairyFree"
-                :free="item.isGlutenFree" :nutriValues="item.nutriValues" />
+                :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
         </div>
         <NavBar />
         <div class="h-8"></div>

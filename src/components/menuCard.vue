@@ -41,8 +41,9 @@
                 <p>{{ full_description }}</p>
                 <p>Valori nutritionale:</p>
                 <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
-                    <p class="ml-2">{{ key }}:  {{ value }}</p>
+                    <p class="ml-2">{{ key }}: {{ value }}</p>
                 </div>
+                <p class="text-xs">Alergeni: {{ alergeni }}</p>
                 <div class="flex mt-2">
                     <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
                     <img src="@/assets/free.png" class="h-10" v-if="free">
@@ -60,7 +61,7 @@
 <script>
 export default {
     name: 'MenuCard',
-    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues'],
+    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergeni'],
     data: function () {
         return {
             showDetails: false,
