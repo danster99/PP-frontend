@@ -32,7 +32,8 @@ module.exports = {
       video: '16 / 9',
       small: '1 / 1',
       medium: '4 / 3',
-      large: '16 / 9'
+      large: '16 / 9',
+      custom: '5 / 4'
     },
     backdropBlur: ({ theme }) => theme('blur'),
     backdropBrightness: ({ theme }) => theme('brightness'),

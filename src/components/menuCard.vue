@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="aspect-small h-36 w-28 rounded-2xl relative z-30 flex items-center justify-end mr-3 ml-6">
-                <img class="w-5/6 h-5/6 object-scale-down  rounded-2xl" :src="this.image" alt="">
+                <img class="aspect-custom object-fit  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
         <div class="top-0 left-0 w-full h-screen bg-slate-50 pt-5 pb-6 pr-2 pl-2 border-b-[1px] shadow-lg flex flex-col justify-center overflow-hidden custom-z"
@@ -28,7 +28,7 @@
             <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
                 <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-4"
                     @click="hideDetailsfunc()">X</h2>
-                <img class=" w-2/5 mt-1 aspect-square object-fill rounded-2xl" :src="this.image" alt="">
+                <img class=" w-4/5 mt-1 aspect-custom object-fit rounded-2xl" :src="this.image" alt="">
             </div>
             <div class="flex flex-col bg-slate-50">
                 <div class="flex">
