@@ -4,7 +4,7 @@
             v-if="!showDetails">
             <div class="flex flex-col pl-2 z-30 w-8/12">
                 <div class="flex items-center">
-                    <h2 class="font-bold text-2xl tracking-tight pb-2 font-sans">{{ title }}</h2>
+                    <h2 class="font-bold text-2xl tracking-tight pb-2 ">{{ title }}</h2>
                     <img src="@/assets/chilli.png" class="h-5 ml-2" v-if="spice > 0">
                     <img src="@/assets/chilli.png" class="h-5 ml-1" v-if="spice > 1">
                     <img src="@/assets/chilli.png" class="h-5 ml-1" v-if="spice > 2">
