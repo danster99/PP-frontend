@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         limitLength(str) {
-            console.log(str)
             return str.length > 50 ? str.substring(0, 50) + '...' : str;
         },
     }

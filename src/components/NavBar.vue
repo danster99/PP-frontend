@@ -44,7 +44,6 @@ export default {
         } else {
             this.showTotalsBar = false;
         }
-        console.log(this.$router.history.current.name)
     }
 }
 </script>

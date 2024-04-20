@@ -68,10 +68,8 @@ export default {
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
             window.alert('Added to Wishlist');
             this.goBack();
-            console.log(localStorage.getItem('wishlist'));
         },
         sortNutriValues(nutriValues) {
-            console.log(nutriValues);
             let sorted = {};
             sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
             sorted["Grasimi"] = nutriValues["Grasimi"];

@@ -51,18 +51,15 @@ export default {
     },
     methods: {
         hideNavbar() {
-            console.log('hide')
             this.showNavbarMenu = false;
         },
         showNavbar() {
-            console.log('show')
             this.showNavbarMenu = true;
         },
         async getItems() {
             try {
                 await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {
                     this.items = response.data.food;
-                    console.log(this.items)
                 });
             } catch (error) {
                 console.log(error)
@@ -89,7 +86,6 @@ export default {
                 });
             }
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
-            console.log(localStorage.getItem('wishlist'));
         },
         scrollTo(id) {
             if (localStorage.getItem('showDetails') == 'false') {
@@ -105,7 +101,6 @@ export default {
                     document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
                 }
             }
-
         }
     },
     beforeDestroy() {

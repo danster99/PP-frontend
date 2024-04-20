@@ -2,12 +2,7 @@
   <div class="home">
     <appTitle />
     <StoriesBar />
-    <SingleLineSection title="Exclusive offers"
-      :sizes="[{ size: 'l', image: box1 }, { size: 'm', image: box2 }, { size: 's', image: box3 }]" />
-    <SingleLineSection title="Plate perfections" :sizes="[{ size: 'm', image: box4 }, { size: 'l', image: box5 }]" />
-    <SingleLineSection title="Deals & events"
-      :sizes="[{ size: 'l', image: box6 }, { size: 's', image: box7 }, { size: 'm', image: box8 }]" />
-    <SingleLineSection :sizes="[{ size: 'm', image: box4 }, { size: 'l', image: box2 }, { size: 's', image: box6 }]" />
+    <SingleLineSection v-for="(item, key, index) in this.cards" :key="index" :title="key" :sizes="formatCards(item)" />
     <NavBar />
     <div class=" h-10"></div>
   </div>
@@ -18,14 +13,7 @@ import appTitle from "@/components/appTitle.vue"
 import SingleLineSection from "@/components/SingleLineSection.vue";
 import StoriesBar from "@/components/StoriesBar.vue";
 import NavBar from "@/components/NavBar.vue"
-import box1 from "@/assets/Home Page/Exclusive Offers/box1.jpg"
-import box2 from "@/assets/Home Page/Exclusive Offers/box2.jpg"
-import box3 from "@/assets/Home Page/Palete Perfections/box3.jpg"
-import box4 from "@/assets/Home Page/Palete Perfections/box4.jpg"
-import box5 from "@/assets/Home Page/Story/box5.jpg"
-import box6 from "@/assets/Home Page/Story/box6.jpg"
-import box7 from "@/assets/Home Page/Story/box7.jpg"
-import box8 from "@/assets/Home Page/Story/box8.jpg"
+import axios from 'axios';
 
 export default {
   name: 'HomeView',
@@ -37,14 +25,33 @@ export default {
   },
   data() {
     return {
-      box1,
-      box2,
-      box3,
-      box4,
-      box5,
-      box6,
-      box7,
-      box8
+      cards: [],
+    }
+  },
+  created() {
+    this.getCards();
+  },
+  methods: {
+    async getCards() {
+      try {
+        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/homepageCards/').then(response => {
+          this.cards = response.data;
+        });
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    formatCards(cards) {
+      console.log(cards)
+      let returnCards = [];
+      cards.forEach(element => {
+        returnCards.push({
+          size: element.size,
+          image: element.b2StorageFile,
+          text: element.text
+        })
+      });
+      return returnCards;
     }
   }
 }

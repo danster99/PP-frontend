@@ -4,7 +4,7 @@
         <div class="overflow-x-scroll">
             <div class="flex">
                 <div v-for="(card, index) in this.sizes" :key="index">
-                    <DisplayCard :size="card.size" :image="card.image" />
+                    <DisplayCard :size="card.size" :image="card.image" :text="card.text" />
                 </div>
             </div>
         </div>

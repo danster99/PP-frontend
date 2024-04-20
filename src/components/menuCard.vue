@@ -56,7 +56,6 @@ export default {
             this.$forceUpdate();
         },
         addToWishlistParent() {
-            console.log('clicked');
             this.$parent.addToWishlist(this.title, this.price, this.description, this.image);
             window.alert('Added to Wishlist');
         },
@@ -67,7 +66,6 @@ export default {
             document.body.style.overflow = 'auto';
         },
         sortNutriValues(nutriValues) {
-            console.log(nutriValues);
             let sorted = {};
             sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
             sorted["Grasimi"] = nutriValues["Grasimi"];

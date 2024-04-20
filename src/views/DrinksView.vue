@@ -52,7 +52,6 @@ export default {
             try {
                 await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {
                     this.items = response.data.drinks;
-                    console.log(this.items)
                 });
             } catch (error) {
                 console.log(error)
@@ -79,7 +78,6 @@ export default {
                 });
             }
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
-            console.log(localStorage.getItem('wishlist'));
         },
         scrollTo(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
