@@ -16,12 +16,14 @@
             <h3 class="text-lg font-light mb-1">{{ price }} RON</h3>
             <div class="flex flex-col overflow-scroll">
                 <p class=" max-h-24 overflow-scroll">{{ full_description }}</p>
-                <p>Valori nutritionale:</p>
-                <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
-                    <p class="ml-2">{{ key }}: {{ value }}</p>
+                <p v-if="nutriValues">Valori nutritionale:</p>
+                <div v-if="nutriValues">
+                    <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
+                        <p class="ml-2">{{ key }}: {{ value }}</p>
+                    </div>
                 </div>
             </div>
-            <p class="text-xs max-h-20 overflow-scroll">Alergeni: {{ alergeni }}</p>
+            <p class="text-xs max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
             <div class="flex mt-2">
                 <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
                 <img src="@/assets/free.png" class="h-10" v-if="free">
