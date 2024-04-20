@@ -5,6 +5,7 @@ import MenuView from '../views/MenuView.vue'
 import CallWaiter from '../views/CallWaiter.vue'
 import Wishlist from '../views/WishlistView.vue'
 import DrinksView from '@/views/DrinksView.vue'
+import DetailedView from '@/views/DetailedView.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,12 @@ const routes = [
     path: '/wishlist',
     name: 'wishlist',
     component: Wishlist
+  },
+  {
+    path: '/details/:title/:price/:description/:image/:full_description/:spice/:vegan/:free/:milk/:nutriValues/:alergeni',
+    name: 'details',
+    component: DetailedView,
+    props: true
   },
   {
     path: '/about',

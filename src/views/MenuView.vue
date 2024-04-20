@@ -2,7 +2,7 @@
     <div class="home">
         <appTitle />
         <StoriesBar />
-        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3" id="menu">
+        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
             <div v-for="(categ, key, index) in items" :key="index" class="">
                 <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
             </div>
@@ -14,7 +14,7 @@
                 :price="item.price" :spice="item.spiceLvl" :vegan="item.isVegan" :milk="item.isDairyFree"
                 :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
         </div>
-        <NavBar v-if="showNavbarMenu" />
+        <NavBar />
         <div class="h-8"></div>
     </div>
 </template>
