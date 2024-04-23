@@ -9,7 +9,7 @@
 
 <style>
 #app {
-  max-height: 100vh;
+  height: auto;
 }
 
 .router-view {

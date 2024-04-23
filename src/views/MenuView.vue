@@ -1,11 +1,14 @@
 <template>
     <div class="home">
         <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
-            <div v-for="(categ, key, index) in items" :key="index" class="">
-                <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
+            <div v-for="(categ, key, index) in items" :key="index">
+                <div :class="{ highlited: shouldUnderline(key) }">
+                <h3 class="p-3 capitalize font-semibold h-10 whitespace-nowrap" 
+                    @click="scrollTo(key)">{{ key }}</h3>
+                </div>
             </div>
         </div>
-        <div v-for="(categ, key, index) in items" :key="index" :id="key">
+        <div v-for="(categ, key, index) in items" :key="index" :id="key" :ref="`${key}-ref`">
             <h1 class="p-2 font-bold text-3xl capitalize" v-if="categ.length > 0">{{ key }}</h1>
             <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
                 :description="item.description" :full_description="item.description" :image="item.b2StorageFile"
@@ -34,7 +37,9 @@ export default {
             wishlist: [],
             scrollPosition: null,
             firstScroll: null,
-            showNavbarMenu: true
+            showNavbarMenu: true,
+            focusedComponent: null,
+            categories: []
         }
     },
     created() {
@@ -45,6 +50,7 @@ export default {
         this.scrollPosition = localStorage.getItem('scrollPosition');
         localStorage.setItem('firstScroll', this.scrollPosition);
         window.addEventListener('scroll', this.updateScrollPosition);
+
     },
     methods: {
         hideNavbar() {
@@ -57,6 +63,8 @@ export default {
             try {
                 await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {
                     this.items = response.data.food;
+                    this.categories = Object.keys(this.items);
+                    this.focusedComponent = this.categories[0];
                     this.$nextTick(() => {
                         this.firstScroll = localStorage.getItem('firstScroll');
                         if (this.firstScroll != null) {
@@ -91,8 +99,15 @@ export default {
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
         },
         scrollTo(id) {
+            var headderOffset = 40;
             if (localStorage.getItem('showDetails') == 'false') {
-                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+                var element = document.getElementById(id);
+                var elementRect = element.getBoundingClientRect().top;
+                var offsetPosition = elementRect + window.pageYOffset - headderOffset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
             }
         },
         updateScrollPosition() {
@@ -105,6 +120,37 @@ export default {
                     document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
                 }
             }
+            this.categories.forEach(key => {
+                if (this.isComponentInFocus(key)) {
+                    this.focusedComponent = key;
+                }
+            });
+        },
+        isComponentInFocus(index) {
+            const componentRefs = this.$refs[`${index}-ref`];
+            if (componentRefs) {
+                return componentRefs.some(ref => {
+                    const rect = ref.getBoundingClientRect();
+                    const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+                    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+
+                    // Consider the component in focus if at least half of it is visible
+                    return (
+                        rect.top + rect.height / 4 >= 0 &&
+                        rect.left + rect.width / 4 >= 0 &&
+                        rect.bottom - rect.height / 4 <= windowHeight &&
+                        rect.right - rect.width / 4 <= windowWidth
+                    );
+                });
+            }
+            return false;
+        },
+        shouldUnderline(index) {
+            if(this.focusedComponent == index) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     beforeDestroy() {
@@ -114,7 +160,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .highlited {
-    font-weight: 900;
-    text-decoration: underline;
+    border-bottom: 6px solid #fbbf24; 
 }
 </style>
