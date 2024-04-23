@@ -1,7 +1,5 @@
 <template>
     <div class="home">
-        <appTitle />
-        <StoriesBar />
         <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
             <div v-for="(categ, key, index) in items" :key="index" class="">
                 <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
@@ -20,8 +18,6 @@
 </template>
 
 <script>
-import appTitle from "@/components/appTitle.vue"
-import StoriesBar from "@/components/StoriesBar.vue";
 import NavBar from "@/components/NavBar.vue"
 import MenuCard from "@/components/menuCard.vue"
 import axios from 'axios';
@@ -29,8 +25,6 @@ import axios from 'axios';
 export default {
     name: 'MenuView',
     components: {
-        appTitle,
-        StoriesBar,
         NavBar,
         MenuCard
     },

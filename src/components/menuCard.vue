@@ -12,7 +12,7 @@
                 <h3 class="text-base font-light mb tracking-tight flex">{{ price }} RON <img
                         src="@/assets/heart-yellow.png" class="h-6 ml-2" @click.stop="addToWishlistParent()" alt="">
                 </h3>
-                <p class="text-base tracking-tighter">{{ this.limitLength(description) }}</p>
+                <p class="text-base tracking-tighter line-clamp-2">{{ description }}</p>
                 <div class="flex mt-2">
                     <img src="@/assets/vegan.png" class="h-8" v-if="vegan">
                     <img src="@/assets/free.png" class="h-9" v-if="free">

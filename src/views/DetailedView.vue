@@ -1,6 +1,6 @@
 <template>
     <div
-        class="top-0 left-0 w-full h-screen bg-slate-50 pt-5 pb-6 pr-4 pl-4 border-b-[1px] shadow-lg flex flex-col justify-center overflow-hidden custom-z">
+        class="top-0 left-0 w-full h-screen bg-slate-50 shadow-lg flex flex-col justify-center overflow-hidden custom-z">
         <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
             <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-4" @click="goBack()">X
             </h2>
@@ -37,6 +37,7 @@
     </div>
 </template>
 <script>
+
 export default {
     name: 'DetailedView',
     props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergeni'],

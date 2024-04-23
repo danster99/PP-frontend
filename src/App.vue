@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <img src="@/assets/background.png" class="fixed top-0 z-[-1]">
+    <appTitle />
+    <StoriesBar />
     <router-view />
   </div>
 </template>
@@ -25,3 +27,16 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+<script>
+import appTitle from "@/components/appTitle.vue";
+import StoriesBar from "@/components/StoriesBar.vue";
+
+export default {
+  name: "App",
+  components: {
+    appTitle,
+    StoriesBar,
+  },
+};
+</script>
