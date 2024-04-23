@@ -37,6 +37,9 @@ export default {
             isLocked: true
         }
     },
+    created(){
+        window.removeEventListener('scroll', this.updateScrollPosition);
+    },
     mounted() {
 
         localStorage.setItem('showDetails', 'false');

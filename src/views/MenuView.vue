@@ -33,6 +33,7 @@ export default {
             items: {},
             wishlist: [],
             scrollPosition: null,
+            firstScroll: null,
             showNavbarMenu: true
         }
     },
@@ -41,6 +42,8 @@ export default {
         this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     },
     mounted() {
+        this.scrollPosition = localStorage.getItem('scrollPosition');
+        localStorage.setItem('firstScroll', this.scrollPosition);
         window.addEventListener('scroll', this.updateScrollPosition);
     },
     methods: {
@@ -54,6 +57,12 @@ export default {
             try {
                 await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {
                     this.items = response.data.food;
+                    this.$nextTick(() => {
+                        this.firstScroll = localStorage.getItem('firstScroll');
+                        if (this.firstScroll != null) {
+                            window.scrollTo(0, Number(this.firstScroll));
+                        }
+                    });
                 });
             } catch (error) {
                 console.log(error)
@@ -88,6 +97,7 @@ export default {
         },
         updateScrollPosition() {
             this.scrollPosition = window.scrollY;
+            localStorage.setItem('scrollPosition', this.scrollPosition);
             if (document.getElementById('menu') != null) {
                 if (this.scrollPosition > 160 && this.$route.name == 'menu') {
                     document.getElementById('menu').style.backgroundColor = 'rgba(255, 255, 255, 1)';
@@ -98,7 +108,7 @@ export default {
         }
     },
     beforeDestroy() {
-        window.removeEventListener('scroll', this.updateScroll)
+        window.removeEventListener('scroll', this.updateScrollPosition)
     }
 }
 </script>

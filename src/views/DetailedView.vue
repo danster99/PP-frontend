@@ -1,21 +1,23 @@
 <template>
     <div
-        class="top-0 left-0 w-full h-screen bg-slate-50 shadow-lg flex flex-col justify-center overflow-hidden custom-z">
-        <div class="sticky flex flex-col justify-center items-center w-full h-2/5 bg-red mb-2">
-            <h2 class="text-3xl text-black font-bold text-m absolute right-4 top-10 -translate-y-4" @click="goBack()">X
+        class="top-0 left-0 w-full max-h-screen h-full pb-10 bg-transparent shadow-lg flex flex-col justify-center overflow-hidden custom-z rounded-2xl">
+        <div class="sticky flex flex-col justify-center items-center w-full bg-red top-2">
+            <h2 class="text-2xl text-black font-bold text-m absolute right-6 top-2 
+                bg-slate-50 text-center px-2 rounded-3xl" @click="goBack()">X
             </h2>
-            <img class=" w-3/5 max-w-4/5 mt-1 aspect-custom object-fit rounded-2xl" :src="this.image" alt="">
+            <img class=" w-11/12 aspect-custom object-fit rounded-2xl " :src="this.image" alt="">
         </div>
-        <div class="flex flex-col bg-slate-50">
+        <div class="flex flex-col pt-4 px-2 overflow-y-scroll overflow-x-hidden">
             <div class="flex">
-                <h2 class="font-semibold text-2xl mb-1 ">{{ title }}</h2>
+                <h2 class="font-semibold text-2xl">{{ title }}</h2>
                 <img src="@/assets/chilli.png" class="h-5 ml-2 mt-1" v-if="spice > 0">
                 <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 1">
                 <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 2">
             </div>
             <h3 class="text-lg font-light mb-1">{{ price }} RON</h3>
-            <div class="flex flex-col overflow-scroll">
-                <p class=" max-h-24 overflow-scroll">{{ full_description }}</p>
+            <div class="flex flex-col overflow-y-scroll">
+                <p>{{ full_description }}</p>
+                <p class="max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
                 <p v-if="nutriValues">Valori nutritionale:</p>
                 <div v-if="nutriValues">
                     <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
@@ -23,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            <p class="text-xs max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
             <div class="flex mt-2">
                 <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
                 <img src="@/assets/free.png" class="h-10" v-if="free">
@@ -68,7 +69,7 @@ export default {
             }
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
             window.alert('Added to Wishlist');
-            this.goBack();
+            this.$router.go(-1);
         },
         sortNutriValues(nutriValues) {
             let sorted = {};
