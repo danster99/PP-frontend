@@ -36,7 +36,6 @@ export default {
       }
     },
     formatCards(cards) {
-      console.log(cards)
       let returnCards = [];
       cards.forEach(element => {
         returnCards.push({

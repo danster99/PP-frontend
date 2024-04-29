@@ -4,4 +4,9 @@ module.exports = defineConfig({
   devServer: {
     allowedHosts: 'all',
   },
+  pwa: {    
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-transculent',
+    themeColor: '#FFFFFF'
+  }
 })

@@ -1,6 +1,24 @@
 <template>
   <div id="app">
     <img src="@/assets/background.png" class="fixed top-0 z-[-1]" />
+    <div class="bg-yellow-500">
+      <div v-if="deferredPrompt" dark>
+        <p class="text-black">
+          Get our free app. It won't take up space on your phone and also works
+          offline!
+        </p>
+          <div class="w-full flex flex-row justify-evenly">
+            <button text @click="dismiss">
+              <p class="text-black">Dismiss</p>
+            </button>
+            <button text @click="install">
+              <p class="text-black">
+                Install
+              </p>
+            </button>
+          </div>
+        </div>
+    </div>
     <appTitle />
     <StoriesBar v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'" />
     <router-view />
@@ -39,6 +57,29 @@ export default {
   components: {
     appTitle,
     StoriesBar,
+  },
+  data() {
+    return {
+      deferredPrompt: null,
+    };
+  },
+  created() {
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      this.deferredPrompt = e;
+    });
+    window.addEventListener("appinstalled", () => {
+      this.deferredPrompt = null;
+    });
+  },
+  methods: {
+    async dismiss() {
+      this.deferredPrompt = null;
+    },
+    async install() {
+      this.deferredPrompt.prompt();
+    },
   },
 };
 </script>
