@@ -43,7 +43,12 @@ export default {
     },
     created() {
         this.updateTotal();
-        localStorage.setItem('isLoading', 'true');
+        let willLoad = true;
+        setTimeout(() => {
+            if (willLoad) {
+                localStorage.setItem('isLoading', 'true');
+            }
+        }, 200);
         const imagePromises = [];
         Object.values(this.wishlist).forEach((element) => {
                 imagePromises.push(new Promise((resolve, reject) => {
@@ -56,6 +61,7 @@ export default {
         Promise.all(imagePromises)
             .then(() => {
                 localStorage.setItem('isLoading', 'false');
+                willLoad = false;
             })
             .catch(() => {
                 console.error('Some images failed to load.');

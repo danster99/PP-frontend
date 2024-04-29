@@ -40,7 +40,12 @@ export default {
         }
     },
     created() {
-        localStorage.setItem('isLoading', 'true');
+        let willLoad = true;
+        setTimeout(() => {
+            if (willLoad) {
+                localStorage.setItem('isLoading', 'true');
+            }
+        }, 200);
         this.getItems().then(() => {
             const imagePromises = [];
             Object.values(this.items).forEach((item) => {
@@ -56,7 +61,7 @@ export default {
             Promise.all(imagePromises)
                 .then(() => {
                     localStorage.setItem('isLoading', 'false');
-                    console.log('All images loaded successfully.');
+                    willLoad = false;
                 })
                 .catch(() => {
                     console.error('Some images failed to load.');

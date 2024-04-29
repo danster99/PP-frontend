@@ -23,7 +23,12 @@ export default {
     }
   },
   created() {
-    localStorage.setItem('isLoading', 'true');
+    let willLoad = true;
+        setTimeout(() => {
+            if (willLoad) {
+                localStorage.setItem('isLoading', 'true');
+            }
+        }, 200);
     this.getCards().then(() => {
       const cardsPromises = [];
       Object.values(this.cards).forEach(element => {
@@ -38,6 +43,7 @@ export default {
       });
       Promise.all(cardsPromises).then(() => {
         localStorage.setItem('isLoading', 'false');
+        willLoad = false;
       });
   }).catch(error => {
     console.log(error);
