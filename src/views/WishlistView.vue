@@ -10,7 +10,7 @@
                     currently empty!
                 </h1>
             </div>
-            <div v-if="this.wishlist.length != 0" class="h-4/5 overflow-scroll flex flex-col justify-start">
+            <div v-if="this.wishlist.length != 0" class="h-4/5 overflow-y-scroll overflow-x-hidden flex flex-col justify-start">
                 <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title" :price="item.price"
                     :description="item.description" :image="item.image" :quantity="item.quantity" />
             </div>
