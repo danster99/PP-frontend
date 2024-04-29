@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
+        <div class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60 mt-3" id="menu">
             <div v-for="(categ, key, index) in items" :key="index" :ref="`${key}-horizontal-ref`">
                 <div :class="{ highlited: shouldUnderline(key) }">
                 <h3 class="py-3 px-5 capitalize font-semibold h-10 whitespace-nowrap" 
@@ -50,10 +50,15 @@ export default {
         this.scrollPosition = localStorage.getItem('scrollPosition');
         localStorage.setItem('firstScroll', this.scrollPosition);
         window.addEventListener('scroll', this.updateScrollPosition);
+        // document.getElementById('menu').scrollTo({
+        //     left: -230,
+        //     behavior: 'smooth'
+        // });
 
     },
     methods: {
         scrollToEntry(index) {
+            console.log(index);
             const componentRefs = this.$refs[`${index}-horizontal-ref`];
             if (componentRefs) {
                 return componentRefs.some(ref => {
@@ -64,6 +69,7 @@ export default {
                         const divRect = scrollableDiv.getBoundingClientRect();
                         const offset = rect.left - divRect.left;
                         const scrollPosition = offset - divRect.width / 2 + rect.width / 2;
+                        console.log(scrollPosition);
                         scrollableDiv.scrollTo({
                             left: scrollPosition,
                             behavior: 'smooth'
