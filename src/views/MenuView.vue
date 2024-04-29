@@ -1,9 +1,9 @@
 <template>
     <div class="home">
         <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="menu">
-            <div v-for="(categ, key, index) in items" :key="index">
+            <div v-for="(categ, key, index) in items" :key="index" :ref="`${key}-horizontal-ref`">
                 <div :class="{ highlited: shouldUnderline(key) }">
-                <h3 class="p-3 capitalize font-semibold h-10 whitespace-nowrap" 
+                <h3 class="py-3 px-5 capitalize font-semibold h-10 whitespace-nowrap" 
                     @click="scrollTo(key)">{{ key }}</h3>
                 </div>
             </div>
@@ -53,6 +53,26 @@ export default {
 
     },
     methods: {
+        scrollToEntry(index) {
+            const componentRefs = this.$refs[`${index}-horizontal-ref`];
+            if (componentRefs) {
+                return componentRefs.some(ref => {
+                    const rect = ref.getBoundingClientRect();
+
+                    const scrollableDiv = document.getElementById('menu');
+                    if (scrollableDiv) {
+                        const divRect = scrollableDiv.getBoundingClientRect();
+                        const offset = rect.left - divRect.left;
+                        const scrollPosition = offset - divRect.width / 2 + rect.width / 2;
+                        scrollableDiv.scrollTo({
+                            left: scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+            return false;
+        },
         hideNavbar() {
             this.showNavbarMenu = false;
         },
@@ -147,6 +167,7 @@ export default {
         },
         shouldUnderline(index) {
             if(this.focusedComponent == index) {
+                this.scrollToEntry(index);
                 return true;
             } else {
                 return false;
