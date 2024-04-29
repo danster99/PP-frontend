@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <img src="@/assets/background.png" class="fixed top-0 z-[-1]">
+    <img src="@/assets/background.png" class="fixed top-0 z-[-1]" />
     <appTitle />
-    <StoriesBar v-if="this.$route.name !== 'details'"/>
+    <StoriesBar v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'" />
     <router-view />
   </div>
 </template>

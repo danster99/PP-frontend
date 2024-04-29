@@ -1,36 +1,40 @@
 <template>
     <div
-        class="top-0 left-0 w-full max-h-screen h-full pb-10 bg-transparent shadow-lg flex flex-col justify-center overflow-hidden custom-z rounded-2xl">
-        <div class="sticky flex flex-col justify-center items-center w-full bg-red top-2">
-            <h2 class="text-2xl text-black font-bold text-m absolute right-6 top-2 
+        class="top-0 left-0 w-full bg-transparent shadow-lg flex flex-col justify-between overflow-hidden custom-z rounded-2xl h-screen_40 min-h-screen_40">
+        <div class="sticky flex flex-col justify-center items-center w-11/12 bg-red top-2 msx-h-3/6 m-auto">
+            <h2 class="text-2xl text-black font-bold text-m absolute right-4 top-4 
                 bg-slate-50 text-center px-2 rounded-3xl" @click="goBack()">X
             </h2>
-            <img class=" w-11/12 aspect-custom object-fit rounded-2xl " :src="this.image" alt="">
+            <img class="aspect-custom object-fit rounded-2xl " :src="this.image" alt=""/>
         </div>
-        <div class="flex flex-col pt-4 px-2 overflow-y-scroll overflow-x-hidden">
-            <div class="flex">
-                <h2 class="font-semibold text-2xl">{{ title }}</h2>
-                <img src="@/assets/chilli.png" class="h-5 ml-2 mt-1" v-if="spice > 0">
-                <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 1">
-                <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 2">
+        <div class="flex flex-col py-4 px-2 h-3/5 justify-between">
+            <div class="h-1/6">
+                <div class="flex">
+                    <h2 class="font-semibold text-2xl">{{ title }}</h2>
+                    <img src="@/assets/chilli.png" class="h-5 ml-2 mt-1" v-if="spice > 0">
+                    <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 1">
+                    <img src="@/assets/chilli.png" class="h-5 ml-1 mt-1" v-if="spice > 2">
+                </div>
+                <h3 class="text-lg font-light mb-1">{{ price }} RON</h3>
             </div>
-            <h3 class="text-lg font-light mb-1">{{ price }} RON</h3>
-            <div class="flex flex-col overflow-y-scroll">
-                <p>{{ full_description }}</p>
-                <p class="max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
-                <p v-if="nutriValues">Valori nutritionale:</p>
-                <div v-if="nutriValues">
-                    <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
-                        <p class="ml-2">{{ key }}: {{ value }}</p>
+            <div class="overflow-y-scroll overflow-x-hidden h-5/6 mt-2">
+                <div class="flex flex-col overflow-y-scroll">
+                    <p>{{ full_description }}</p>
+                    <p class="max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
+                    <p v-if="nutriValues">Valori nutritionale:</p>
+                    <div v-if="nutriValues">
+                        <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
+                            <p class="ml-2">{{ key }}: {{ value }}</p>
+                        </div>
                     </div>
                 </div>
+                <div class="flex mt-2">
+                    <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
+                    <img src="@/assets/free.png" class="h-10" v-if="free">
+                    <img src="@/assets/milk.png" class="h-10" v-if="milk">
+                </div>
             </div>
-            <div class="flex mt-2">
-                <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
-                <img src="@/assets/free.png" class="h-10" v-if="free">
-                <img src="@/assets/milk.png" class="h-10" v-if="milk">
-            </div>
-            <div class="h-16 flex justify-center items-center rounded-lg mt-3 border-[1px] text-white bg-yellow-500 text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
+            <div class="h-16 flex justify-center items-center rounded-lg mt-3 mb-5 border-[1px] text-white bg-yellow-500 text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
                 @click="addToWishlist(title, price, description, image)">
                 Add to Wishlist
             </div>

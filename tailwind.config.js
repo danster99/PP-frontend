@@ -547,6 +547,8 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      screen_40: 'calc(100vh - 40px)',
+      screen_136: 'calc(100vh - 136px)',
     }),
     hueRotate: {
       0: '0deg',
@@ -654,6 +656,7 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      screen_40: 'calc(100vh - 40px)',
     }),
     maxWidth: ({ theme, breakpoints }) => ({
       ...theme('spacing'),

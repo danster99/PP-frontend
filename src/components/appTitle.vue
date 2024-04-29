@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-3xl text-left pl-2 font-black">Todds</h1>
+    <h1 class="text-3xl text-left pl-2 font-black h-10">Todds</h1>
 </template>
 
 <script>

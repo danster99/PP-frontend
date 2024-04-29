@@ -14,50 +14,19 @@
                 <img src="../assets/heart.png" class="max-h-8">
             </router-link>
         </div>
-        <div class="h-36 border-t-2 absolute bottom-0 bg-white -z-50 total-bar" v-if="this.showTotalsBar">
-            <div class="pt-2 pb-2 pr-6 pl-4 flex justify-between">
-                <h2 class="text-xl font-semibold">Subtotal:</h2>
-                <h2 class="text-xl font-semibold">{{ total }} RON</h2>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: 'NavBar',
-    data() {
-        return {
-            showTotalsBar: false,
-            showNavbar: localStorage.getItem('showDetails') != 'true',
-            total: 0
-        }
-    },
-    mounted() {
-        this.total = localStorage.getItem('total');
-        window.addEventListener('storage', (event) => {
-            this.total = event.detail.storage;
-            this.$forceUpdate();
-        });
-        if (this.$router.history.current.name == 'wishlist') {
-            this.showTotalsBar = true;
-        } else {
-            this.showTotalsBar = false;
-        }
-    }
 }
 </script>
 <style scoped lang="scss">
 .navbar {
     width: 50%;
     position: sticky;
-    bottom: 30px;
+    bottom: 25px;
     left: 25%;
-}
-
-.total-bar {
-    width: 100vw;
-    transform: translate(-25%, 40px);
-    bottom: 0;
 }
 </style>

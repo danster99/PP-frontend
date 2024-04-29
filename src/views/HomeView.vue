@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <SingleLineSection v-for="(item, key, index) in this.cards" :key="index" :title="key" :sizes="formatCards(item)" />
+    <div class="h-4"></div>
     <NavBar />
-    <div class=" h-10"></div>
   </div>
 </template>
 

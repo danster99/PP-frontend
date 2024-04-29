@@ -11,8 +11,8 @@
                 :description="item.description" :full_description="item.description" :image="item.b2StorageFile"
                 :price="item.price" />
         </div>
+        <div class="h-4"></div>
         <NavBar />
-        <div class="h-8"></div>
     </div>
 </template>
 

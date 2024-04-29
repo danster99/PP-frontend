@@ -15,8 +15,8 @@
                 :price="item.price" :spice="item.spiceLvl" :vegan="item.isVegan" :milk="item.isDairyFree"
                 :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
         </div>
+        <div class="h-4"></div>
         <NavBar />
-        <div class="h-8"></div>
     </div>
 </template>
 
