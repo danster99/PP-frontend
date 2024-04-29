@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-between border-b-2" @click="showDetailsfunc()">
+    <div class="flex justify-between border-b-2">
         <div class="p-3 w-1/4 flex items-center justify-center">
             <img class=" aspect-custom object-contain  rounded-2xl" :src="image" alt="">
         </div>
@@ -16,7 +16,6 @@
 
 <script>
 import QuantitySelector from "@/components/QuantitySelector.vue"
-// import showDetailsfunc from "@/components/menuCard.vue"
 
 export default {
     name: 'WishlistCard',
