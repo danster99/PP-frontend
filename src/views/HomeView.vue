@@ -23,7 +23,25 @@ export default {
     }
   },
   created() {
-    this.getCards();
+    localStorage.setItem('isLoading', 'true');
+    this.getCards().then(() => {
+      const cardsPromises = [];
+      Object.values(this.cards).forEach(element => {
+        element.forEach(card => {
+          cardsPromises.push(new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = card.b2StorageFile;
+          }));
+        });
+      });
+      Promise.all(cardsPromises).then(() => {
+        localStorage.setItem('isLoading', 'false');
+      });
+  }).catch(error => {
+    console.log(error);
+  });
   },
   methods: {
     async getCards() {

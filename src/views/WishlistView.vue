@@ -41,10 +41,29 @@ export default {
             total: 0
         }
     },
+    created() {
+        this.updateTotal();
+        localStorage.setItem('isLoading', 'true');
+        const imagePromises = [];
+        Object.values(this.wishlist).forEach((element) => {
+                imagePromises.push(new Promise((resolve, reject) => {
+                    const img = new window.Image();
+                    img.onload = resolve;
+                    img.onerror = reject;
+                    img.src = element.image;
+                }));
+            });
+        Promise.all(imagePromises)
+            .then(() => {
+                localStorage.setItem('isLoading', 'false');
+            })
+            .catch(() => {
+                console.error('Some images failed to load.');
+            });
+    },
     mounted() {
         window.removeEventListener('scroll', this.updateScroll)
         window.scrollTo(0, 0);
-        this.updateTotal();
         this.total = localStorage.getItem('total');
         window.addEventListener('storage', (event) => {
             this.total = event.detail.storage;

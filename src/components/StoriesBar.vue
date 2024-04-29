@@ -71,7 +71,6 @@ export default {
       }
     },
     openStory(imgUrl, story) {
-      console.log(story);
       this.currentStoryImg = imgUrl;
       this.currentStory = story;
       this.showBig = true;

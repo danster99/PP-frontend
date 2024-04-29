@@ -25,7 +25,6 @@ export default {
     name: 'MenuView',
     computed: {
         filteredItems() {
-            console.log(Object.keys(this.items).filter(item => item.length > 0));
             return Object.entries(this.items)[Object.values(this.items).filter(item => item.length > 0)];
         }
     },
@@ -41,7 +40,30 @@ export default {
         }
     },
     created() {
-        this.getItems();
+        localStorage.setItem('isLoading', 'true');
+        this.getItems().then(() => {
+            const imagePromises = [];
+            Object.values(this.items).forEach((item) => {
+                item.forEach((element) => {
+                    imagePromises.push(new Promise((resolve, reject) => {
+                        const img = new window.Image();
+                        img.onload = resolve;
+                        img.onerror = reject;
+                        img.src = element.b2StorageFile;
+                    }));
+                });
+            });
+            Promise.all(imagePromises)
+                .then(() => {
+                    localStorage.setItem('isLoading', 'false');
+                    console.log('All images loaded successfully.');
+                })
+                .catch(() => {
+                    console.error('Some images failed to load.');
+                });
+        }).catch((error) => {
+            console.error(error);
+        });
         this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     },
     mounted() {
