@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="flex overflow-scroll sticky top-0 bg-white z-[99] bg-opacity-60 mt-3 justify-around" id="drinks">
-            <div v-for="(categ, key, index) in items" :key="index" class="">
+            <div v-for="(categ, key, index) in items " :key="index" class="">
                 <h3 class="p-3 capitalize font-semibold h-12 whitespace-nowrap" @click="scrollTo(key)">{{ key }}</h3>
             </div>
         </div>
@@ -23,6 +23,12 @@ import axios from 'axios';
 
 export default {
     name: 'MenuView',
+    computed: {
+        filteredItems() {
+            console.log(Object.keys(this.items).filter(item => item.length > 0));
+            return Object.entries(this.items)[Object.values(this.items).filter(item => item.length > 0)];
+        }
+    },
     components: {
         NavBar,
         MenuCard

@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="flex items-center p-3">
-            <img class="h-7 mr-2" src="@/assets/heart_red.png">
+            <img class="h-7 mr-2" src="@/assets/heart-yellow.png">
             <h1 class="text-2xl">Wishlist</h1>
         </div>
         <h1 v-if="this.wishlist.length == 0" class="w-full text-center text-xl mt-24 font-semibold">Your wishlist is

@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="aspect-custom w-4/12 rounded-2xl relative z-30 flex items-center justify-end p-3">
-                <img class="aspect-custom object-fit  rounded-2xl" :src="this.image" alt="">
+                <img class="aspect-custom object-contain  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
 
