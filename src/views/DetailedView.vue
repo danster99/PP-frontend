@@ -39,12 +39,17 @@
                 Add to Wishlist
             </div>
         </div>
+        <modalSimple ref="modalSimpleDetails" :parentGoBack="goBack" />
     </div>
 </template>
 <script>
+import modalSimple from '@/components/modalSimple.vue';
 
 export default {
     name: 'DetailedView',
+    components: {
+        modalSimple
+    },
     props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergeni'],
     data: function () {
         return {
@@ -72,8 +77,7 @@ export default {
                 });
             }
             localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
-            window.alert('Added to Wishlist');
-            this.$router.go(-1);
+            this.$refs.modalSimpleDetails.showModal = true;
         },
         sortNutriValues(nutriValues) {
             let sorted = {};

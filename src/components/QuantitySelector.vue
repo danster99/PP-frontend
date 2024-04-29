@@ -3,11 +3,16 @@
         <button @click="decrement()">−</button>
         <input type="text" :value="quantity" readonly>
         <button @click="increment()">+</button>
+        <modalConfirm ref="modalConfirm" :parentRemove="removeItemFromWishlist" />
     </div>
 </template>
 <script>
+import modalConfirm from './modalConfirm.vue';
 export default {
     name: 'QuantitySelector',
+    components: {
+        modalConfirm
+    },
     props: ['item'],
     data() {
         return {
@@ -22,9 +27,7 @@ export default {
         },
         decrement() {
             if (this.quantity === 1) {
-                if (confirm('Are you sure you want to remove this item from your wishlist?')) {
-                    this.removeItemFromWishlist();
-                }
+                this.$refs.modalConfirm.showModalMethod();
             } else {
                 this.quantity--;
                 this.updateWishlist();
