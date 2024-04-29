@@ -23,13 +23,17 @@
                 <img class="aspect-custom object-contain  rounded-2xl" :src="this.image" alt="">
             </div>
         </div>
-
+        <modalSimple ref="modalSimple" />
     </div>
 </template>
 
 <script>
+import modalSimple from './modalSimple.vue';
 export default {
     name: 'MenuCard',
+    components: {
+        modalSimple
+    },
     props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergeni'],
     data: function () {
         return {
@@ -37,7 +41,7 @@ export default {
             isLocked: true
         }
     },
-    created(){
+    created() {
         window.removeEventListener('scroll', this.updateScrollPosition);
     },
     mounted() {
@@ -60,7 +64,7 @@ export default {
         },
         addToWishlistParent() {
             this.$parent.addToWishlist(this.title, this.price, this.description, this.image);
-            window.alert('Added to Wishlist');
+            this.$refs.modalSimple.showModalMethod();
         },
         disableScroll() {
             document.body.style.overflow = 'hidden';
