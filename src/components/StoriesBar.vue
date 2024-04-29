@@ -34,6 +34,7 @@ export default {
       showBig: false,
       currentStory: null,
       progress: -1,
+      progressTimeout: null,
     };
   },
   mounted() {
@@ -45,7 +46,8 @@ export default {
         this.alertRight(this.currentStory);
       }
       if (newVal < 99 && newVal > -1) {
-        setTimeout(() => {
+        clearTimeout(this.progressTimeout); // Clear the previous timeout
+        this.progressTimeout = setTimeout(() => { // Store the timeout ID
           this.progress += 1;
         }, 70);
       }
@@ -78,6 +80,7 @@ export default {
       this.progress = -10;
     },
     alertLeft(current) {
+      clearTimeout(this.progressTimeout);
       this.stories.forEach((element) => {
         if (this.stories.indexOf(current) != 0) {
           if (this.stories.indexOf(element) == this.stories.indexOf(current) - 1) {
@@ -95,6 +98,7 @@ export default {
       });
     },
     alertRight(current) {
+      clearTimeout(this.progressTimeout);
       this.stories.forEach((element) => {
         if (this.stories.indexOf(current) != 3) {
           if (element.id == current.id + 1) {
