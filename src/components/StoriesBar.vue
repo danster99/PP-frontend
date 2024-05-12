@@ -1,8 +1,8 @@
 <template>
   <div @touchstart="handleTouchStart" @touchend="handleTouchEnd"
-    class="h-24 flex w-full justify-between items-center py-6 px-2 bg-transparent overflow-x-scroll">
+    class="h-24 flex overflow-x-scroll w-full justify-between items-center py-6 px-2 bg-transparent ">
     <div v-for="(story, index) in this.stories" :key="index"
-      class="rounded-full w-[22%] aspect-square drop-shadow-2xl border-4 border-primary overflow-hidden flex flex-col justify-center"
+      class="rounded-full aspect-square drop-shadow-2xl mx-[1px] border-4 border-primary overflow-hidden flex flex-col justify-center w-1/4 flex-shrink-0"
       @click="openStory(story.b2StorageFile, story)">
       <img :src=story.b2StorageFile class="object-cover" />
     </div>
@@ -105,7 +105,7 @@ export default {
     alertRight(current) {
       clearTimeout(this.progressTimeout);
       this.stories.forEach((element) => {
-        if (this.stories.indexOf(current) != 3) {
+        if (this.stories.indexOf(current) != this.stories.length - 1) {
           if (element.id == current.id + 1) {
             this.currentStory = element;
             this.currentStoryImg = element.b2StorageFile;
