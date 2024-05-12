@@ -16,7 +16,7 @@
       </p>
       <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>
       <div class="absolute bottom-0 left-0 pl-2 h-1/12 w-full pb-1/12">
-        <p class=" text-white text-m clamp-2">
+        <p class=" text-white text-m clamp-2 bg-gray-400 px-10 py-2 -translate-x-[4px]">
           {{ this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION " }}
         </p>
       </div>
