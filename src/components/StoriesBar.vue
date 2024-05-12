@@ -14,10 +14,10 @@
       <p class="text-2xl text-black font-bold text-m absolute top-5 right-5 text-2xl
                 bg-slate-50 text-center px-2 rounded-3xl z-[99999]" @click="this.closeBig">X
       </p>
-      <p class="absolute top-5 left-2 text-xl text-white ">{{this.currentStory.title}}</p>
+      <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>
       <div class="absolute bottom-0 left-0 pl-2 h-1/12 w-full pb-1/12">
         <p class=" text-white text-m clamp-2">
-          {{this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION "}}
+          {{ this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION " }}
         </p>
       </div>
       <img :src="this.currentStoryImg" class="h-5/6 w-full object-cover" />
@@ -144,3 +144,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.border-primary {
+  border-color: var(--primary);
+}
+</style>

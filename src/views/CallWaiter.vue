@@ -38,7 +38,7 @@
         <div class="flex justify-center items-center flex-col">
             <textarea rows="4" cols="50" placeholder="Enjoying Todd's? Please leave a quick review..."
                 class="border-2 w-11/12 p-4 bg-slate-100 rounded-xl text-black"></textarea>
-            <h4 class="mt-6 bg-yellow-500 p-2 w-11/12 text-center text-white font-semibold text-xl rounded-lg">
+            <h4 class="mt-6 bg-primary p-2 w-11/12 text-center text-white font-semibold text-xl rounded-lg">
                 Submit
             </h4>
         </div>
@@ -63,3 +63,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.bg-primary {
+    background-color: var(--primary);
+}
+</style>

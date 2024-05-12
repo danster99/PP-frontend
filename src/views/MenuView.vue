@@ -1,52 +1,26 @@
 <template>
-  <div class="home">
-    <div
-      class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60 mt-3"
-      id="menu"
-    >
-      <div
-        v-for="(categ, key, index) in items"
-        :key="index"
-        :ref="`${key}-horizontal-ref`"
-      >
-        <div :class="{ highlited: shouldUnderline(key) }">
-          <h3
-            class="py-3 px-5 capitalize font-semibold h-10 whitespace-nowrap"
-            @click="scrollTo(key)"
-          >
-            {{ key }}
-          </h3>
+    <div class="home">
+        <div class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60 mt-3" id="menu">
+            <div v-for="(categ, key, index) in items" :key="index" :ref="`${key}-horizontal-ref`">
+                <div :class="{ highlited: shouldUnderline(key) }">
+                    <h3 class="py-3 px-5 capitalize font-semibold h-10 whitespace-nowrap" @click="scrollTo(key)">
+                        {{ key }}
+                    </h3>
+                </div>
+            </div>
         </div>
-      </div>
+        <div v-for="(categ, key, index) in items" :key="index" :id="key" :ref="`${key}-ref`">
+            <h1 class="p-2 font-bold text-3xl capitalize" v-if="categ.length > 0">
+                {{ key }}
+            </h1>
+            <MenuCard v-for="(item, index) in categ" :key="index" :title="capitalize(item.name)"
+                :description="item.description" :full_description="item.description" :image="item.b2StorageFile"
+                :price="item.price" :spice="item.spiceLvl" :vegan="item.isVegan" :milk="item.isDairyFree"
+                :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
+        </div>
+        <div class="h-4"></div>
+        <NavBar />
     </div>
-    <div
-      v-for="(categ, key, index) in items"
-      :key="index"
-      :id="key"
-      :ref="`${key}-ref`"
-    >
-      <h1 class="p-2 font-bold text-3xl capitalize" v-if="categ.length > 0">
-        {{ key }}
-      </h1>
-      <MenuCard
-        v-for="(item, index) in categ"
-        :key="index"
-        :title="capitalize(item.name)"
-        :description="item.description"
-        :full_description="item.description"
-        :image="item.b2StorageFile"
-        :price="item.price"
-        :spice="item.spiceLvl"
-        :vegan="item.isVegan"
-        :milk="item.isDairyFree"
-        :free="item.isGlutenFree"
-        :nutriValues="item.nutriValues"
-        :alergeni="item.alergens"
-      />
-    </div>
-    <div class="h-4"></div>
-    <NavBar />
-  </div>
 </template>
 
 <script>
@@ -228,7 +202,7 @@ export default {
             return false;
         },
         shouldUnderline(index) {
-            if(this.focusedComponent == index) {
+            if (this.focusedComponent == index) {
                 this.scrollToEntry(index);
                 return true;
             } else {
@@ -243,6 +217,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .highlited {
-  border-bottom: 6px solid #fbbf24;
+    border-bottom: 6px solid;
+    border-color: var(--primary);
 }
 </style>

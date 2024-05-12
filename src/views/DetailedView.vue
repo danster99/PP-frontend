@@ -5,7 +5,7 @@
             <h2 class="text-2xl text-black font-bold text-m absolute right-4 top-4 
                 bg-slate-50 text-center px-2 rounded-3xl" @click="goBack()">X
             </h2>
-            <img class="aspect-custom object-fit rounded-2xl " :src="this.image" alt=""/>
+            <img class="aspect-custom object-fit rounded-2xl " :src="this.image" alt="" />
         </div>
         <div class="flex flex-col py-4 px-2 h-3/5 justify-between">
             <div class="h-1/6">
@@ -23,7 +23,8 @@
                     <p class="max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
                     <p v-if="nutriValues">Valori nutritionale:</p>
                     <div v-if="nutriValues">
-                        <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key" class="flex flex-wrap text-xs">
+                        <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key"
+                            class="flex flex-wrap text-xs">
                             <p class="ml-2">{{ key }}: {{ value }}</p>
                         </div>
                     </div>
@@ -34,7 +35,7 @@
                     <img src="@/assets/milk.png" class="h-10" v-if="milk">
                 </div>
             </div>
-            <div class="h-16 flex justify-center items-center rounded-lg mt-3 mb-5 border-[1px] text-white bg-yellow-500 text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
+            <div class="h-16 flex justify-center items-center rounded-lg mt-3 mb-5 border-[1px] text-white bg-primary text-bold text-2xl w-5/6 left-0 right-0 ml-10 mr-10 drop-shadow-xl -translate-x-2"
                 @click="addToWishlist(title, price, description, image)">
                 Add to Wishlist
             </div>
@@ -96,3 +97,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.bg-primary {
+    background-color: var(--primary);
+}
+</style>
