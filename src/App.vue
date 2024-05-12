@@ -105,8 +105,12 @@ export default {
       }
     },
     async getParams() {
+      let tempId = this.$route.query.menu;
+      if (!tempId) {
+        tempId = 1;
+      }
       try {
-        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + this.$route.query.menu + '/').then(response => {
+        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + tempId + '/').then(response => {
           console.log(response.data.primary);
           let style = document.createElement('style');
           style.type = 'text/css';
@@ -120,7 +124,12 @@ export default {
     },
     getMenuId() {
       const id = this.$route.query.menu;
-      localStorage.setItem("menuId", id);
+      if (id) {
+        localStorage.setItem("menuId", id);
+      }
+      else {
+        localStorage.setItem("menuId", "1");
+      }
       this.getParams();
     }
   },
