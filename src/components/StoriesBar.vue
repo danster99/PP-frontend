@@ -1,10 +1,10 @@
 <template>
   <div @touchstart="handleTouchStart" @touchend="handleTouchEnd"
-    class="h-24 flex w-full justify-between items-center py-6 px-2 bg-transparent">
-    <div v-for="(story, index) in this.stories" :key="index"
-      class="rounded-full w-[22%] aspect-square drop-shadow-2xl border-4 border-primary overflow-hidden flex flex-col justify-center"
-      @click="openStory(story.b2StorageFile, story)">
-      <img :src=story.b2StorageFile class="object-cover" />
+    class="h-24 flex w-full justify-between items-center py-6 px-2 bg-transparent overflow-x-scroll">
+    <div v-for="(story, index) in this.stories" :key="index" 
+    class="rounded-full w-[22%] aspect-square drop-shadow-2xl border-4 border-yellow-500 overflow-hidden flex flex-col justify-center"
+    @click="openStory(story.b2StorageFile, story)">
+      <img :src=story.b2StorageFile class="object-cover"/>
     </div>
     <div class="absolute w-screen h-screen top-0 left-0 z-[999] flex flex-col items-center justify-center bg-black"
       v-if="this.showBig">
