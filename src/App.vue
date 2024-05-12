@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Preloader/>
+    <Preloader />
     <div>
       <img src="@/assets/background.png" class="fixed top-0 z-[-1]" />
-      <div class="bg-yellow-500">
+      <div class="bg-primary">
         <div v-if="deferredPrompt" dark>
           <p class="text-black">
             Get our free app. It won't take up space on your phone and also
@@ -20,15 +20,17 @@
         </div>
       </div>
       <appTitle />
-      <StoriesBar
-        v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'"
-      />
-      <router-view class="z-3"/>
+      <StoriesBar v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'" />
+      <router-view class="z-3" />
     </div>
   </div>
 </template>
 
 <style>
+.bg-primary {
+  background-color: var(--primary);
+}
+
 #app {
   height: auto;
 }
