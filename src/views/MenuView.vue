@@ -117,7 +117,7 @@ export default {
         },
         async getItems() {
             try {
-                await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/items/').then(response => {
+                await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + localStorage.getItem('menuId') + '/items/').then(response => {
                     this.items = response.data.food;
                     this.categories = Object.keys(this.items);
                     this.focusedComponent = this.categories[0];

@@ -1,17 +1,17 @@
 <template>
   <div @touchstart="handleTouchStart" @touchend="handleTouchEnd"
     class="h-24 flex w-full justify-between items-center py-6 px-2 bg-transparent overflow-x-scroll">
-    <div v-for="(story, index) in this.stories" :key="index" 
-    class="rounded-full w-[22%] aspect-square drop-shadow-2xl border-4 border-yellow-500 overflow-hidden flex flex-col justify-center"
-    @click="openStory(story.b2StorageFile, story)">
-      <img :src=story.b2StorageFile class="object-cover"/>
+    <div v-for="(story, index) in this.stories" :key="index"
+      class="rounded-full w-[22%] aspect-square drop-shadow-2xl border-4 border-primary overflow-hidden flex flex-col justify-center"
+      @click="openStory(story.b2StorageFile, story)">
+      <img :src=story.b2StorageFile class="object-cover" />
     </div>
     <div class="absolute w-screen h-screen top-0 left-0 z-[999] flex flex-col items-center justify-center bg-black"
       v-if="this.showBig">
       <div class="absolute w-screen h-1 bg-transparent top-0 left-0 rounded-full mt-1 px-1">
         <div :style="{ width: progress + '%' }" class="h-full bg-gray-700 rounded-full transition-all"></div>
       </div>
-      <p class="text-2xl text-black font-bold text-m absolute top-5 right-5 text-2xl
+      <p class="text-black font-bold text-m absolute top-5 right-5 text-2xl
                 bg-slate-50 text-center px-2 rounded-3xl z-[99999]" @click="this.closeBig">X
       </p>
       <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>

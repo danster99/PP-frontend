@@ -57,6 +57,7 @@ nav a.router-link-exact-active {
 import appTitle from "@/components/appTitle.vue";
 import StoriesBar from "@/components/StoriesBar.vue";
 import Preloader from "@/components/Preloader.vue";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -82,6 +83,7 @@ export default {
       this.deferredPrompt = null;
     });
     window.addEventListener("storage", this.handleStorageChange);
+    this.getMenuId();
   },
   // mounted() {
   //   setTimeout(() => {
@@ -101,6 +103,20 @@ export default {
         this.isLoading = e.newValue === "true";
       }
     },
+    async getParams(id) {
+      try {
+        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + id + '/').then(response => {
+          console.log(response.data);
+        });
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    getMenuId() {
+      const id = this.$route.query.menu;
+      localStorage.setItem("menuId", id);
+      this.getParams(id);
+    }
   },
   // beforeDestroy() {
   //   window.removeEventListener("storage", this.handleStorageChange);
