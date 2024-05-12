@@ -2,7 +2,7 @@
   <div id="app">
     <Preloader />
     <div>
-      <img src="@/assets/background.png" class="fixed top-0 z-[-1]" />
+      <img :src="backgroundImage" class="fixed top-0 z-[-1]" />
       <div class="bg-primary">
         <div v-if="deferredPrompt" dark>
           <p class="text-black">
@@ -70,6 +70,7 @@ export default {
     return {
       deferredPrompt: null,
       isLoading: true,
+      backgroundImage: "",
     };
   },
   created() {
@@ -103,10 +104,15 @@ export default {
         this.isLoading = e.newValue === "true";
       }
     },
-    async getParams(id) {
+    async getParams() {
       try {
-        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + id + '/').then(response => {
-          console.log(response.data);
+        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + this.$route.query.menu + '/').then(response => {
+          console.log(response.data.primary);
+          let style = document.createElement('style');
+          style.type = 'text/css';
+          style.innerHTML = ':root { --primary: ' + response.data.primary + '; }';
+          document.getElementsByTagName('head')[0].appendChild(style);
+          this.backgroundImage = response.data.b2StorageFile;
         });
       } catch (error) {
         console.log(error)
@@ -115,7 +121,7 @@ export default {
     getMenuId() {
       const id = this.$route.query.menu;
       localStorage.setItem("menuId", id);
-      this.getParams(id);
+      this.getParams();
     }
   },
   // beforeDestroy() {
