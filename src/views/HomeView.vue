@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home min-h-full">
     <SingleLineSection v-for="(item, key, index) in this.cards" :key="index" :title="key" :sizes="formatCards(item)" />
     <div class="h-4"></div>
   </div>

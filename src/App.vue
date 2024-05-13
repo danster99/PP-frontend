@@ -4,7 +4,7 @@
     <div class="content">
       <img
         :src="backgroundImage"
-        class="fixed top-0 left-0 z-[-1] max-w-full"
+        class="fixed top-0 left-0 z-[-1] max-w-full min-w-[100svw] object-cover"
       />
       <!-- <div class="bg-primary">
         <div v-if="deferredPrompt" dark>

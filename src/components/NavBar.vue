@@ -1,6 +1,6 @@
 <template>
     <div class="navbar z-50">
-        <div class="h-14 bg-primary flex justify-around rounded-3xl border-black z-50 px- py-1">
+        <div class="h-14 bg-primary flex justify-around rounded-3xl border-black z-50 px-2 py-1">
             <router-link to="/home" class="p-2"  active-class="active">
                 <img src="../assets/home.png" class="max-h-8">
             </router-link>
