@@ -2,7 +2,7 @@
   <div @touchstart="handleTouchStart" @touchend="handleTouchEnd"
     class="h-24 flex overflow-x-scroll w-full justify-between items-center py-6 px-2 bg-transparent ">
     <div v-for="(story, index) in this.stories" :key="index"
-      class="rounded-full aspect-square drop-shadow-2xl mx-[1px] border-4 border-primary overflow-hidden flex flex-col justify-center w-1/4 flex-shrink-0"
+      class="rounded-full aspect-square mx-[1px] border-4 border-primary overflow-hidden flex flex-col justify-center w-1/4 flex-shrink-0"
       @click="openStory(story.b2StorageFile, story)">
       <img :src=story.b2StorageFile class="object-cover" />
     </div>
