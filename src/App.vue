@@ -3,7 +3,7 @@
     <Preloader />
     <div>
       <img :src="backgroundImage" class="fixed top-0 z-[-1]" />
-      <div class="bg-primary">
+      <!-- <div class="bg-primary">
         <div v-if="deferredPrompt" dark>
           <p class="text-black">
             Get our free app. It won't take up space on your phone and also
@@ -18,7 +18,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
       <appTitle />
       <StoriesBar v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'" />
       <router-view class="z-3" />

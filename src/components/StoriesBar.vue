@@ -15,8 +15,8 @@
                 bg-slate-50 text-center px-2 rounded-3xl z-[99999]" @click="this.closeBig">X
       </p>
       <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>
-      <div class="absolute bottom-0 left-0 pl-2 h-1/12 w-full pb-1/12">
-        <p class=" text-white text-m clamp-2 bg-gray-400 px-10 py-2 -translate-x-[4px]">
+      <div class="absolute bottom-0 left-0 h-1/12 w-full pb-1/12">
+        <p class=" text-white text-m clamp-2 bg-black bg-opacity-60 px-4 py-2">
           {{ this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION " }}
         </p>
       </div>
@@ -104,21 +104,16 @@ export default {
     },
     alertRight(current) {
       clearTimeout(this.progressTimeout);
-      this.stories.forEach((element) => {
-        if (this.stories.indexOf(current) != this.stories.length - 1) {
-          if (element.id == current.id + 1) {
-            this.currentStory = element;
-            this.currentStoryImg = element.b2StorageFile;
+      let index = this.stories.indexOf(current);
+        if (index != this.stories.length - 1) {
+            this.currentStory = this.stories[index + 1];
+            this.currentStoryImg = this.stories[index + 1].b2StorageFile;
             this.progress = 0;
-          }
         } else {
-          if (this.stories.indexOf(current) == 3) {
             this.showBig = false;
             this.enableScroll();
             this.progress = -10;
-          }
         }
-      });
     },
     handleTouchStart(e) {
       this.touchStart = e.touches[0].clientY;
