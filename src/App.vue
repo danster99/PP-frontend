@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <Preloader />
-    <div>
-      <img :src="backgroundImage" class="fixed top-0 z-[-1]" />
+    <Preloader class="z-[99999]" />
+    <div class="content">
+      <img
+        :src="backgroundImage"
+        class="fixed top-0 left-0 z-[-1] max-w-full"
+      />
       <!-- <div class="bg-primary">
         <div v-if="deferredPrompt" dark>
           <p class="text-black">
@@ -20,8 +23,11 @@
         </div>
       </div> -->
       <appTitle />
-      <StoriesBar v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'" />
+      <StoriesBar
+        v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'"
+      />
       <router-view class="z-3" />
+      <NavBar v-if="this.$route.name !== 'details'"/>
     </div>
   </div>
 </template>
@@ -33,6 +39,9 @@
 
 #app {
   height: auto;
+  align-items: center;
+  justify-content: center;
+  display: grid;
 }
 
 .router-view {
@@ -51,6 +60,19 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.content {
+  max-width: 100svw;
+  width: 100svw;
+  height: 100svh;
+  justify-content: center;
+}
+
+@media (min-width: 500px) {
+  .content {
+    max-width: 500px;
+  }
+}
 </style>
 
 <script>
@@ -58,6 +80,7 @@ import appTitle from "@/components/appTitle.vue";
 import StoriesBar from "@/components/StoriesBar.vue";
 import Preloader from "@/components/Preloader.vue";
 import axios from "axios";
+import NavBar from "./components/NavBar.vue";
 
 export default {
   name: "App",
@@ -65,6 +88,7 @@ export default {
     appTitle,
     StoriesBar,
     Preloader,
+    NavBar,
   },
   data() {
     return {
@@ -102,6 +126,7 @@ export default {
     handleStorageChange(e) {
       if (e.key === "isLoading") {
         this.isLoading = e.newValue === "true";
+        console.log(this.isLoading);
       }
     },
     async getParams() {
@@ -110,28 +135,34 @@ export default {
         tempId = 1;
       }
       try {
-        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + tempId + '/').then(response => {
-          console.log(response.data.primary);
-          let style = document.createElement('style');
-          style.type = 'text/css';
-          style.innerHTML = ':root { --primary: ' + response.data.primary + '; }';
-          document.getElementsByTagName('head')[0].appendChild(style);
-          this.backgroundImage = response.data.b2StorageFile;
-        });
+        await axios
+          .get(
+            "https://plate-pal-97cd0667892d.herokuapp.com/api/menu/" +
+              tempId +
+              "/"
+          )
+          .then((response) => {
+            console.log(response.data.primary);
+            let style = document.createElement("style");
+            style.type = "text/css";
+            style.innerHTML =
+              ":root { --primary: " + response.data.primary + "; }";
+            document.getElementsByTagName("head")[0].appendChild(style);
+            this.backgroundImage = response.data.b2StorageFile;
+          });
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     getMenuId() {
       const id = this.$route.query.menu;
       if (id) {
         localStorage.setItem("menuId", id);
-      }
-      else {
+      } else {
         localStorage.setItem("menuId", "1");
       }
       this.getParams();
-    }
+    },
   },
   // beforeDestroy() {
   //   window.removeEventListener("storage", this.handleStorageChange);

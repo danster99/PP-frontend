@@ -1,16 +1,16 @@
 <template>
     <div class="navbar z-50">
-        <div class="h-12 bg-slate-200 flex justify-around rounded-full mt-3 border-black z-50">
-            <router-link to="/" class="p-2">
+        <div class="h-14 bg-primary flex justify-around rounded-3xl border-black z-50 px- py-1">
+            <router-link to="/home" class="p-2"  active-class="active">
                 <img src="../assets/home.png" class="max-h-8">
             </router-link>
-            <router-link to="/menu" class="p-2">
+            <router-link to="/menu" class="p-2"  active-class="active">
                 <img src="../assets/burger.png" class="max-h-8">
             </router-link>
-            <router-link to="/drinks" class="p-2">
+            <router-link to="/drinks" class="p-2"  active-class="active">
                 <img src="../assets/cocktail.png" class="max-h-8">
             </router-link>
-            <router-link to="/wishlist" class="p-2">
+            <router-link to="/wishlist" class="p-2"  active-class="active">
                 <img src="../assets/heart.png" class="max-h-8">
             </router-link>
         </div>
@@ -24,9 +24,14 @@ export default {
 </script>
 <style scoped lang="scss">
 .navbar {
-    width: 50%;
+    width: 100%;
     position: sticky;
     bottom: 25px;
-    left: 25%;
+    padding-inline: 25%;
+}
+
+.active {
+    border-radius: 100%;
+    background-color: white;
 }
 </style>

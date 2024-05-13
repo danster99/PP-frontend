@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60 mt-3" id="menu">
+        <div class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60" id="menu">
             <div v-for="(categ, key, index) in items" :key="index" :ref="`${key}-horizontal-ref`">
                 <div :class="{ highlited: shouldUnderline(key) }">
                     <h3 class="py-3 px-5 capitalize font-semibold h-10 whitespace-nowrap" @click="scrollTo(key)">
@@ -19,19 +19,16 @@
                 :free="item.isGlutenFree" :nutriValues="item.nutriValues" :alergeni="item.alergens" />
         </div>
         <div class="h-4"></div>
-        <NavBar />
     </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue"
 import MenuCard from "@/components/menuCard.vue"
 import axios from 'axios';
 
 export default {
     name: 'MenuView',
     components: {
-        NavBar,
         MenuCard
     },
     data() {

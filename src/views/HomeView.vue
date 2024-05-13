@@ -2,20 +2,17 @@
   <div class="home">
     <SingleLineSection v-for="(item, key, index) in this.cards" :key="index" :title="key" :sizes="formatCards(item)" />
     <div class="h-4"></div>
-    <NavBar />
   </div>
 </template>
 
 <script>
 import SingleLineSection from "@/components/SingleLineSection.vue";
-import NavBar from "@/components/NavBar.vue"
 import axios from 'axios';
 
 export default {
   name: 'HomeView',
   components: {
     SingleLineSection,
-    NavBar
   },
   data() {
     return {

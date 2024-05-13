@@ -1,29 +1,32 @@
 <template>
   <div @touchstart="handleTouchStart" @touchend="handleTouchEnd"
-    class="h-24 flex overflow-x-scroll w-full justify-between items-center py-6 px-2 bg-transparent ">
+    class="h-24 flex overflow-x-scroll w-full justify-between items-center bg-transparent ">
     <div v-for="(story, index) in this.stories" :key="index"
-      class="rounded-full aspect-square mx-[1px] border-4 border-primary overflow-hidden flex flex-col justify-center w-1/4 flex-shrink-0"
+      class="rounded-full aspect-square mx-[10px] border-4 border-primary overflow-hidden flex flex-col justify-center w-1/5 flex-shrink-0"
       @click="openStory(story.b2StorageFile, story)">
       <img :src=story.b2StorageFile class="object-cover" />
     </div>
-    <div class="absolute w-screen h-screen top-0 left-0 z-[999] flex flex-col items-center justify-center bg-black"
+    <div class="absolute w-screen h-screen top-0 left-0 z-[999] flex flex-col items-center justify-center bg-black self-center"
       v-if="this.showBig">
-      <div class="absolute w-screen h-1 bg-transparent top-0 left-0 rounded-full mt-1 px-1">
-        <div :style="{ width: progress + '%' }" class="h-full bg-gray-700 rounded-full transition-all"></div>
-      </div>
-      <p class="text-black font-bold text-m absolute top-5 right-5 text-2xl
-                bg-slate-50 text-center px-2 rounded-3xl z-[99999]" @click="this.closeBig">X
-      </p>
-      <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>
-      <div class="absolute bottom-0 left-0 h-1/12 w-full pb-1/12">
-        <p class=" text-white text-m clamp-2 bg-black bg-opacity-60 px-4 py-2">
-          {{ this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION " }}
+      <div class="max-w-[500px] w-full h-full flex relative items-center" id="div">
+        <div class="absolute w-full h-1 bg-transparent top-0 left-0 rounded-full mt-1 px-1">
+          <div :style="{ width: progress + '%' }" class="h-full bg-gray-700 rounded-full transition-all"></div>
+        </div>
+        
+        <p class="text-black font-bold text-m absolute top-5 right-5 text-2xl
+                  bg-slate-50 text-center px-2 rounded-3xl z-[99999]" @click="this.closeBig">X
         </p>
-      </div>
-      <img :src="this.currentStoryImg" class="h-5/6 w-full object-cover" />
-      <div class="absolute w-screen h-screen flex justify-between">
-        <div class="absolute w-[33vw] h-screen left-0 z-[9999]" @click="alertLeft(currentStory)"></div>
-        <div class="absolute w-[33vw] h-screen right-0 z-[9999]" @click="alertRight(currentStory)"></div>
+        <p class="absolute top-5 left-2 text-xl text-white ">{{ this.currentStory.title }}</p>
+        <div class="absolute bottom-0 left-0 h-1/12 w-full pb-1/12">
+          <p class=" text-white text-m clamp-2 bg-black bg-opacity-60 px-4 py-2">
+            {{ this.currentStory.description ? this.currentStory.description : " TEST DESCRIPTION " }}
+          </p>
+        </div>
+        <img :src="this.currentStoryImg" class="h-5/6 w-full object-cover" />
+        <div class="absolute w-full h-screen flex justify-between">
+          <div class="absolute w-[33vw] h-screen left-0 z-[9999]" @click="alertLeft(currentStory)"></div>
+          <div class="absolute w-[33vw] h-screen right-0 z-[9999]" @click="alertRight(currentStory)"></div>
+        </div>
       </div>
     </div>
   </div>

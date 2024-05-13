@@ -1,6 +1,6 @@
 <template>
     <div class="home max-h-screen_40">
-        <div class="h-screen_40 flex flex-col justify-between">
+        <div class="h-screen_40 flex flex-col justify-between w-full">
             <div class="flex items-center p-3">
                 <!-- <svg class="h-7 mr-2" src="@/assets/heart.svg"></svg> -->
                 <svg class="h-7 mr-2 stroke-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -21,25 +21,22 @@
                 <WishlistCard v-for="(item, index) in this.wishlist" :key="index" :title="item.title"
                     :price="item.price" :description="item.description" :image="item.image" :quantity="item.quantity" />
             </div>
-            <div class="h-1/5 border-t-2 absolut bg-white total-bar">
+            <div class="h-1/5 border-t-2 bg-white total-bar justify-between">
                 <div class="pt-2 pb-2 pr-6 pl-4 flex justify-between">
                     <h2 class="text-xl font-semibold">Subtotal:</h2>
                     <h2 class="text-xl font-semibold">{{ total }} RON</h2>
                 </div>
-                <NavBar />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue"
 import WishlistCard from "@/components/WishlistCard.vue"
 
 export default {
     name: 'WishlistView',
     components: {
-        NavBar,
         WishlistCard
     },
     data() {

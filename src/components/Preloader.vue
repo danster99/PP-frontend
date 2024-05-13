@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="static top-0 left-0 h-svh w-svw bg-white z-1 flex flex-col justify-center items-center">
+  <div v-if="isLoading" class="fixed top-0 left-0 h-svh w-svw bg-white z-1 flex flex-col justify-center items-center">
     <div class="flip-box">
       <div class="flip-box-inner">
         <div class="flip-box-front">
