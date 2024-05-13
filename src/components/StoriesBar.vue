@@ -66,7 +66,7 @@ export default {
     async getStories() {
       try {
         const data = await axios.get(
-          "https://plate-pal-97cd0667892d.herokuapp.com/api/story/"
+          "https://plate-pal-97cd0667892d.herokuapp.com/api/menu/" + localStorage.getItem('menuId') + "/stories/"
         );
         this.stories = data.data;
       } catch (error) {

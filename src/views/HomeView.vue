@@ -49,7 +49,7 @@ export default {
   methods: {
     async getCards() {
       try {
-        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/1/homepageCards/').then(response => {
+        await axios.get('https://plate-pal-97cd0667892d.herokuapp.com/api/menu/' + localStorage.getItem('menuId') + '/homepageCards/').then(response => {
           this.cards = response.data;
         });
       } catch (error) {
