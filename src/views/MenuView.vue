@@ -83,7 +83,11 @@ export default {
         //     left: -230,
         //     behavior: 'smooth'
         // });
-
+        if(this.$route.query.category) {
+            setTimeout(() => {
+                this.scrollTo(this.$route.query.category);
+            }, 500);
+        }
     },
     methods: {
         scrollToEntry(index) {

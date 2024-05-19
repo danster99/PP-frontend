@@ -62,7 +62,8 @@ export default {
         returnCards.push({
           size: element.size,
           image: element.b2StorageFile,
-          text: element.text
+          text: element.text,
+          link: element.links_to
         })
       });
       return returnCards;
