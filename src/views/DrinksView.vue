@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home min-h-full">
         <div class="flex overflow-scroll sticky top-0 left-0 bg-white z-[99] bg-opacity-60" id="menu-drinks">
             <div v-for="(categ, key, index) in items" :key="index" :ref="`${key}-horizontal-ref`">
                 <div :class="{ highlited: shouldUnderline(key) }">

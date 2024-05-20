@@ -6,6 +6,7 @@ import CallWaiter from '../views/CallWaiter.vue'
 import Wishlist from '../views/WishlistView.vue'
 import DrinksView from '@/views/DrinksView.vue'
 import DetailedView from '@/views/DetailedView.vue'
+import InfoView from '@/views/InfoView.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [
     name: 'details',
     component: DetailedView,
     props: true
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: InfoView
   },
   {
     path: '/about',

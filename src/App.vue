@@ -24,7 +24,7 @@
       </div> -->
       <appTitle />
       <StoriesBar
-        v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist'"
+        v-if="this.$route.name !== 'details' && this.$route.name !== 'wishlist' && this.$route.name !== 'info'"
       />
       <router-view class="z-3" />
       <NavBar v-if="this.$route.name !== 'details'"/>
@@ -149,6 +149,15 @@ export default {
               ":root { --primary: " + response.data.primary + "; }";
             document.getElementsByTagName("head")[0].appendChild(style);
             this.backgroundImage = response.data.b2StorageFile;
+            axios
+              .get(
+                "https://plate-pal-97cd0667892d.herokuapp.com/api/restaurant/" +
+                  response.data.restaurant +
+                  "/"
+              )
+              .then((response) => {
+                localStorage.setItem("restaurant", JSON.stringify(response.data));
+              });
           });
       } catch (error) {
         console.log(error);
