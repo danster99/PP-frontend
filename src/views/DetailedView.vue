@@ -20,7 +20,9 @@
             <div class="overflow-y-scroll overflow-x-hidden h-5/6 mt-2">
                 <div class="flex flex-col overflow-y-scroll">
                     <p>{{ full_description }}</p>
-                    <p class="max-h-20 overflow-scroll" v-if="alergeni">Alergeni: {{ alergeni }}</p>
+                    <p class="max-h-20 overflow-scroll">Greutate: {{ weight }}g</p>
+                    <p class="max-h-20 overflow-scroll" v-if="alergens">Alergeni: {{ alergens }}</p>
+                    <p class="max-h-20 overflow-scroll">Aditivi: {{ aditives ? aditives : "0 (E)" }}</p>
                     <p v-if="nutriValues">Valori nutritionale:</p>
                     <div v-if="nutriValues">
                         <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key"
@@ -51,7 +53,7 @@ export default {
     components: {
         modalSimple
     },
-    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergeni'],
+    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergens', 'weight', 'aditives'],
     data: function () {
         return {
             showDetails: false,

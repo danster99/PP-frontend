@@ -30,7 +30,7 @@ export default {
     width: 100%;
     position: sticky;
     bottom: 25px;
-    padding-inline: 15svw;
+    padding-inline: 20svw;
 }
 
 .active {
