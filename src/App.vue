@@ -134,6 +134,9 @@ export default {
       if (!tempId) {
         tempId = 1;
       }
+      if(localStorage.getItem("menuId")){
+        tempId = localStorage.getItem("menuId");
+      }
       try {
         await axios
           .get(
@@ -167,7 +170,7 @@ export default {
       const id = this.$route.query.menu;
       if (id) {
         localStorage.setItem("menuId", id);
-      } else {
+      } else if(!localStorage.getItem("menuId") ){
         localStorage.setItem("menuId", "1");
       }
       this.getParams();
