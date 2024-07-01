@@ -23,11 +23,14 @@
                     <p class="max-h-20 overflow-scroll">Greutate: {{ weight }}g</p>
                     <p class="max-h-20 overflow-scroll" v-if="alergens">Alergeni: {{ alergens }}</p>
                     <p class="max-h-20 overflow-scroll">Aditivi: {{ aditives ? aditives : "0 (E)" }}</p>
-                    <p v-if="nutriValues">Valori nutritionale:</p>
+                    <p v-if="nutriValues">Valori nutritionale per 100g:</p>
                     <div v-if="nutriValues">
-                        <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key"
+                        <!-- <div v-for="(value, key) in sortNutriValues(nutriValues)" :key="key"
                             class="flex flex-wrap text-xs">
                             <p class="ml-2">{{ key }}: {{ value }}</p>
+                        </div> -->
+                        <div class="flex flex-wrap text-xs">
+                            <p><strong>{{sortNutriValues(nutriValues)}}</strong></p>
                         </div>
                     </div>
                 </div>
@@ -83,14 +86,22 @@ export default {
             this.$refs.modalSimpleDetails.showModal = true;
         },
         sortNutriValues(nutriValues) {
-            let sorted = {};
-            sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
-            sorted["Grasimi"] = nutriValues["Grasimi"];
-            sorted["Acizi grasi saturati"] = nutriValues["Acizi grasi saturati"];
-            sorted["Glucide"] = nutriValues["Glucide"];
-            sorted["Zaharuri"] = nutriValues["Zaharuri"];
-            sorted["Proteine"] = this.nutriValues["Proteine"];
-            sorted["Sare"] = nutriValues["Sare"];
+            let sorted = "";
+            sorted += "Valoare energetica: " + nutriValues["Valoare energetica"];
+            sorted += "; Grasimi: " + nutriValues["Grasimi"];
+            sorted += "; Acizi grasi saturati: " + nutriValues["Acizi grasi saturati"];
+            sorted += "; Glucide: " + nutriValues["Glucide"];
+            sorted += "; Zaharuri: " + nutriValues["Zaharuri"];
+            sorted += "; Proteine: " + nutriValues["Proteine"];
+            sorted += "; Sare: " + nutriValues["Sare"];
+            // sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
+            // sorted["Grasimi"] = nutriValues["Grasimi"];
+            // sorted["Acizi grasi saturati"] = nutriValues["Acizi grasi saturati"];
+            // sorted["Glucide"] = nutriValues["Glucide"];
+            // sorted["Zaharuri"] = nutriValues["Zaharuri"];
+            // sorted["Proteine"] = nutriValues["Proteine"];
+            // sorted["Sare"] = nutriValues["Sare"];
+            console.log(sorted);
             return sorted;
         },
         goBack() {

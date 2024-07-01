@@ -78,17 +78,6 @@ export default {
         },
         enableScroll() {
             document.body.style.overflow = 'auto';
-        },
-        sortNutriValues(nutriValues) {
-            let sorted = {};
-            sorted["Valoare energetica"] = nutriValues["Valoare energetica"];
-            sorted["Grasimi"] = nutriValues["Grasimi"];
-            sorted["Acizi grasi saturati"] = nutriValues["Acizi grasi saturati"];
-            sorted["Glucide"] = nutriValues["Glucide"];
-            sorted["Zaharuri"] = nutriValues["Zaharuri"];
-            sorted["Proteine"] = this.nutriValues["Proteine"];
-            sorted["Sare"] = nutriValues["Sare"];
-            return sorted;
         }
     }
 }
