@@ -42,7 +42,10 @@
         :milk="item.isDairyFree"
         :free="item.isGlutenFree"
         :nutriValues="item.nutriValues"
+        :nutriValuesLink="item.nutriValuesLink"
         :alergens="item.alergens"
+        :weight="item.weight"
+        :aditives="item.aditives"
       />
     </div>
     <div class="h-4"></div>
