@@ -19,6 +19,7 @@
                 </h3>
                 <p class="text-base tracking-tighter line-clamp-2">{{ description }}</p>
                 <p class="text-base tracking-tighter line-clamp-2">{{ aditives ? aditives : "0 E" }}</p>
+                <!-- <p class="text-base tracking-tighter line-clamp-2" v-if="nutriValuesLink">{{ nutriValuesLink }} </p> -->
                 <p class="text-base tracking-tighter line-clamp-2">{{ weight ? weight : 0 }} g</p>
                 <div class="flex mt-2">
                     <img src="@/assets/vegan.png" class="h-8" v-if="vegan">
@@ -41,7 +42,7 @@ export default {
     components: {
         modalSimple
     },
-    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergens', 'weight', 'aditives'],
+    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'nutriValuesLink', 'alergens', 'weight', 'aditives'],
     data: function () {
         return {
             showDetails: false,
@@ -60,7 +61,7 @@ export default {
             return str.length > 80 ? str.substring(0, 80) + ' ...' : str;
         },
         showDetailsfunc() {
-            this.$router.push({ name: 'details', params: { title: this.title, price: this.price, description: this.description, image: this.image, full_description: this.full_description, spice: this.spice, vegan: this.vegan, free: this.free, milk: this.milk, nutriValues: this.nutriValues, alergens: this.alergens, weight: this.weight, aditives: this.aditives } });
+            this.$router.push({ name: 'details', params: { title: this.title, price: this.price, description: this.description, image: this.image, full_description: this.full_description, spice: this.spice, vegan: this.vegan, free: this.free, milk: this.milk, nutriValues: this.nutriValues, nutriValuesLink: this.nutriValuesLink, alergens: this.alergens, weight: this.weight, aditives: this.aditives } });
         },
         hideDetailsfunc() {
             this.$parent.showNavbar();

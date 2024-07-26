@@ -41,7 +41,7 @@ const routes = [
     component: Wishlist
   },
   {
-    path: '/details/:title/:price/:description/:image/:full_description/:spice/:vegan/:free/:milk/:nutriValues/:alergens',
+    path: '/details/:title/:price/:description/:image/:full_description/:spice/:vegan/:free/:milk/:nutriValues/:nutriValuesLink/:alergens',
     name: 'details',
     component: DetailedView,
     props: true

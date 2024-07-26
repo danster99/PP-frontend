@@ -33,6 +33,7 @@
                             <p><strong>{{sortNutriValues(nutriValues)}}</strong></p>
                         </div>
                     </div>
+                    <a :href="nutriValuesLink" target="_blank" rel="noopener noreferrer" class="max-h-20 overflow-scroll text-primary" v-if="nutriValuesLink">{{ nutriValuesLink }}</a>
                 </div>
                 <div class="flex mt-2">
                     <img src="@/assets/vegan.png" class="h-9" v-if="vegan">
@@ -56,7 +57,7 @@ export default {
     components: {
         modalSimple
     },
-    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'alergens', 'weight', 'aditives'],
+    props: ['title', 'price', 'description', 'image', 'full_description', 'spice', 'vegan', 'free', 'milk', 'nutriValues', 'nutriValuesLink', 'alergens', 'weight', 'aditives'],
     data: function () {
         return {
             showDetails: false,
