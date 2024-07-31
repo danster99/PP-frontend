@@ -1,7 +1,7 @@
 <template>
   <div class="appTitle">
     <div v-if="restaurant.b2StorageFile">
-      <img :src="restaurant.b2StorageFile" class="max-h-10 pl-2 pt-2" />
+      <img :src="restaurant.b2StorageFile" class="max-h-12 pl-2 pt-2" />
     </div>
     <div v-else>
         <h1 class="text-3xl text-left pl-2 pt-2 font-black h-10">{{restaurant.name}}</h1>
